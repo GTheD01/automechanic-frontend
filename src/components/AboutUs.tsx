@@ -2,8 +2,8 @@ import heroSectionImage from "../assets/images/hero-section-image.webp";
 
 function AboutUs() {
   return (
-    <section className="flex gap-16 px-28 pt-36">
-      <div className="flex gap-8 flex-col items-start justify-start text-primary w-1/2">
+    <section className="lg:flex gap-16 px-28 pt-36">
+      <div className="flex gap-8 flex-col items-start justify-start text-primary lg:w-1/2 mb-4">
         <h2 className="text-4xl font-semibold">About Us</h2>
         <p>
           Choosing our auto service center means choosing a team of highly
@@ -23,7 +23,7 @@ function AboutUs() {
           Request A Quote
         </button>
       </div>
-      <div className="w-1/2">
+      <div className="lg:w-1/2">
         <img src={heroSectionImage} className="w-full h-full" />
       </div>
     </section>
