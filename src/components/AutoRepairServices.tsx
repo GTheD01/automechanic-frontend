@@ -6,7 +6,7 @@ import RepairServiceCard from "./RepairServiceCard";
 
 function AutoRepairServices() {
   return (
-    <div className="text-neutral px-28">
+    <section className="text-neutral px-28">
       <div className="flex justify-between">
         <h2 className="text-5xl text-primary font-medium">
           Our Auto Repair Services
@@ -59,7 +59,7 @@ function AutoRepairServices() {
               engine."
         />
       </div>
-    </div>
+    </section>
   );
 }
 

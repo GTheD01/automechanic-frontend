@@ -2,7 +2,7 @@ import heroSectionImage from "../assets/images/hero-section-image.webp";
 
 function HeroSection() {
   return (
-    <div className="lg:grid lg:grid-cols-2 gap-20 pt-36 border-b border-gray-500 px-28 bg-primary">
+    <main className="lg:grid lg:grid-cols-2 gap-20 pt-36 border-b border-gray-500 px-28 bg-primary">
       <div className="space-y-8 pb-8">
         <h1 className="text-5xl font-bold">
           Optimize Your Vehicle's Performance with Our Auto Service
@@ -39,12 +39,13 @@ function HeroSection() {
       </div>
       <div>
         <img
+          loading="lazy"
           src={heroSectionImage}
-          className="h-full"
+          className="h-full w-full"
           alt="Worker doing service"
         />
       </div>
-    </div>
+    </main>
   );
 }
 

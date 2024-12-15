@@ -5,7 +5,7 @@ import WhyChooseUsCard from "../components/WhyChooseUsCard";
 
 function WhyChooseUsSection() {
   return (
-    <>
+    <section>
       <div className="pt-36 bg-primary">
         <h2 className="text-5xl pl-28 pb-28 w-4/5">
           Based on our 24+ years of experience we serve you the best
@@ -39,7 +39,7 @@ function WhyChooseUsSection() {
           />
         </div>
       </div>
-    </>
+    </section>
   );
 }
 
