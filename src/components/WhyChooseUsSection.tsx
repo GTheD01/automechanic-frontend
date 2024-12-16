@@ -7,7 +7,7 @@ function WhyChooseUsSection() {
   return (
     <section>
       <div className="pt-36 bg-primary">
-        <h2 className="lg:text-5xl md:text-3xl text-2xl lg:pl-28 pl-2 pb-28 w-4/5">
+        <h2 className="lg:text-4xl md:text-3xl text-2xl sm:pl-28 pl-2 pb-28 w-4/5">
           Based on our 24+ years of experience we serve you the best
         </h2>
       </div>

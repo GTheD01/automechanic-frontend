@@ -4,7 +4,7 @@ import userProfile from "../assets/images/user-profile.png";
 
 function CustomerReviews() {
   return (
-    <section className="text-primary pt-36 lg:px-28 px-4 mb-16">
+    <section className="text-primary pt-36 sm:px-28 px-4 mb-16">
       <h2 className="lg:text-4xl md:text-3xl text-2xl font-semibold text-center">
         What Our Happy Clients Say About Our Services
       </h2>

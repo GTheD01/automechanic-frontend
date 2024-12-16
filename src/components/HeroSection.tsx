@@ -2,9 +2,9 @@ import heroSectionImage from "../assets/images/hero-section-image.webp";
 
 function HeroSection() {
   return (
-    <main className="lg:grid lg:grid-cols-2 gap-20 sm:pt-32 pt-16 border-b border-gray-500 sm:px-28 px-2 bg-primary">
+    <main className="lg:grid lg:grid-cols-2 gap-20 pt-16 border-b border-gray-500 sm:px-28 px-2 bg-primary">
       <div className="space-y-8 pb-8">
-        <h1 className="lg:text-5xl md:text-3xl sm:text-2xl  font-bold">
+        <h1 className="lg:text-4xl md:text-3xl sm:text-2xl  font-bold">
           Optimize Your Vehicle's Performance with Our Auto Service
         </h1>
         <p className="text-neutral font-light text-sm md:text-base lg:text-lg">

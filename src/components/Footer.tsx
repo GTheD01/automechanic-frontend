@@ -8,7 +8,7 @@ import linkedinSvg from "../assets/svgs/linkedin.svg";
 
 function Footer() {
   return (
-    <footer className="lg:px-28 px-16 bg-primary pt-16">
+    <footer className="sm:px-28 px-16 bg-primary pt-16">
       <div className="flex sm:justify-between sm:items-center border-b border-neutral pb-12 gap-2">
         <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-sm w-3/5">
           Ready To Get Excellent Auto Services For your Vehicle.

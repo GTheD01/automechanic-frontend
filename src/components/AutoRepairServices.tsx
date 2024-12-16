@@ -6,7 +6,7 @@ import RepairServiceCard from "./RepairServiceCard";
 
 function AutoRepairServices() {
   return (
-    <section className="text-neutral lg:px-28 px-4">
+    <section className="text-neutral sm:px-28 px-4">
       <div className="flex justify-between">
         <h2 className="lg:text-5xl md:text-3xl text-2xl text-primary font-medium">
           Our Auto Repair Services

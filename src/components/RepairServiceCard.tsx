@@ -14,9 +14,6 @@ function RepairServiceCard({ alt, header, img, text }: RepairServiceCard) {
         <p className="mt-4 text-primary font-light sm:text-base text-sm">
           {text}
         </p>
-        <button className="text-secondary mt-8 hover:text-secondaryHover">
-          More Details {">"}
-        </button>
       </div>
     </div>
   );
