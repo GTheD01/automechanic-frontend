@@ -1,8 +1,8 @@
-import engineMaintenanceImg from "../assets/images/engine-maintenance.jpeg";
-import brakeRepairImg from "../assets/images/brake-repair.jpeg";
-import airConditioningImg from "../assets/images/air-conditioning-service.jpeg";
-import glassRepairImg from "../assets/images/auto-glass-repair.jpeg";
-import RepairServiceCard from "./RepairServiceCard";
+import engineMaintenanceImg from "@/assets/images/engine-maintenance.jpeg";
+import brakeRepairImg from "@/assets/images/brake-repair.jpeg";
+import airConditioningImg from "@/assets/images/air-conditioning-service.jpeg";
+import glassRepairImg from "@/assets/images/auto-glass-repair.jpeg";
+import RepairServiceCard from "@/components/RepairServiceCard";
 
 function AutoRepairServices() {
   return (

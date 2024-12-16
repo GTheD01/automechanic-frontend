@@ -1,7 +1,7 @@
-import expertDiagnosticsIcon from "../assets/svgs/expert-diagnostics.svg";
-import varietyOfServicesIcon from "../assets/svgs/variety-of-services.svg";
-import toolsIcon from "../assets/svgs/tools.svg";
-import WhyChooseUsCard from "../components/WhyChooseUsCard";
+import expertDiagnosticsIcon from "@/assets/svgs/expert-diagnostics.svg";
+import varietyOfServicesIcon from "@/assets/svgs/variety-of-services.svg";
+import toolsIcon from "@/assets/svgs/tools.svg";
+import WhyChooseUsCard from "@/components/WhyChooseUsCard";
 
 function WhyChooseUsSection() {
   return (

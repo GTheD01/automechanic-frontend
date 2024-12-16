@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-import mailSvg from "../assets/svgs/mail.svg";
-import phoneSvg from "../assets/svgs/phone.svg";
-import instagramSvg from "../assets/svgs/instagram.svg";
-import facebookSvg from "../assets/svgs/facebook.svg";
-import linkedinSvg from "../assets/svgs/linkedin.svg";
+import mailSvg from "@/assets/svgs/mail.svg";
+import phoneSvg from "@/assets/svgs/phone.svg";
+import instagramSvg from "@/assets/svgs/instagram.svg";
+import facebookSvg from "@/assets/svgs/facebook.svg";
+import linkedinSvg from "@/assets/svgs/linkedin.svg";
 
 function Footer() {
   return (

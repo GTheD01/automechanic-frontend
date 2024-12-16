@@ -1,4 +1,4 @@
-import heroSectionImage from "../assets/images/hero-section-image.webp";
+import heroSectionImage from "@/assets/images/hero-section-image.webp";
 
 function HeroSection() {
   return (

@@ -1,6 +1,5 @@
-import CustomerReviewCard from "./CustomerReviewCard";
-
-import userProfile from "../assets/images/user-profile.png";
+import userProfile from "@/assets/images/user-profile.png";
+import CustomerReviewCard from "@/components/CustomerReviewCard";
 
 function CustomerReviews() {
   return (
