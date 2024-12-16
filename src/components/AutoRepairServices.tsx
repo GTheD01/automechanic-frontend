@@ -12,7 +12,7 @@ function AutoRepairServices() {
           Our Auto Repair Services
         </h2>
         <button className="bg-secondary text-white px-8 py-4 hover:bg-secondaryHover md:text-base text-sm">
-          Call Us Now
+          Become Our Customer
         </button>
       </div>
       <p className="text-primary max-w-[65%] mt-8 sm:text-base text-sm">

@@ -1,10 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
+import NavFooterLayout from "../pages/HomeLayout";
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Home />,
+    element: <NavFooterLayout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+    ],
   },
 ]);
 

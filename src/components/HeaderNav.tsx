@@ -11,34 +11,35 @@ function HeaderNav() {
       </Link>
 
       <nav className="flex gap-5 *:tracking-wide *:text-sm *:sm:text-base">
-        <Link
-          to=""
-          className="active:border-b active:border-secondary hover:border-b hover:border-secondary"
+        <a
+          href="#home"
+          className="border-b-2 border-transparent hover:border-b hover:border-secondary"
         >
           Home
-        </Link>
-        <Link
-          to="#about-us"
-          className="active:border-b active:border-secondary hover:border-b hover:border-secondary"
-        >
-          About Us
-        </Link>
-        <Link
-          to="#services"
-          className="active:border-b active:border-secondary hover:border-b hover:border-secondary"
+        </a>
+        <a
+          href="#services"
+          className="border-b-2 border-transparent hover:border-b hover:border-secondary"
         >
           Services
-        </Link>
-        <Link
-          to="#contact"
-          className="active:border-b active:border-secondary hover:border-b hover:border-secondary"
+        </a>
+        <a
+          href="#about-us"
+          className="border-b-2 border-transparent hover:border-b hover:border-secondary"
+        >
+          About Us
+        </a>
+
+        <a
+          href="#contact"
+          className="border-b-2 border-transparent hover:border-b hover:border-secondary"
         >
           Contact
-        </Link>
+        </a>
       </nav>
 
       <button className="border border-secondary p-4 md:tracking-wider hover:text-secondary text-sm sm:text-base">
-        Customer
+        Customers
       </button>
     </div>
   );

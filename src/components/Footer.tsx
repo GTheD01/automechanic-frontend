@@ -8,16 +8,8 @@ import linkedinSvg from "../assets/svgs/linkedin.svg";
 
 function Footer() {
   return (
-    <footer className="sm:px-28 px-16 bg-primary pt-16">
-      <div className="flex sm:justify-between sm:items-center border-b border-neutral pb-12 gap-2">
-        <h2 className="lg:text-4xl md:text-3xl sm:text-2xl text-sm w-3/5">
-          Ready To Get Excellent Auto Services For your Vehicle.
-        </h2>
-        <button className="bg-secondary hover:bg-secondaryHover sm:px-8 sm:py-4 px-4 py-2 text-sm sm:text-base">
-          Call Us Now
-        </button>
-      </div>
-      <div className="pt-12 flex gap-8 justify-between mb-12 flex-wrap">
+    <footer className="sm:px-28 px-16 bg-primary pt-4">
+      <div className="flex gap-8 justify-between mb-12 flex-wrap">
         <div>
           <h5 className="text-xl mb-3">Our Working Hours</h5>
           <div className="*:text-neutral space-y-1 text-xs sm:text-sm">
