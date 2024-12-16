@@ -1,15 +1,14 @@
-import ArrowIcon from "./ArrowIcon";
 import CustomerReviewCard from "./CustomerReviewCard";
 
 import userProfile from "../assets/images/user-profile.png";
 
 function CustomerReviews() {
   return (
-    <section className="text-primary pt-36 px-28 mb-16">
-      <h2 className="text-4xl font-semibold text-center">
+    <section className="text-primary pt-36 lg:px-28 px-4 mb-16">
+      <h2 className="lg:text-4xl md:text-3xl text-2xl font-semibold text-center">
         What Our Happy Clients Say About Our Services
       </h2>
-      <div className="flex gap-8 mt-12">
+      <div className="flex gap-8 flex-col lg:flex-row mt-12">
         <CustomerReviewCard
           img={userProfile}
           alt="user picture"
@@ -34,10 +33,6 @@ function CustomerReviews() {
           userLocation="Newport Beach, CA"
           userRating={4}
         />
-      </div>
-      <div className="flex items-center justify-center gap-4 pt-10">
-        <ArrowIcon arrowDirection="left" />
-        <ArrowIcon arrowDirection="right" />
       </div>
     </section>
   );

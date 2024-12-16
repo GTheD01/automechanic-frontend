@@ -6,16 +6,16 @@ import RepairServiceCard from "./RepairServiceCard";
 
 function AutoRepairServices() {
   return (
-    <section className="text-neutral px-28">
+    <section className="text-neutral lg:px-28 px-4">
       <div className="flex justify-between">
-        <h2 className="text-5xl text-primary font-medium">
+        <h2 className="lg:text-5xl md:text-3xl text-2xl text-primary font-medium">
           Our Auto Repair Services
         </h2>
-        <button className="bg-secondary text-white px-8 py-4 hover:bg-secondaryHover">
+        <button className="bg-secondary text-white px-8 py-4 hover:bg-secondaryHover md:text-base text-sm">
           Call Us Now
         </button>
       </div>
-      <p className="text-primary max-w-[65%] mt-8">
+      <p className="text-primary max-w-[65%] mt-8 sm:text-base text-sm">
         At our auto repair center, we offer a comprehensive range of services to
         keep your vehicle running smoothly. Our expert technicians are here to
         diagnose and solve any issues with your car, providing you with the

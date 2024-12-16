@@ -11,7 +11,9 @@ function RepairServiceCard({ alt, header, img, text }: RepairServiceCard) {
       <img src={img} className="w-full" alt={alt} />
       <div className="px-2 py-4">
         <h3 className="text-primary text-xl font-medium">{header}</h3>
-        <p className="mt-4 text-primary font-light">{text}</p>
+        <p className="mt-4 text-primary font-light sm:text-base text-sm">
+          {text}
+        </p>
         <button className="text-secondary mt-8 hover:text-secondaryHover">
           More Details {">"}
         </button>

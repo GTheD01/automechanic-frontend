@@ -2,36 +2,36 @@ import heroSectionImage from "../assets/images/hero-section-image.webp";
 
 function HeroSection() {
   return (
-    <main className="lg:grid lg:grid-cols-2 gap-20 pt-36 border-b border-gray-500 px-28 bg-primary">
+    <main className="lg:grid lg:grid-cols-2 gap-20 sm:pt-32 pt-16 border-b border-gray-500 sm:px-28 px-2 bg-primary">
       <div className="space-y-8 pb-8">
-        <h1 className="text-5xl font-bold">
+        <h1 className="lg:text-5xl md:text-3xl sm:text-2xl  font-bold">
           Optimize Your Vehicle's Performance with Our Auto Service
         </h1>
-        <p className="text-neutral font-light">
+        <p className="text-neutral font-light text-sm md:text-base lg:text-lg">
           At our auto service center, we offer a range of services designed to
           keep your vehicle running at its best. From routine maintenance to
           complex repairs, We're here to help you achieve optimal performance
           and reliability.
         </p>
-        <button className="bg-secondary px-12 py-4 tracking-wider text-lg hover:bg-secondaryHover">
+        <button className="bg-secondary px-12 py-4 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover">
           Request A Quote
         </button>
         <div className="flex gap-8">
           <div className="border-r border-gray-500 pr-8">
-            <p className="text-4xl">543+</p>
-            <p className="text-neutral text-lg font-light">
+            <p className="lg:text-4xl md:text-2xl text-xl">543+</p>
+            <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
               Projects Completed
             </p>
           </div>
           <div className="border-r border-gray-500 pr-8">
-            <p className="text-4xl">98%</p>
-            <p className="text-neutral text-lg font-light">
+            <p className="lg:text-4xl md:text-2xl text-xl">98%</p>
+            <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
               Clients Satisfaction
             </p>
           </div>
           <div>
-            <p className="text-4xl">36+</p>
-            <p className="text-neutral text-lg font-light">
+            <p className="lg:text-4xl md:text-2xl text-xl">36+</p>
+            <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
               Expert Technicians
             </p>
           </div>

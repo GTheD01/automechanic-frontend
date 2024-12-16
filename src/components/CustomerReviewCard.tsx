@@ -24,7 +24,7 @@ function CustomerReviewCard({
         <h4 className="text-xl font-extrabold">{userFullname}</h4>
         <span>{userLocation}</span>
         <StarRating rating={userRating} />
-        <p className="text-center">{reviewContent}</p>
+        <p className="text-center text-sm sm:text-base">{reviewContent}</p>
       </div>
     </div>
   );

@@ -7,11 +7,11 @@ function WhyChooseUsSection() {
   return (
     <section>
       <div className="pt-36 bg-primary">
-        <h2 className="text-5xl pl-28 pb-28 w-4/5">
+        <h2 className="lg:text-5xl md:text-3xl text-2xl lg:pl-28 pl-2 pb-28 w-4/5">
           Based on our 24+ years of experience we serve you the best
         </h2>
       </div>
-      <div className="pr-28 pl-52">
+      <div className="sm:pr-28 sm:pl-52 lg:pl-28 px-4 lg:pr-20">
         <div className="lg:flex lg:items-start space-y-4 lg:space-y-0 gap-16 bg-sky-50 text-black px-16 py-20 -translate-y-14">
           <WhyChooseUsCard
             alt="computer with car on the screen"
