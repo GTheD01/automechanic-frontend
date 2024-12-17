@@ -13,6 +13,7 @@ function ContactUs() {
             <input
               id="firstName"
               type="text"
+              autoComplete="off"
               required
               minLength={1}
               placeholder="Enter your first name"
@@ -26,6 +27,7 @@ function ContactUs() {
             <input
               id="lastName"
               type="text"
+              autoComplete="off"
               required
               minLength={1}
               placeholder="Enter your last name"
@@ -39,6 +41,7 @@ function ContactUs() {
             <input
               id="email"
               type="text"
+              autoComplete="off"
               required
               minLength={1}
               placeholder="Enter your email"
@@ -46,7 +49,7 @@ function ContactUs() {
             />
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <label htmlFor="description" className="text-lg">
             Description
           </label>
@@ -55,12 +58,12 @@ function ContactUs() {
             placeholder="What you think?"
             minLength={1}
             maxLength={350}
-            className="resize-none outline-none text-secondary px-1 h-44 md:h-36"
+            className="resize-none outline-none text-secondary p-1 h-44 md:h-36 w-4/5 mb-2 max-w-[700px]"
           />
+          <button className="bg-secondary px-4 py-2 hover:bg-secondaryHover">
+            Submit
+          </button>
         </div>
-        <button className="bg-secondary px-4 py-2 hover:bg-secondaryHover">
-          Submit
-        </button>
       </form>
     </div>
   );

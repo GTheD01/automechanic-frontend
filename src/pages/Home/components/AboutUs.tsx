@@ -2,32 +2,29 @@ import heroSectionImage from "@/assets/images/hero-section-image.webp";
 
 function AboutUs() {
   return (
-    <section id="about-us" className="lg:flex gap-16 sm:px-28 px-4 pt-36">
-      <div className="flex gap-8 flex-col items-start justify-start text-primary lg:w-1/2 mb-4">
+    <section
+      id="about-us"
+      className="lg:flex gap-16 md:px-28 sm:px-16 px-4 pt-36"
+    >
+      <div
+        className="relative flex gap-8 flex-col items-start mb-4 
+        bg-cover bg-top p-28 before:absolute before:inset-0 before:bg-black/75 *:z-10 text-white"
+        style={{ backgroundImage: `url(${heroSectionImage})` }}
+      >
         <h2 className="text-4xl font-semibold">About Us</h2>
         <p className="sm:text-base text-sm">
-          Choosing our auto service center means choosing a team of highly
-          skilled and experienced technicians dedicated to providing the best
-          possible service for your vehicle. We pride ourselves on our
-          commitment to quality, using only the highest quality parts and
-          cutting-edge diagnostic tools to keep your car running at its best.
-          With transparent pricing and exceptional customer service, we strive
-          to exceed your expectations every time you visit us." Choosing our
-          auto service center means choosing a team of highly skilled and
-          experienced technicians dedicated to providing the best possible
-          service for your vehicle. We pride ourselves on our commitment to
-          quality, using only the highest quality parts and cutting-edge
-          diagnostic tools to keep your car running at its best.
+          Choose our auto service center for expert technicians committed to
+          keeping your vehicle in top condition. We use high-quality parts and
+          advanced diagnostic tools to ensure the best service, with transparent
+          pricing and outstanding customer care. Our goal is to exceed your
+          expectations every time you visit.
         </p>
         <a
           href="#contact"
-          className="bg-secondary px-6 py-3 hover:bg-secondaryHover text-white md:text-xl cursor-pointer"
+          className="bg-secondary px-6 py-3 hover:bg-secondaryHover md:text-xl cursor-pointer"
         >
           Contact Us
         </a>
-      </div>
-      <div className="lg:w-1/2">
-        <img src={heroSectionImage} className="w-full h-full" />
       </div>
     </section>
   );

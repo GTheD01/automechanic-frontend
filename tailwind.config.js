@@ -15,6 +15,9 @@ export default {
       stroke: {
         primary: "#4895ef",
       },
+      screens: {
+        lg: "1150px",
+      },
     },
   },
   plugins: [],

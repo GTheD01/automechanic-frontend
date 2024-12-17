@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import arrowUpIcon from "@/assets/svgs/scroll-top-arrow-up.svg";
+
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -27,14 +29,14 @@ const ScrollToTopButton = () => {
 
   // Don't render the button if it's not visible
   if (!isVisible) return null;
-  console.log(isVisible);
 
   return (
     <button
+      type="button"
       onClick={scrollToTop}
-      className="fixed bottom-5 right-5 bg-secondary hover:bg-secondaryHover text-white border-none rounded-full py-1.5 px-3.5 text-xl"
+      className="fixed bottom-5 right-5 bg-secondary hover:bg-secondaryHover text-white border-none rounded-full p-2 text-xl"
     >
-      ↑
+      <img src={arrowUpIcon} alt="arrow up" className="w-8 h-8" />
     </button>
   );
 };

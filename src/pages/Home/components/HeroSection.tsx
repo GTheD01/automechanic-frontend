@@ -25,13 +25,13 @@ function HeroSection() {
           </a>
         </p>
         <div className="flex gap-8">
-          <div className="border-r border-gray-500 pr-8">
+          <div className="border-r border-gray-500 sm:pr-8">
             <p className="lg:text-4xl md:text-2xl text-xl">543+</p>
             <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
               Projects Completed
             </p>
           </div>
-          <div className="border-r border-gray-500 pr-8">
+          <div className="border-r border-gray-500 sm:pr-8">
             <p className="lg:text-4xl md:text-2xl text-xl">98%</p>
             <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
               Clients Satisfaction
