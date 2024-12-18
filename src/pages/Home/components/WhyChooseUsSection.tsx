@@ -6,7 +6,7 @@ import WhyChooseUsCard from "@/components/WhyChooseUsCard";
 function WhyChooseUsSection() {
   return (
     <section>
-      <div className="pt-36 bg-primary">
+      <div className="pt-28 bg-primary">
         <h2
           id="services"
           className="lg:text-4xl md:text-3xl text-2xl sm:pl-28 pl-2 pb-28 w-4/5"

@@ -17,7 +17,7 @@ function ContactUs() {
               required
               minLength={1}
               placeholder="Enter your first name"
-              className="outline-none text-secondary px-4 py-2 bg-transparent border-b border-white"
+              className="outline-none text-white px-4 py-2 bg-transparent border border-white placeholder:text-neutral"
             />
           </div>
           <div className="flex flex-col items-start">
@@ -31,7 +31,7 @@ function ContactUs() {
               required
               minLength={1}
               placeholder="Enter your last name"
-              className="outline-none text-secondary px-4 py-2 bg-transparent border-b border-white"
+              className="outline-none text-white px-4 py-2 bg-transparent border border-white placeholder:text-neutral"
             />
           </div>
           <div className="flex flex-col items-start">
@@ -45,7 +45,7 @@ function ContactUs() {
               required
               minLength={1}
               placeholder="Enter your email"
-              className="outline-none text-secondary px-4 py-2 bg-transparent border-b border-white"
+              className="outline-none text-white px-4 py-2 bg-transparent border border-white placeholder:text-neutral"
             />
           </div>
         </div>
@@ -58,7 +58,7 @@ function ContactUs() {
             placeholder="What you think?"
             minLength={1}
             maxLength={350}
-            className="resize-none outline-none text-secondary p-1 h-44 md:h-36 w-4/5 mb-2 max-w-[700px]"
+            className="resize-none outline-none text-black p-1 h-44 md:h-36 w-4/5 mb-2 max-w-[700px]"
           />
           <button className="bg-secondary px-4 py-2 hover:bg-secondaryHover">
             Submit

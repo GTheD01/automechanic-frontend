@@ -37,7 +37,7 @@ function HeaderNav() {
           to={"/"}
           className="lg:text-3xl md:text-2xl text-xl font-bold tracking-wider"
         >
-          <span className="text-secondary bold">Auto</span> Mechanic
+          <span className="text-sky-200 bold">Auto</span> Mechanic
         </Link>
       )}
 
@@ -45,7 +45,7 @@ function HeaderNav() {
 
       <Link
         to={"/customer/sign-in"}
-        className="border border-secondary p-4 md:tracking-wider hover:text-secondary text-sm sm:text-base"
+        className="border border-sky-200 p-4 md:tracking-wider hover:text-sky-200 text-sm sm:text-base"
       >
         Customers
       </Link>

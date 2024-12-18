@@ -22,11 +22,11 @@ function MobileNav({
   return (
     <>
       <div
-        className="fixed inset-0 bg-black/50 z-10"
+        className="fixed inset-0 bg-black/50 z-40"
         onClick={() => setOpenMobileNav(false)}
       ></div>
       <div
-        className={`fixed top-0 left-0 bg-secondary/70 h-full z-20 backdrop-blur-sm transition-transform duration-100 ${
+        className={`fixed top-0 left-0 bg-secondary/70 h-full z-50 backdrop-blur-sm transition-transform duration-100 ${
           isVisible
             ? "opacity-100 translate-x-0"
             : " opacity-0 -translate-x-full"

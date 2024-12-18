@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#3e5c76",
-        secondary: "#2563eb",
-        secondaryHover: "#4895ef",
-        neutral: "#6B7280",
+        primary: "#364f67",
+        secondary: "#132bd0",
+        secondaryHover: "#1637ff",
+        neutral: "#dadada",
       },
       textColor: {
-        neutral: "#d1d5db",
+        neutral: "#dadada",
       },
       stroke: {
         primary: "#4895ef",
