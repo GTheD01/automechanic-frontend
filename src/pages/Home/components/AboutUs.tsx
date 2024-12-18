@@ -21,7 +21,7 @@ function AboutUs() {
         </p>
         <a
           href="#contact"
-          className="bg-secondary px-6 py-3 hover:bg-secondaryHover md:text-xl cursor-pointer"
+          className="bg-secondary px-6 py-3 hover:bg-secondaryHover md:text-xl cursor-pointer font-bold"
         >
           Contact Us
         </a>

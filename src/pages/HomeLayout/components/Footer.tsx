@@ -11,7 +11,7 @@ function Footer() {
     <footer className="sm:px-28 px-16 bg-primary pt-4">
       <div className="flex gap-8 justify-between mb-12 flex-wrap">
         <div>
-          <h5 className="text-xl mb-3">Our Working Hours</h5>
+          <h3 className="text-xl mb-3">Our Working Hours</h3>
           <div className="*:text-neutral space-y-1 text-xs sm:text-sm">
             <p>Monday - 08am-10pm</p>
             <p>Tuesday - 09am-10pm</p>
@@ -23,7 +23,7 @@ function Footer() {
           </div>
         </div>
         <div>
-          <h5 className="text-xl mb-3">Company</h5>
+          <h3 className="text-xl mb-3">Company</h3>
           <div className="*:text-neutral space-y-1 flex flex-col">
             <Link to={""} className="hover:text-gray-400">
               About Us
@@ -40,7 +40,7 @@ function Footer() {
           </div>
         </div>
         <div>
-          <h5 className="text-xl mb-3">Contact Us</h5>
+          <h3 className="text-xl mb-3">Contact Us</h3>
           <div className="*:text-neutral">
             <p className="flex items-center">
               <img src={phoneSvg} alt="phone" className="w-5" />
@@ -56,7 +56,7 @@ function Footer() {
           </div>
         </div>
         <div>
-          <h5 className="text-xl mb-3">Locations</h5>
+          <h3 className="text-xl mb-3">Locations</h3>
           <p className="text-neutral">Wettingen</p>
         </div>
       </div>

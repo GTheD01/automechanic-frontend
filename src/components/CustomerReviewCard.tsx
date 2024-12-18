@@ -21,7 +21,7 @@ function CustomerReviewCard({
     <div className="bg-sky-50 p-4">
       <div className="flex flex-col gap-2 items-center justify-center">
         <img src={img} alt={alt} className="w-20 h-20 rounded-full" />
-        <h4 className="text-xl font-extrabold">{userFullname}</h4>
+        <h3 className="text-xl font-extrabold">{userFullname}</h3>
         <span>{userLocation}</span>
         <StarRating rating={userRating} />
         <p className="text-center text-sm sm:text-base">{reviewContent}</p>

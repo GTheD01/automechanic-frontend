@@ -12,24 +12,24 @@ function CustomerReviews() {
           img={userProfile}
           alt="user picture"
           reviewContent="The team was friendly and knowledgeable, and they were able to diagnose and fix the issue quickly and affordably. I appreciated the pricing and the clear communication throughout the process. I would definitely recommend to anyone."
-          userFullname="Shan Williams"
-          userLocation="Newport Beach, CA"
+          userFullname="Reto Lanwert"
+          userLocation="Zurich, ZH"
           userRating={4}
         />
         <CustomerReviewCard
           img={userProfile}
           alt="user picture"
           reviewContent="The team was friendly and knowledgeable, and they were able to diagnose and fix the issue quickly and affordably. I appreciated the pricing and the clear communication throughout the process. I would definitely recommend to anyone."
-          userFullname="Shan Williams"
-          userLocation="Newport Beach, CA"
+          userFullname="Reto Lanwert"
+          userLocation="Zurich, ZH"
           userRating={4}
         />
         <CustomerReviewCard
           img={userProfile}
           alt="user picture"
           reviewContent="The team was friendly and knowledgeable, and they were able to diagnose and fix the issue quickly and affordably. I appreciated the pricing and the clear communication throughout the process. I would definitely recommend to anyone."
-          userFullname="Shan Williams"
-          userLocation="Newport Beach, CA"
+          userFullname="Reto Lanwert"
+          userLocation="Zurich, ZH"
           userRating={4}
         />
       </div>

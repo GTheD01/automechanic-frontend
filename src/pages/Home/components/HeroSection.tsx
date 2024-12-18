@@ -19,7 +19,7 @@ function HeroSection() {
         <p>
           <a
             href="#contact"
-            className="bg-secondary px-12 py-4 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer"
+            className="bg-secondary px-12 py-4 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer font-bold"
           >
             Contact Us
           </a>

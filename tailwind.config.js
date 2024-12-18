@@ -5,8 +5,8 @@ export default {
     extend: {
       colors: {
         primary: "#3e5c76",
-        secondary: "#4895ef",
-        secondaryHover: "#2563eb",
+        secondary: "#2563eb",
+        secondaryHover: "#4895ef",
         neutral: "#6B7280",
       },
       textColor: {

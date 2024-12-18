@@ -8,8 +8,11 @@ function NavFooterLayout() {
   return (
     <>
       <HeaderNav />
+
       <Outlet />
+
       <Footer />
+
       <ScrollToTopButton />
     </>
   );
