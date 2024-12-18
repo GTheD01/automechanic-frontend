@@ -1,7 +1,7 @@
-import engineMaintenanceImg from "@/assets/images/engine-maintenance.jpeg";
-import brakeRepairImg from "@/assets/images/brake-repair.jpeg";
-import airConditioningImg from "@/assets/images/air-conditioning-service.jpeg";
-import glassRepairImg from "@/assets/images/auto-glass-repair.jpeg";
+import engineMaintenanceImg from "@/assets/images/engine-maintenance.webp";
+import brakeRepairImg from "@/assets/images/brake-repair.webp";
+import airConditioningImg from "@/assets/images/air-conditioning-service.webp";
+import glassRepairImg from "@/assets/images/auto-glass-repair.webp";
 import RepairServiceCard from "@/components/RepairServiceCard";
 import { Link } from "react-router-dom";
 

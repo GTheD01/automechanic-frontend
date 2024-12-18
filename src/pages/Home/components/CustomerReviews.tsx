@@ -1,4 +1,4 @@
-import userProfile from "@/assets/images/user-profile.png";
+import userProfile from "@/assets/images/user-profile.webp";
 import CustomerReviewCard from "@/components/CustomerReviewCard";
 
 function CustomerReviews() {
