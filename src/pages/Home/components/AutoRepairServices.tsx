@@ -13,7 +13,7 @@ function AutoRepairServices() {
           Our Auto Repair Services
         </h2>
         <Link
-          to="/customer/sign-in"
+          to="/customer/sign-up"
           className="bg-secondary text-white px-8 py-4 hover:bg-secondaryHover md:text-base text-sm text-center font-bold"
         >
           Become Our Customer
@@ -30,37 +30,29 @@ function AutoRepairServices() {
           img={engineMaintenanceImg}
           alt="Man putting oil into the car's engine"
           header="Engine Maintenance"
-          text="Our Engine Tune-Up service is designed to keep your engine running
-              smoothly and efficiently. Our expert technicians use advanced
-              diagnostic tools to identify and correct any issues with your
-              engine."
+          text="Our Engine Tune-Up service is tailored to keep your engine running at its best. 
+          Using advanced diagnostic tools, our skilled technicians identify and resolve any issues for optimal performance."
         />
         <RepairServiceCard
           img={brakeRepairImg}
           alt="Man repairing car brakes"
           header="Brake System Repaire"
-          text="Our Engine Tune-Up service is designed to keep your engine running
-              smoothly and efficiently. Our expert technicians use advanced
-              diagnostic tools to identify and correct any issues with your
-              engine."
+          text="Engineered to ensure your vehicle’s safety, this service addresses all aspects of your brake system. 
+          Expert technicians use advanced diagnostic tools to detect and fix any issues, ensuring optimal braking performance."
         />
         <RepairServiceCard
           img={airConditioningImg}
           alt="Replacing fluid"
           header="Air Conditioning Service"
-          text="Our Engine Tune-Up service is designed to keep your engine running
-              smoothly and efficiently. Our expert technicians use advanced
-              diagnostic tools to identify and correct any issues with your
-              engine."
+          text="Designed to keep your vehicle's climate control system functioning at its best, this service ensures optimal cooling performance. 
+          Expert technicians use advanced tools to diagnose and resolve any issues with your air conditioning system."
         />
         <RepairServiceCard
           img={glassRepairImg}
           alt="Replacing glass"
           header="Auto Glass Services"
-          text="Our Engine Tune-Up service is designed to keep your engine running
-              smoothly and efficiently. Our expert technicians use advanced
-              diagnostic tools to identify and correct any issues with your
-              engine."
+          text="Specialized to ensure your vehicle’s glass is in top condition, this service addresses any cracks or damage. 
+          Skilled technicians use advanced tools to repair or replace auto glass, ensuring safety and clarity."
         />
       </div>
     </section>

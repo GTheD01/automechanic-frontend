@@ -8,7 +8,7 @@ import linkedinSvg from "@/assets/svgs/linkedin.svg";
 
 function Footer() {
   return (
-    <footer className="sm:px-28 px-16 bg-primary pt-4">
+    <footer className="sm:px-28 px-16 bg-primary pt-8">
       <div className="flex gap-8 justify-between mb-12 flex-wrap">
         <div>
           <h3 className="text-xl mb-3">Our Working Hours</h3>

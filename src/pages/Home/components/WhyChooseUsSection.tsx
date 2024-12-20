@@ -11,7 +11,8 @@ function WhyChooseUsSection() {
           id="services"
           className="lg:text-4xl md:text-3xl text-2xl sm:pl-28 pl-2 pb-28 w-4/5"
         >
-          Based on our 24+ years of experience we serve you the best
+          Driven by 24+ Years of Expertise, Delivering Excellence in Every
+          Service
         </h2>
       </div>
       <div className="sm:pr-28 sm:pl-52 lg:pl-28 px-4 lg:pr-20">
@@ -20,25 +21,22 @@ function WhyChooseUsSection() {
             alt="computer with car on the screen"
             img={expertDiagnosticsIcon}
             header="Expert Diagnostics"
-            text="With over 24 years of experience, our seas oned technicians have
-            encountered and solved countless auto issues. This means we can
-            quickly and accurately diagnose any problems with your vehicle."
+            text="With more than 24 years of experience, our skilled technicians have handled and resolved a wide range of automotive issues. 
+            This expertise allows us to swiftly and precisely identify any problems with your vehicle."
           />
           <WhyChooseUsCard
             alt="tree branches"
             img={varietyOfServicesIcon}
-            header="Variety of services"
-            text="From routine oil changes and brake repairs to complex engine
-            overhauls and transmission replacements, our comprehensive range of
-            services has all your car care needs covered."
+            header="Variety of Services"
+            text="From routine maintenance like oil changes to complex repairs such as engine overhauls and transmission replacements, 
+            our extensive service offerings meet all your car care needs."
           />
           <WhyChooseUsCard
             alt="tools"
             img={toolsIcon}
-            header="Cutting-Edge Equipment"
-            text="We stay up-to-date with the latest tools and technologies to ensure
-            that we provide you with the best possible service. We use advanced
-            equipment available to keep your car running smoothly."
+            header="Advanced Equipment"
+            text="We continuously invest in the latest tools and technologies to deliver top-quality service. 
+            Using cutting-edge equipment, we ensure your vehicle stays in optimal condition."
           />
         </div>
       </div>

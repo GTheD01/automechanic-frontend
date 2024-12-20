@@ -4,18 +4,18 @@ function HeroSection() {
   return (
     <main
       id="home"
-      className="xl:flex relative gap-8 pt-16 border-b border-gray-500 sm:px-48 px-2 bg-primary bg-cover bg-center before:absolute before:inset-0 before:bg-black/75 *:z-10"
+      className="xl:flex relative gap-8 pt-16 border-b border-gray-500 lg:px-40 md:px-28 sm:px-20 px-2 bg-primary bg-cover bg-center before:absolute before:inset-0 before:bg-black/75 *:z-10"
       style={{ backgroundImage: `url(${heroSectionImage})` }}
     >
-      <div className="space-y-8 pb-8 relative">
+      <div className="space-y-8 pb-8 relative lg:w-2/3">
         <h1 className="lg:text-4xl md:text-3xl sm:text-2xl  font-bold">
-          Optimize Your Vehicle's Performance with Our Auto Service
+          Enhance Your Vehicle's Performance with Expert Auto Services
         </h1>
         <p className="text-neutral font-light text-sm md:text-base">
-          At our auto service center, we offer a range of services designed to
-          keep your vehicle running at its best. From routine maintenance to
-          complex repairs, We're here to help you achieve optimal performance
-          and reliability.
+          At our auto service center, we provide a comprehensive range of
+          services to ensure your vehicle performs at its peak. Whether it's
+          routine maintenance or intricate repairs, we're dedicated to
+          delivering the reliability and performance your car deserves.
         </p>
         <p>
           <a
@@ -25,23 +25,23 @@ function HeroSection() {
             Contact Us
           </a>
         </p>
-        <div className="flex gap-8">
-          <div className="border-r border-gray-500 sm:pr-8">
-            <p className="lg:text-2xl md:text-xl text-lg">543+</p>
+        <div className="flex">
+          <div className="border-r border-gray-500 pr-2">
+            <p className="lg:text-2xl md:text-xl text-lg">1000+</p>
             <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
-              Projects Completed
+              Happy Customers
             </p>
           </div>
-          <div className="border-r border-gray-500 sm:pr-8">
-            <p className="lg:text-2xl md:text-xl text-lg">98%</p>
+          <div className="border-r border-gray-500 px-2">
+            <p className="lg:text-2xl md:text-xl text-lg">95%</p>
             <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
-              Clients Satisfaction
+              Service Excellence Rate
             </p>
           </div>
-          <div>
-            <p className="lg:text-2xl md:text-xl text-lg">36+</p>
+          <div className="pl-2">
+            <p className="lg:text-2xl md:text-xl text-lg">15+</p>
             <p className="text-neutral lg:text-lg md:text-base text-sm font-light">
-              Expert Technicians
+              Years in the Industry
             </p>
           </div>
         </div>
