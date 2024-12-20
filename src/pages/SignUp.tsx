@@ -1,50 +1,63 @@
-import Input from "@/components/Input";
+import Form from "@/components/Form";
+import { InputProps } from "@/components/Input";
 import { Link } from "react-router-dom";
 
 function SignUp() {
+  const config: InputProps[] = [
+    {
+      type: "text",
+      label: "First Name",
+      name: "firstName",
+      placeholder: "Enter your first name",
+      required: true,
+      value: "",
+      error: "",
+    },
+    {
+      type: "text",
+      label: "Last Name",
+      name: "lastName",
+      placeholder: "Enter your last name",
+      required: true,
+      value: "",
+      error: "",
+    },
+    {
+      type: "text",
+      label: "Email",
+      name: "email",
+      placeholder: "Enter your email",
+      required: true,
+      value: "",
+      error: "",
+    },
+    {
+      type: "password",
+      label: "Password",
+      name: "password",
+      placeholder: "Enter your password",
+      required: true,
+      value: "",
+      error: "",
+    },
+    {
+      type: "password",
+      label: "Repeat Password",
+      name: "repeatPassword",
+      placeholder: "Repeat your password",
+      required: true,
+      value: "",
+      error: "",
+    },
+  ];
   return (
     <>
-      <form className="mt-8 mb-4 flex flex-col items-center space-y-4 min-w-72">
-        <Input
-          type="text"
-          name="firstName"
-          label="First Name"
-          placeholder="Enter your first name"
-          required={true}
-        />
-        <Input
-          type="text"
-          name="lastName"
-          label="Last Name"
-          placeholder="Enter your last name"
-          required={true}
-        />
-        <Input
-          type="email"
-          name="email"
-          label="Email"
-          placeholder="Enter your email"
-          required={true}
-        />
-        <Input
-          type="password"
-          name="password"
-          label="Password"
-          placeholder="Enter your password"
-          required={true}
-        />
-        <Input
-          type="password"
-          name="repeatPassword"
-          label="Repeat Password"
-          placeholder="Repeat your password"
-          required={true}
-        />
-
-        <button className="bg-secondary px-12 py-2 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer w-full">
-          Sign Up
-        </button>
-      </form>
+      <Form
+        config={config}
+        btnText="Sign Up"
+        isLoading={false}
+        onSubmit={() => {}}
+      />
 
       <div className="flex gap-1">
         <p> Already have an account?</p>

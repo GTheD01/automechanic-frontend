@@ -1,6 +1,6 @@
 import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 
-interface InputProps {
+export interface InputProps {
   type: HTMLInputTypeAttribute;
   placeholder: string;
   required: boolean;
@@ -8,6 +8,7 @@ interface InputProps {
   label: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  value: string;
 }
 
 function Input({
@@ -18,6 +19,7 @@ function Input({
   type,
   onChange,
   error,
+  value,
 }: InputProps) {
   return (
     <div className="flex flex-col items-start w-full">
@@ -26,6 +28,7 @@ function Input({
       </label>
       <input
         id={name}
+        value={value}
         name={name}
         type={type}
         autoComplete="off"
