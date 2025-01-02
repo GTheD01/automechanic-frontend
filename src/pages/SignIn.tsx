@@ -2,35 +2,36 @@ import { Link } from "react-router-dom";
 
 import Form from "@/components/Form";
 import { InputProps } from "@/components/Input";
+import useSignIn from "@/hooks/useSignIn";
 
 function SignIn() {
-  const config: InputProps[] = [
+  const { formData, errors, onChange, onSubmit } = useSignIn();
+  const inputConfig: InputProps[] = [
     {
       type: "text",
       label: "Email",
       name: "email",
       placeholder: "Enter your email",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.email,
+      error: errors.email,
     },
     {
       type: "password",
       label: "Password",
       name: "password",
       placeholder: "Enter your password",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.password,
+      error: errors.password,
     },
   ];
   return (
     <>
       <Form
-        config={config}
+        onChange={onChange}
+        inputConfig={inputConfig}
         btnText="Sign In"
         isLoading={false}
-        onSubmit={() => {}}
+        onSubmit={onSubmit}
       />
       <Link
         to={"/customer/reset-password"}

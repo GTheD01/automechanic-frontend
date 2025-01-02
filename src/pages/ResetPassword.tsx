@@ -17,10 +17,11 @@ function ResetPassword() {
   return (
     <>
       <Form
-        config={config}
+        inputConfig={config}
         btnText="Reset Password"
         isLoading={false}
         onSubmit={() => {}}
+        onChange={() => {}}
       />
 
       <Link

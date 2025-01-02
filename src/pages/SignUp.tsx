@@ -1,62 +1,60 @@
 import Form from "@/components/Form";
 import { InputProps } from "@/components/Input";
+import useSignUp from "@/hooks/useSignUp";
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  const config: InputProps[] = [
+  const { formData, onChange, errors, onSubmit } = useSignUp();
+  const inputConfig: InputProps[] = [
     {
       type: "text",
       label: "First Name",
       name: "firstName",
       placeholder: "Enter your first name",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.firstName,
+      error: errors.firstName,
     },
     {
       type: "text",
       label: "Last Name",
       name: "lastName",
       placeholder: "Enter your last name",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.lastName,
+      error: errors.lastName,
     },
     {
       type: "text",
       label: "Email",
       name: "email",
       placeholder: "Enter your email",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.email,
+      error: errors.email,
     },
     {
       type: "password",
       label: "Password",
       name: "password",
       placeholder: "Enter your password",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.password,
+      error: errors.password,
     },
     {
       type: "password",
       label: "Repeat Password",
       name: "repeatPassword",
       placeholder: "Repeat your password",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.repeatPassword,
+      error: errors.repeatPassword,
     },
   ];
   return (
     <>
       <Form
-        config={config}
+        onChange={onChange}
+        inputConfig={inputConfig}
         btnText="Sign Up"
         isLoading={false}
-        onSubmit={() => {}}
+        onSubmit={onSubmit}
       />
 
       <div className="flex gap-1">

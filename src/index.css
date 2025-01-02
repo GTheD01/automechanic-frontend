@@ -15,7 +15,7 @@ body,
 #root {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   color: #fff;
-  max-width: 1440px;
+  /* max-width: 1440px; */
   margin: 0 auto;
   scroll-behavior: smooth;
   height: 100%;

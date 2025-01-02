@@ -2,20 +2,27 @@ import { ChangeEvent, FormEvent } from "react";
 import Input, { InputProps } from "./Input";
 import Spinner from "./Spinner";
 
-type FormMethod = "GET" | "POST" | "PUT" | "PATCH";
+// type FormMethod = "GET" | "POST" | "PUT" | "PATCH";
+
+enum FormMethod {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+}
 
 interface FormProps {
-  config: InputProps[];
+  inputConfig: InputProps[];
   method?: FormMethod;
   btnText: string;
   isLoading: boolean;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
 function Form({
-  config,
-  method = "POST",
+  inputConfig,
+  method = FormMethod.POST,
   onSubmit,
   btnText,
   onChange,
@@ -27,7 +34,7 @@ function Form({
       onSubmit={onSubmit}
       className="mt-8 mb-4 flex flex-col items-center space-y-4 min-w-72"
     >
-      {config.map((input) => (
+      {inputConfig.map((input) => (
         <Input
           value={input.value}
           key={input.name}
