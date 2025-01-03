@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home/Home";
-import NavFooterLayout from "../pages/HomeLayout/HomeLayout";
+
+import Home from "@/pages/Home/Home";
 import SignIn from "@/pages/SignIn";
-import AuthPagesLayout from "@/pages/AuthPagesLayout/AuthPagesLayout";
 import SignUp from "@/pages/SignUp";
 import ResetPassword from "@/pages/ResetPassword";
+import ResetPasswordConfirm from "@/pages/ResetPasswordConfirm";
+import AuthPagesLayout from "@/pages/AuthPagesLayout/AuthPagesLayout";
+import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/customer/reset-password",
         element: <ResetPassword />,
+      },
+      {
+        path: "/customer/reset-password/confirm",
+        element: <ResetPasswordConfirm />,
       },
     ],
   },

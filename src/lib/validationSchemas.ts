@@ -16,7 +16,10 @@ export const RegisterUserSchema = z
       ),
     repeatPassword: z
       .string()
-      .min(8, "Repeated password must contain at least 8 characters"),
+      .regex(
+        PASSWORD_REGEX,
+        "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+      ),
   })
   .refine(
     (values) => {
@@ -32,3 +35,34 @@ export const LoginUserSchema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(1, "Password must be at least 1 character"),
 });
+
+export const ResetPasswordSchema = z.object({
+  email: z.string().email("Invalid email"),
+});
+
+export const ResetPasswordConfirmSchema = z
+  .object({
+    email: z.string().email("Invalid email"),
+    token: z.string().min(1, "Token must be at least 1 character"),
+    password: z
+      .string()
+      .regex(
+        PASSWORD_REGEX,
+        "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+      ),
+    repeatPassword: z
+      .string()
+      .regex(
+        PASSWORD_REGEX,
+        "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
+      ),
+  })
+  .refine(
+    (values) => {
+      return values.password === values.repeatPassword;
+    },
+    {
+      message: "Passwords must match!",
+      path: ["repeatPassword"],
+    }
+  );

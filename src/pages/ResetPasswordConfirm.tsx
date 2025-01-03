@@ -2,27 +2,12 @@ import { Link } from "react-router-dom";
 
 import Form from "@/components/Form";
 import { InputProps } from "@/components/Input";
-import useSignUp from "@/hooks/useSignUp";
+import useResetPasswordConfirm from "@/hooks/useResetPasswordConfirm";
 
-function SignUp() {
-  const { formData, onChange, errors, onSubmit, isLoading } = useSignUp();
+function ResetPasswordConfirm() {
+  const { errors, formData, isLoading, onChange, onSubmit } =
+    useResetPasswordConfirm();
   const inputConfig: InputProps[] = [
-    {
-      type: "text",
-      label: "First Name",
-      name: "firstName",
-      placeholder: "Enter your first name",
-      value: formData.firstName,
-      error: errors.firstName,
-    },
-    {
-      type: "text",
-      label: "Last Name",
-      name: "lastName",
-      placeholder: "Enter your last name",
-      value: formData.lastName,
-      error: errors.lastName,
-    },
     {
       type: "text",
       label: "Email",
@@ -30,6 +15,14 @@ function SignUp() {
       placeholder: "Enter your email",
       value: formData.email,
       error: errors.email,
+    },
+    {
+      type: "text",
+      label: "Token",
+      name: "token",
+      placeholder: "Enter your token",
+      value: formData.token,
+      error: errors.token,
     },
     {
       type: "password",
@@ -51,24 +44,21 @@ function SignUp() {
   return (
     <>
       <Form
-        onChange={onChange}
         inputConfig={inputConfig}
-        btnText="Sign Up"
+        btnText="Reset Password"
         isLoading={isLoading}
         onSubmit={onSubmit}
+        onChange={onChange}
       />
 
-      <div className="flex gap-1">
-        <p> Already have an account?</p>
-        <Link
-          to={"/customer/sign-in"}
-          className="text-blue-500 hover:text-blue-400"
-        >
-          Sign in
-        </Link>
-      </div>
+      <Link
+        to={"/customer/sign-in"}
+        className="text-sm hover:text-neutral border px-4 py-2"
+      >
+        Back to Sign In
+      </Link>
     </>
   );
 }
 
-export default SignUp;
+export default ResetPasswordConfirm;

@@ -1,19 +1,17 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { z } from "zod";
-import { LoginUserSchema } from "@/lib/validationSchemas";
+import { ResetPasswordSchema } from "@/lib/validationSchemas";
 
-type LoginForm = z.infer<typeof LoginUserSchema>;
+type ResetPasswordForm = z.infer<typeof ResetPasswordSchema>;
 
-function useSignIn() {
-  const [formData, setFormData] = useState<LoginForm>({
+function useResetPassword() {
+  const [formData, setFormData] = useState<ResetPasswordForm>({
     email: "",
-    password: "",
   });
 
   const [errors, setErrors] = useState({
     email: "",
-    password: "",
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -30,10 +28,9 @@ function useSignIn() {
       // Clear errors
       setErrors({
         email: "",
-        password: "",
       });
 
-      const parsedFormData = LoginUserSchema.parse(formData);
+      const parsedFormData = ResetPasswordSchema.parse(formData);
       console.log("Validation passed: ", parsedFormData);
 
       // TODO: Make API call to sign-up (set form data and set errors)
@@ -63,4 +60,4 @@ function useSignIn() {
   };
 }
 
-export default useSignIn;
+export default useResetPassword;

@@ -5,7 +5,7 @@ import { InputProps } from "@/components/Input";
 import useSignIn from "@/hooks/useSignIn";
 
 function SignIn() {
-  const { formData, errors, onChange, onSubmit } = useSignIn();
+  const { formData, errors, onChange, onSubmit, isLoading } = useSignIn();
   const inputConfig: InputProps[] = [
     {
       type: "text",
@@ -30,7 +30,7 @@ function SignIn() {
         onChange={onChange}
         inputConfig={inputConfig}
         btnText="Sign In"
-        isLoading={false}
+        isLoading={isLoading}
         onSubmit={onSubmit}
       />
       <Link

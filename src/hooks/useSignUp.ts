@@ -1,6 +1,7 @@
-import { RegisterUserSchema } from "@/lib/validationSchemas";
 import { ChangeEvent, FormEvent, useState } from "react";
+
 import { z } from "zod";
+import { RegisterUserSchema } from "@/lib/validationSchemas";
 
 type RegistrationForm = z.infer<typeof RegisterUserSchema>;
 

@@ -1,27 +1,30 @@
-import Form from "@/components/Form";
-import { InputProps } from "@/components/Input";
 import { Link } from "react-router-dom";
 
+import Form from "@/components/Form";
+import { InputProps } from "@/components/Input";
+import useRequestResetPassword from "@/hooks/useResetPassword";
+
 function ResetPassword() {
+  const { errors, formData, isLoading, onChange, onSubmit } =
+    useRequestResetPassword();
   const config: InputProps[] = [
     {
       type: "text",
       label: "Email",
       name: "email",
       placeholder: "Enter your email",
-      required: true,
-      value: "",
-      error: "",
+      value: formData.email,
+      error: errors.email,
     },
   ];
   return (
     <>
       <Form
         inputConfig={config}
-        btnText="Reset Password"
-        isLoading={false}
-        onSubmit={() => {}}
-        onChange={() => {}}
+        btnText="Send confirmation token"
+        isLoading={isLoading}
+        onSubmit={onSubmit}
+        onChange={onChange}
       />
 
       <Link
