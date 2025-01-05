@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { z } from "zod";
-import { ResetPasswordConfirmSchema } from "@/lib/validationSchemas";
+import { ResetPasswordConfirmSchema } from "@/validations/authValidationSchemas";
 
 type ResetPasswordConfirmForm = z.infer<typeof ResetPasswordConfirmSchema>;
 

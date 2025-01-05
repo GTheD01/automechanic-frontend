@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { z } from "zod";
-import { LoginUserSchema } from "@/lib/validationSchemas";
+import { LoginUserSchema } from "@/validations/authValidationSchemas";
 
 type LoginForm = z.infer<typeof LoginUserSchema>;
 

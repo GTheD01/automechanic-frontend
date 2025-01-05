@@ -1,28 +1,55 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { AxiosError } from "axios";
 
 import { z } from "zod";
-import { RegisterUserSchema } from "@/lib/validationSchemas";
+import { RegisterUserSchema } from "@/validations/authValidationSchemas";
+import { useMutation } from "@tanstack/react-query";
+import { signup } from "@/services/authService";
+import { toast } from "react-toastify";
 
 type RegistrationForm = z.infer<typeof RegisterUserSchema>;
 
 function useSignUp() {
-  const [formData, setFormData] = useState<RegistrationForm>({
+  const initialFormData: RegistrationForm = {
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     repeatPassword: "",
-  });
+  };
 
-  const [errors, setErrors] = useState({
+  const initialErrors = {
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     repeatPassword: "",
-  });
+  };
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [formData, setFormData] = useState<RegistrationForm>(initialFormData);
+  const [errors, setErrors] = useState(initialErrors);
+
+  const mutation = useMutation({
+    mutationFn: signup,
+    onSuccess: () => {
+      setFormData(initialFormData);
+      toast.success(
+        "Successfully registered! Check your email to verify your account."
+      );
+    },
+    onError: (error: AxiosError) => {
+      if (error.response?.data) {
+        const backendErrors = error.response.data;
+
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          ...backendErrors,
+        }));
+      } else {
+        console.log("Unexpected error: ", error);
+      }
+    },
+  });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,18 +61,11 @@ function useSignUp() {
     e.preventDefault();
     try {
       // Clear errors
-      setErrors({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        repeatPassword: "",
-      });
+      setErrors(initialErrors);
 
       const parsedFormData = RegisterUserSchema.parse(formData);
-      console.log("Validation passed: ", parsedFormData);
 
-      // TODO: Make API call to sign-up (set form data and set errors)
+      mutation.mutate(parsedFormData);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -58,19 +78,15 @@ function useSignUp() {
       } else {
         console.log("Unexpected error: ", error);
       }
-    } finally {
-      setIsLoading(false);
     }
   };
-
-  // TODO: Return isLoading when making API request
 
   return {
     formData,
     onChange,
     onSubmit,
     errors,
-    isLoading,
+    isLoading: mutation.isPending,
   };
 }
 

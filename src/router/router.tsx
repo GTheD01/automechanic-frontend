@@ -7,6 +7,9 @@ import ResetPassword from "@/pages/ResetPassword";
 import ResetPasswordConfirm from "@/pages/ResetPasswordConfirm";
 import AuthPagesLayout from "@/pages/AuthPagesLayout/AuthPagesLayout";
 import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
+import AuthProtector from "@/lib/AuthProtector";
+import AuthContextProvider from "@/providers/AuthContextProvider";
+import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,24 @@ const router = createBrowserRouter([
       {
         path: "/customer/reset-password/confirm",
         element: <ResetPasswordConfirm />,
+      },
+    ],
+  },
+  {
+    element: (
+      <AuthContextProvider>
+        <AuthProtector />
+      </AuthContextProvider>
+    ),
+    children: [
+      {
+        element: <ProtectedPagesLayout />,
+        children: [
+          {
+            path: "/protected",
+            element: <div>Protected</div>,
+          },
+        ],
       },
     ],
   },
