@@ -1,11 +1,8 @@
-enum UserRoles {
-  ADMIN = "admin",
-  USER = "user",
-}
+type UserRoles = "ADMIN" | "USER";
 
 export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  role: UserRoles | undefined;
+  role: UserRoles;
 }

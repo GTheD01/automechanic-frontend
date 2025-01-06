@@ -29,7 +29,7 @@ function useSignUp() {
   const [formData, setFormData] = useState<RegistrationForm>(initialFormData);
   const [errors, setErrors] = useState(initialErrors);
 
-  const mutation = useMutation({
+  const signUpMutation = useMutation({
     mutationFn: signup,
     onSuccess: () => {
       setFormData(initialFormData);
@@ -46,7 +46,7 @@ function useSignUp() {
           ...backendErrors,
         }));
       } else {
-        console.log("Unexpected error: ", error);
+        toast.error("An unexpected error occurred. Please try again later.");
       }
     },
   });
@@ -65,7 +65,7 @@ function useSignUp() {
 
       const parsedFormData = RegisterUserSchema.parse(formData);
 
-      mutation.mutate(parsedFormData);
+      signUpMutation.mutate(parsedFormData);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -86,7 +86,7 @@ function useSignUp() {
     onChange,
     onSubmit,
     errors,
-    isLoading: mutation.isPending,
+    isLoading: signUpMutation.isPending,
   };
 }
 

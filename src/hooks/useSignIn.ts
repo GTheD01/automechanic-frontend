@@ -1,21 +1,47 @@
+import { z } from "zod";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { z } from "zod";
 import { LoginUserSchema } from "@/validations/authValidationSchemas";
+import { signin } from "@/services/authService";
+import { LoginResponseError } from "@/types/Auth";
 
 type LoginForm = z.infer<typeof LoginUserSchema>;
 
 function useSignIn() {
-  const [formData, setFormData] = useState<LoginForm>({
+  const navigate = useNavigate();
+
+  const initialFormData: LoginForm = {
     email: "",
     password: "",
-  });
+  };
+  const [formData, setFormData] = useState<LoginForm>(initialFormData);
 
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const signInMutation = useMutation({
+    mutationFn: signin,
+    onSuccess: () => {
+      setFormData(initialFormData);
+      toast.success("Successfully signed in!");
+
+      navigate("/dashboard");
+    },
+    onError: (error: AxiosError) => {
+      if (error.response?.data) {
+        const data = error.response.data as LoginResponseError;
+        toast.error(data.message);
+      } else {
+        toast.error("An unexpected error occurred. Please try again later.");
+      }
+    },
+  });
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,7 +53,6 @@ function useSignIn() {
     e.preventDefault();
 
     try {
-      // Clear errors
       setErrors({
         email: "",
         password: "",
@@ -36,7 +61,7 @@ function useSignIn() {
       const parsedFormData = LoginUserSchema.parse(formData);
       console.log("Validation passed: ", parsedFormData);
 
-      // TODO: Make API call to sign-up (set form data and set errors)
+      signInMutation.mutate(parsedFormData);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -49,8 +74,6 @@ function useSignIn() {
       } else {
         console.log("Unexpected error: ", error);
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -59,7 +82,7 @@ function useSignIn() {
     onChange,
     onSubmit,
     errors,
-    isLoading,
+    isLoading: signInMutation.isPending,
   };
 }
 
