@@ -8,8 +8,9 @@ import ResetPasswordConfirm from "@/pages/ResetPasswordConfirm";
 import AuthPagesLayout from "@/pages/AuthPagesLayout/AuthPagesLayout";
 import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
 import AuthProtector from "@/lib/AuthProtector";
-import AuthContextProvider from "@/providers/AuthContextProvider";
-import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout";
+import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
+import Dashboard from "@/pages/Dashboard/Dashboard";
+import UserContextProvider from "@/providers/UserContextProvider";
 
 const router = createBrowserRouter([
   {
@@ -46,17 +47,29 @@ const router = createBrowserRouter([
   },
   {
     element: (
-      <AuthContextProvider>
+      <UserContextProvider>
         <AuthProtector />
-      </AuthContextProvider>
+      </UserContextProvider>
     ),
     children: [
       {
         element: <ProtectedPagesLayout />,
         children: [
           {
-            path: "/protected",
-            element: <div>Protected</div>,
+            path: "/dashboard",
+            element: <Dashboard />,
+          },
+          {
+            path: "/users",
+            element: <div>Users</div>,
+          },
+          {
+            path: "/appointments",
+            element: <div>Appointments</div>,
+          },
+          {
+            path: "/reports",
+            element: <div>Reports</div>,
           },
         ],
       },
