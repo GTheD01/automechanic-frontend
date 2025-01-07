@@ -1,6 +1,4 @@
-import { NavLink } from "react-router-dom";
-
-import { cn } from "@/lib/cn";
+import CustomNavLink from "@/components/CustomNavLink";
 
 function AdminNavbar() {
   return (
@@ -9,38 +7,10 @@ function AdminNavbar() {
         Admin Dashboard
       </h2>
       <ul className="flex flex-col">
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/dashboard"
-        >
-          Dashboard
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/users"
-        >
-          Users
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/appointments"
-        >
-          Appointments
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/reports"
-        >
-          Reports
-        </NavLink>
+        <CustomNavLink to="/dashboard" content="Dashboard" />
+        <CustomNavLink to="/users" content="Users" />
+        <CustomNavLink to="/appointments" content="Appointments" />
+        <CustomNavLink to="/reports" content="Reports" />
       </ul>
     </nav>
   );

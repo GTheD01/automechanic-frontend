@@ -21,6 +21,7 @@ export default function UserContextProvider({
   const { data, status } = useQuery({
     queryKey: ["user"],
     queryFn: fetchUser,
+    retry: 0,
   });
 
   return (

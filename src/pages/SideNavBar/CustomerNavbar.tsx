@@ -1,5 +1,4 @@
-import { cn } from "@/lib/cn";
-import { NavLink } from "react-router-dom";
+import CustomNavLink from "@/components/CustomNavLink";
 
 function CustomerNavbar() {
   return (
@@ -8,38 +7,10 @@ function CustomerNavbar() {
         Customer Dashboard
       </h2>
       <ul className="flex flex-col">
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/dashboard"
-        >
-          Dashboard
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/my-cars"
-        >
-          My Cars
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/my-appointments"
-        >
-          My Appointments
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
-          }
-          to="/reports"
-        >
-          Reports
-        </NavLink>
+        <CustomNavLink to="/dashboard" content="Dashboard" />
+        <CustomNavLink to="/my-cars" content="My Cars" />
+        <CustomNavLink to="/my-appointments" content="My Appointments" />
+        <CustomNavLink to="/reports" content="Reports" />
       </ul>
     </nav>
   );

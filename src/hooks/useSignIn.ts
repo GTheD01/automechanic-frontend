@@ -59,7 +59,6 @@ function useSignIn() {
       });
 
       const parsedFormData = LoginUserSchema.parse(formData);
-      console.log("Validation passed: ", parsedFormData);
 
       signInMutation.mutate(parsedFormData);
     } catch (error) {
