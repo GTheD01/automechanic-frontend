@@ -12,3 +12,8 @@ The website allows users to:
 - Track Services: View past appointments and keep track of vehicle service history to stay on top of future maintenance needs.
 
 Built with modern web technologies, this project aims to streamline customer interaction and ensure smooth, efficient management of vehicle repair services.
+
+## Screenshot
+
+![home page](/images/HomePage-Header.png)
+![why choose us section](/images/WhyChooseUs-Section.png)
