@@ -6,6 +6,7 @@ import { RegisterUserSchema } from "@/validations/authValidationSchemas";
 import { useMutation } from "@tanstack/react-query";
 import { signup } from "@/services/authService";
 import { toast } from "react-toastify";
+import { ApiResponseError } from "@/types/Auth";
 
 type RegistrationForm = z.infer<typeof RegisterUserSchema>;
 
@@ -39,12 +40,10 @@ function useSignUp() {
     },
     onError: (error: AxiosError) => {
       if (error.response?.data) {
-        const backendErrors = error.response.data;
+        const data = error.response.data as ApiResponseError;
+        console.log(error.response.data);
 
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          ...backendErrors,
-        }));
+        toast.error(data.message);
       } else {
         toast.error("An unexpected error occurred. Please try again later.");
       }

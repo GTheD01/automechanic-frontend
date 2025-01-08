@@ -47,7 +47,7 @@ function ProtectedPagesLayout() {
               </div>
 
               <div
-                className="absolute top-6 right-0 bg-primary text-white opacity-0 pointer-events-none w-full
+                className="absolute top-6 right-0 bg-primary text-white opacity-0 pointer-events-none
                 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:visible transition-opacity duration-300"
               >
                 <button onClick={handleLogout} className="p-2 hover:opacity-80">

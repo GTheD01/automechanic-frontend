@@ -7,7 +7,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 import { LoginUserSchema } from "@/validations/authValidationSchemas";
 import { signin } from "@/services/authService";
-import { LoginResponseError } from "@/types/Auth";
+import { ApiResponseError } from "@/types/Auth";
 
 type LoginForm = z.infer<typeof LoginUserSchema>;
 
@@ -35,10 +35,8 @@ function useSignIn() {
     },
     onError: (error: AxiosError) => {
       if (error.response?.data) {
-        const data = error.response.data as LoginResponseError;
+        const data = error.response.data as ApiResponseError;
         toast.error(data.message);
-      } else {
-        toast.error("An unexpected error occurred. Please try again later.");
       }
     },
   });

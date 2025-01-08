@@ -11,8 +11,10 @@ export interface LoginUser {
   password: string;
 }
 
-export interface LoginResponseError {
+export interface ApiResponseError {
   message: string;
   error: string;
   status: number;
+  path: string;
+  timestamp: number;
 }
