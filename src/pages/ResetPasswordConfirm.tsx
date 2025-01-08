@@ -27,18 +27,18 @@ function ResetPasswordConfirm() {
     {
       type: "password",
       label: "Password",
-      name: "password",
+      name: "newPassword",
       placeholder: "Enter your password",
-      value: formData.password,
-      error: errors.password,
+      value: formData.newPassword,
+      error: errors.newPassword,
     },
     {
       type: "password",
       label: "Repeat Password",
-      name: "repeatPassword",
+      name: "repeatNewPassword",
       placeholder: "Repeat your password",
-      value: formData.repeatPassword,
-      error: errors.repeatPassword,
+      value: formData.repeatNewPassword,
+      error: errors.repeatNewPassword,
     },
   ];
   return (

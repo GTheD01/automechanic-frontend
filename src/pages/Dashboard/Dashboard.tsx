@@ -5,7 +5,7 @@ import AdminDashboard from "./AdminDashboard";
 function Dashboard() {
   const { user } = useUserContext();
 
-  if (user?.role === "ADMIN") {
+  if (user?.userRole === "ADMIN") {
     return <AdminDashboard />;
   }
 

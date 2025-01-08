@@ -50,9 +50,9 @@ function Form({
       <button
         disabled={isLoading}
         type="submit"
-        className="bg-secondary px-12 py-2 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer w-full"
+        className="bg-secondary px-12 py-2 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer w-full flex justify-center"
       >
-        {isLoading ? <Spinner /> : btnText}
+        {isLoading ? <Spinner md /> : btnText}
       </button>
     </form>
   );

@@ -1,11 +1,18 @@
+import { z } from "zod";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { z } from "zod";
 import { ResetPasswordSchema } from "@/validations/authValidationSchemas";
+import { resetPassword } from "@/services/authService";
+import { ApiResponseError } from "@/types/Auth";
+import { useNavigate } from "react-router-dom";
 
 type ResetPasswordForm = z.infer<typeof ResetPasswordSchema>;
 
 function useResetPassword() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<ResetPasswordForm>({
     email: "",
   });
@@ -13,7 +20,6 @@ function useResetPassword() {
   const [errors, setErrors] = useState({
     email: "",
   });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,19 +27,31 @@ function useResetPassword() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const forgotPasswordMutation = useMutation({
+    mutationFn: resetPassword,
+    onSuccess: () => {
+      toast.success("Password reset token sent to your email!");
+      navigate("/customer/reset-password/confirm");
+    },
+    onError: (error: AxiosError) => {
+      if (error.response?.data) {
+        const data = error.response.data as ApiResponseError;
+        toast.error(data.message);
+      }
+    },
+  });
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      // Clear errors
       setErrors({
         email: "",
       });
 
       const parsedFormData = ResetPasswordSchema.parse(formData);
-      console.log("Validation passed: ", parsedFormData);
 
-      // TODO: Make API call to sign-up (set form data and set errors)
+      forgotPasswordMutation.mutate(parsedFormData);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -46,8 +64,6 @@ function useResetPassword() {
       } else {
         console.log("Unexpected error: ", error);
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -56,7 +72,7 @@ function useResetPassword() {
     onChange,
     onSubmit,
     errors,
-    isLoading,
+    isLoading: forgotPasswordMutation.isPending,
   };
 }
 

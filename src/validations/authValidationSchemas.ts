@@ -44,13 +44,13 @@ export const ResetPasswordConfirmSchema = z
   .object({
     email: z.string().email("Invalid email"),
     token: z.string().min(1, "Token must be at least 1 character"),
-    password: z
+    newPassword: z
       .string()
       .regex(
         PASSWORD_REGEX,
         "Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character"
       ),
-    repeatPassword: z
+    repeatNewPassword: z
       .string()
       .regex(
         PASSWORD_REGEX,
@@ -59,7 +59,7 @@ export const ResetPasswordConfirmSchema = z
   })
   .refine(
     (values) => {
-      return values.password === values.repeatPassword;
+      return values.newPassword === values.repeatNewPassword;
     },
     {
       message: "Passwords must match!",

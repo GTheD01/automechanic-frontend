@@ -11,6 +11,17 @@ export interface LoginUser {
   password: string;
 }
 
+export interface ResetPassword {
+  email: string;
+}
+
+export interface ResetPasswordConfirm {
+  email: string;
+  token: string;
+  newPassword: string;
+  repeatNewPassword: string;
+}
+
 export interface ApiResponseError {
   message: string;
   error: string;

@@ -1,25 +1,34 @@
+import { z } from "zod";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { z } from "zod";
 import { ResetPasswordConfirmSchema } from "@/validations/authValidationSchemas";
+import { ApiResponseError } from "@/types/Auth";
+import { confirmResetPassword } from "@/services/authService";
 
 type ResetPasswordConfirmForm = z.infer<typeof ResetPasswordConfirmSchema>;
 
 function useResetPasswordConfirm() {
-  const [formData, setFormData] = useState<ResetPasswordConfirmForm>({
+  const navigate = useNavigate();
+  const initialFormData: ResetPasswordConfirmForm = {
     email: "",
     token: "",
-    password: "",
-    repeatPassword: "",
-  });
+    newPassword: "",
+    repeatNewPassword: "",
+  };
+  const initialErrors = {
+    email: "",
+    token: "",
+    newPassword: "",
+    repeatNewPassword: "",
+  };
+  const [formData, setFormData] =
+    useState<ResetPasswordConfirmForm>(initialFormData);
 
-  const [errors, setErrors] = useState({
-    email: "",
-    token: "",
-    password: "",
-    repeatPassword: "",
-  });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState(initialErrors);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,22 +36,31 @@ function useResetPasswordConfirm() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const resetPasswordConfirmMutation = useMutation({
+    mutationFn: confirmResetPassword,
+    onSuccess: () => {
+      setFormData(initialFormData);
+      toast.success("Password successfully reset!");
+      navigate("/customer/sign-in");
+    },
+    onError: (error: AxiosError) => {
+      if (error.response?.data) {
+        const data = error.response.data as ApiResponseError;
+        toast.error(data.message);
+      }
+    },
+  });
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       // Clear errors
-      setErrors({
-        email: "",
-        token: "",
-        password: "",
-        repeatPassword: "",
-      });
+      setErrors(initialErrors);
 
       const parsedFormData = ResetPasswordConfirmSchema.parse(formData);
-      console.log("Validation passed: ", parsedFormData);
 
-      // TODO: Make API call to sign-up (set form data and set errors)
+      resetPasswordConfirmMutation.mutate(parsedFormData);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -55,8 +73,6 @@ function useResetPasswordConfirm() {
       } else {
         console.log("Unexpected error: ", error);
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -65,7 +81,7 @@ function useResetPasswordConfirm() {
     onChange,
     onSubmit,
     errors,
-    isLoading,
+    isLoading: resetPasswordConfirmMutation.isPending,
   };
 }
 

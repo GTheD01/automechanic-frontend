@@ -5,7 +5,7 @@ import CustomerNavbar from "./CustomerNavbar";
 function SideNavBar() {
   const { user } = useUserContext();
 
-  if (user?.role === "ADMIN") {
+  if (user?.userRole === "ADMIN") {
     return <AdminNavbar />;
   }
 

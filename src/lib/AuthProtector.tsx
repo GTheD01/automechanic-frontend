@@ -15,7 +15,8 @@ function AuthProtector() {
     );
   }
 
-  if (!user?.role) {
+  if (!user?.userRole) {
+    console.log("User is not authenticated");
     return <Navigate to="/customer/sign-in" />;
   }
 

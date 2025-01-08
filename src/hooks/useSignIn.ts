@@ -30,7 +30,6 @@ function useSignIn() {
     onSuccess: () => {
       setFormData(initialFormData);
       toast.success("Successfully signed in!");
-
       navigate("/dashboard");
     },
     onError: (error: AxiosError) => {

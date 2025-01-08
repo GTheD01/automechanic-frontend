@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import Form from "@/components/Form";
 import { InputProps } from "@/components/Input";
+import Form from "@/components/Form";
 import useRequestResetPassword from "@/hooks/useResetPassword";
 
 function ResetPassword() {
@@ -17,6 +17,7 @@ function ResetPassword() {
       error: errors.email,
     },
   ];
+
   return (
     <>
       <Form
