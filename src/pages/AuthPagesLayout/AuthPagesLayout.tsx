@@ -1,7 +1,15 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import exitArrowSvg from "@/assets/svgs/exit-arrow.svg";
 
+import { useAuthContext } from "@/providers/AuthContextProvider";
+
 function AuthPagesLayout() {
+  const { isAuthenticated } = useAuthContext();
+
+  if (isAuthenticated) {
+    return <Navigate to={"/dashboard"} />;
+  }
+
   return (
     <div className="bg-primary h-full flex flex-col items-center justify-center w-full">
       <Link

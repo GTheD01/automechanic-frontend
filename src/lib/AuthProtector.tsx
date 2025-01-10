@@ -2,12 +2,12 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import Spinner from "@/components/Spinner";
 
-import { useUserContext } from "@/providers/UserContextProvider";
+import { useAuthContext } from "@/providers/AuthContextProvider";
 
 function AuthProtector() {
-  const { status, user } = useUserContext();
+  const { isAuthenticated, isLoading } = useAuthContext();
 
-  if (status === "pending") {
+  if (isLoading) {
     return (
       <div className="bg-primary h-screen flex items-center justify-center">
         <Spinner lg />
@@ -15,8 +15,7 @@ function AuthProtector() {
     );
   }
 
-  if (!user?.userRole) {
-    console.log("User is not authenticated");
+  if (!isAuthenticated) {
     return <Navigate to="/customer/sign-in" />;
   }
 

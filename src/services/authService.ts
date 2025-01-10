@@ -47,3 +47,8 @@ export const confirmResetPassword = async (
   );
   return response.data;
 };
+
+export const verifyToken = async () => {
+  const response = await apiClient.post("/verify-token");
+  return response.data;
+};

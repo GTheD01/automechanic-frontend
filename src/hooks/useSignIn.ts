@@ -8,11 +8,13 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { LoginUserSchema } from "@/validations/authValidationSchemas";
 import { signin } from "@/services/authService";
 import { ApiResponseError } from "@/types/Auth";
+import { useAuthContext } from "@/providers/AuthContextProvider";
 
 type LoginForm = z.infer<typeof LoginUserSchema>;
 
 function useSignIn() {
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuthContext();
 
   const initialFormData: LoginForm = {
     email: "",
@@ -28,6 +30,7 @@ function useSignIn() {
   const signInMutation = useMutation({
     mutationFn: signin,
     onSuccess: () => {
+      setIsAuthenticated(true);
       setFormData(initialFormData);
       toast.success("Successfully signed in!");
       navigate("/dashboard");
@@ -56,7 +59,6 @@ function useSignIn() {
       });
 
       const parsedFormData = LoginUserSchema.parse(formData);
-
       signInMutation.mutate(parsedFormData);
     } catch (error) {
       if (error instanceof z.ZodError) {

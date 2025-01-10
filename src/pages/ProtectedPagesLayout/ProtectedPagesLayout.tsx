@@ -4,20 +4,35 @@ import { useUserContext } from "@/providers/UserContextProvider";
 
 import MessageIcon from "@/assets/svgs/message.svg";
 import SettingsIcon from "@/assets/svgs/settings.svg";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { logout } from "@/services/authService";
+import { fetchUser } from "@/services/userService";
+import { useEffect } from "react";
+import { useAuthContext } from "@/providers/AuthContextProvider";
 
 function ProtectedPagesLayout() {
   const navigate = useNavigate();
-  const { user, status } = useUserContext();
+  const { user, setUser } = useUserContext();
+  const { setIsAuthenticated } = useAuthContext();
+
+  const { data, status } = useQuery({
+    queryKey: ["user"],
+    queryFn: fetchUser,
+    retry: 0,
+  });
+
+  useEffect(() => {
+    setUser(data);
+  }, [data]);
 
   if (status === "error") {
-    return <Navigate to="/customer/sign-in" />;
+    <Navigate to={"/dashboard/sign-in"} />;
   }
 
   const logoutMutation = useMutation({
     mutationFn: logout,
     onSuccess: () => {
+      setIsAuthenticated(false);
       navigate("/customer/sign-in");
     },
   });
