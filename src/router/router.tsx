@@ -12,6 +12,9 @@ import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLay
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import UserContextProvider from "@/providers/UserContextProvider";
 import VerifyEmail from "@/pages/VerifyEmail";
+import Users from "@/pages/Users/Users";
+import Appointments from "@/pages/Appointments";
+import AuthContextProvider from "@/providers/AuthContextProvider";
 
 const router = createBrowserRouter([
   {
@@ -24,9 +27,14 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "/customer",
-    element: <AuthPagesLayout />,
+    element: (
+      <AuthContextProvider>
+        <AuthPagesLayout />
+      </AuthContextProvider>
+    ),
     children: [
       {
         path: "/customer/sign-in",
@@ -52,9 +60,11 @@ const router = createBrowserRouter([
   },
   {
     element: (
-      <UserContextProvider>
-        <AuthProtector />
-      </UserContextProvider>
+      <AuthContextProvider>
+        <UserContextProvider>
+          <AuthProtector />
+        </UserContextProvider>
+      </AuthContextProvider>
     ),
     children: [
       {
@@ -66,11 +76,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/users",
-            element: <div>Users</div>,
+            element: <Users />,
           },
           {
             path: "/appointments",
-            element: <div>Appointments</div>,
+            element: <Appointments />,
           },
           {
             path: "/reports",

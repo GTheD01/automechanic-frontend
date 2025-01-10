@@ -1,12 +1,16 @@
-import { createContext, useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 import { User } from "@/types/User";
-import { fetchUser } from "@/services/userService";
 
 interface UserContextType {
   user: User | undefined;
-  status: "error" | "success" | "pending";
+  setUser: Dispatch<SetStateAction<User | undefined>>;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -18,14 +22,10 @@ export default function UserContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { data, status } = useQuery({
-    queryKey: ["user"],
-    queryFn: fetchUser,
-    retry: 0,
-  });
+  const [user, setUser] = useState<User>();
 
   return (
-    <UserContext.Provider value={{ user: data, status }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );
