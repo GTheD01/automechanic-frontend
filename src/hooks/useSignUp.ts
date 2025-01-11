@@ -41,7 +41,6 @@ function useSignUp() {
     onError: (error: AxiosError) => {
       if (error.response?.data) {
         const data = error.response.data as ApiResponseError;
-        console.log(error.response.data);
 
         toast.error(data.message);
       } else {
@@ -75,7 +74,7 @@ function useSignUp() {
 
         setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
       } else {
-        console.log("Unexpected error: ", error);
+        toast.error(`Unexpected error: ${error}`);
       }
     }
   };

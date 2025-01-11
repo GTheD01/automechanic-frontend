@@ -71,7 +71,7 @@ function useResetPasswordConfirm() {
 
         setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
       } else {
-        console.log("Unexpected error: ", error);
+        toast.error(`Unexpected error: ${error}`);
       }
     }
   };
