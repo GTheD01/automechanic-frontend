@@ -1,13 +1,15 @@
-import { cn } from "@/lib/cn";
+import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
+
+import { cn } from "@/lib/cn";
 
 interface CustomNavLinkProps {
   to: string;
-  content: string;
+  children: ReactNode;
   className?: string;
 }
 
-function CustomNavLink({ to, content, className }: CustomNavLinkProps) {
+function CustomNavLink({ to, children, className }: CustomNavLinkProps) {
   return (
     <NavLink
       className={({ isActive }) =>
@@ -15,7 +17,7 @@ function CustomNavLink({ to, content, className }: CustomNavLinkProps) {
       }
       to={to}
     >
-      {content}
+      {children}
     </NavLink>
   );
 }

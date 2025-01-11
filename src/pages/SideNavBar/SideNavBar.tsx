@@ -6,7 +6,7 @@ function SideNavBar() {
   const { user } = useUserContext();
 
   return (
-    <nav className="bg-primary fixed w-40 sm:w-52 lg:w-64 h-full">
+    <nav className="bg-primary fixed w-14 sm:w-52 lg:w-64 h-full">
       {user?.userRole === "ADMIN" ? <AdminNavbar /> : <CustomerNavbar />}
     </nav>
   );

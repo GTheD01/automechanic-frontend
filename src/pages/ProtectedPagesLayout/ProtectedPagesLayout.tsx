@@ -26,7 +26,7 @@ function ProtectedPagesLayout() {
   return (
     <div className="h-full flex">
       <SideNavBar />
-      <div className="text-primary flex-grow ml-40 sm:ml-52 lg:ml-64">
+      <div className="text-primary flex-grow ml-14 sm:ml-52 lg:ml-64">
         <TopNavBar />
         <Outlet />
       </div>
