@@ -1,77 +1,33 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Navigate, Outlet } from "react-router-dom";
+
+import TopNavBar from "./components/TopNavBar";
 import SideNavBar from "../SideNavBar/SideNavBar";
+import { fetchUser } from "@/services/userService";
 import { useUserContext } from "@/providers/UserContextProvider";
 
-import MessageIcon from "@/assets/svgs/message.svg";
-import SettingsIcon from "@/assets/svgs/settings.svg";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { logout } from "@/services/authService";
-import { fetchUser } from "@/services/userService";
-import { useEffect } from "react";
-import { useAuthContext } from "@/providers/AuthContextProvider";
-
 function ProtectedPagesLayout() {
-  const navigate = useNavigate();
-  const { user, setUser } = useUserContext();
-  const { setIsAuthenticated } = useAuthContext();
-
+  const { setUser } = useUserContext();
   const { data, status } = useQuery({
     queryKey: ["user"],
     queryFn: fetchUser,
     retry: 0,
   });
 
+  if (status === "error") {
+    <Navigate to={"/customers/sign-in"} />;
+  }
+
   useEffect(() => {
     setUser(data);
   }, [data]);
 
-  if (status === "error") {
-    <Navigate to={"/dashboard/sign-in"} />;
-  }
-
-  const logoutMutation = useMutation({
-    mutationFn: logout,
-    onSuccess: () => {
-      setIsAuthenticated(false);
-      navigate("/customer/sign-in");
-    },
-  });
-
-  const handleLogout = () => {
-    logoutMutation.mutate();
-  };
-
   return (
     <div className="h-full flex">
       <SideNavBar />
-      <div className="text-primary flex-grow">
-        <div className="flex justify-between items-center p-8 mb-8 shadow-lg">
-          <h2 className="text-2xl">Automechanic</h2>
-          <div className="flex">
-            <button className="pr-4 hover:opacity-70">
-              <img src={MessageIcon} className="w-6 h-6" alt="Message icon" />
-            </button>
-            <button className="border-x-2 px-4 hover:opacity-70">
-              <img src={SettingsIcon} className="w-6 h-6" alt="Settings icon" />
-            </button>
-            <div className="pl-4 relative group cursor-pointer">
-              <div className="hover:opacity-70">
-                <p>
-                  {user?.firstName} {user?.lastName}
-                </p>
-              </div>
-
-              <div
-                className="absolute top-6 right-0 bg-primary text-white opacity-0 pointer-events-none
-                group-hover:opacity-100 group-hover:pointer-events-auto group-hover:visible transition-opacity duration-300"
-              >
-                <button onClick={handleLogout} className="p-2 hover:opacity-80">
-                  Logout
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="text-primary flex-grow ml-40 sm:ml-52 lg:ml-64">
+        <TopNavBar />
         <Outlet />
       </div>
     </div>

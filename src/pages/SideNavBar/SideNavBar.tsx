@@ -5,11 +5,11 @@ import CustomerNavbar from "./CustomerNavbar";
 function SideNavBar() {
   const { user } = useUserContext();
 
-  if (user?.userRole === "ADMIN") {
-    return <AdminNavbar />;
-  }
-
-  return <CustomerNavbar />;
+  return (
+    <nav className="bg-primary fixed w-40 sm:w-52 lg:w-64 h-full">
+      {user?.userRole === "ADMIN" ? <AdminNavbar /> : <CustomerNavbar />}
+    </nav>
+  );
 }
 
 export default SideNavBar;

@@ -4,13 +4,14 @@ import { NavLink } from "react-router-dom";
 interface CustomNavLinkProps {
   to: string;
   content: string;
+  className?: string;
 }
 
-function CustomNavLink({ to, content }: CustomNavLinkProps) {
+function CustomNavLink({ to, content, className }: CustomNavLinkProps) {
   return (
     <NavLink
       className={({ isActive }) =>
-        cn("pl-8 py-4 hover:bg-gray-200/30", isActive && "bg-gray-200/10")
+        cn("hover:bg-gray-200/30", isActive && "bg-gray-200/10", className)
       }
       to={to}
     >
