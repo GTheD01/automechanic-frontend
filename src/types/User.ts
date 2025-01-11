@@ -18,4 +18,5 @@ export interface UserFilters {
   hasCars?: boolean;
   hasAppointments?: boolean;
   enabled?: boolean;
+  page?: number;
 }
