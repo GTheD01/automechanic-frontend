@@ -91,7 +91,7 @@ function Users() {
       />
 
       <Pagination
-        totalPages={data?.totalPages}
+        totalPages={data?.page?.totalPages}
         currentPage={currentPage}
         handleCurrentPage={handleCurrentPage}
       />

@@ -13,7 +13,7 @@ import Dashboard from "@/pages/Dashboard/Dashboard";
 import UserContextProvider from "@/providers/UserContextProvider";
 import VerifyEmail from "@/pages/VerifyEmail";
 import Users from "@/pages/Users/Users";
-import Appointments from "@/pages/Appointments";
+import Appointments from "@/pages/Appointments/Appointments";
 import AuthContextProvider from "@/providers/AuthContextProvider";
 
 const router = createBrowserRouter([

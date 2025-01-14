@@ -16,6 +16,13 @@ body,
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   color: #fff;
   margin: 0 auto;
-  scroll-behavior: smooth;
   height: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body,
+  #root {
+    scroll-behavior: smooth;
+  }
 }
