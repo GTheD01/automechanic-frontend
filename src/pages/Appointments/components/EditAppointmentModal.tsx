@@ -28,7 +28,7 @@ function EditAppointmentModal({
 
   return (
     <div className="absolute top-0 left-0 w-full h-full bg-opacity-50 bg-gray-800 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-2/3 max-w-96">
         <h2 className="text-xl font-semibold mb-4">Edit Appointment</h2>
         <div>
           <p className="block text-sm font-semibold mb-2">Select Status:</p>

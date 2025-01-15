@@ -53,7 +53,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
           </p>
         </div>
 
-        <div className="flex gap-14">
+        <div className="grid grid-cols-2">
           <div>
             <p className="font-semibold">Created at:</p>
             <p>{appointment.createdDate}</p>
@@ -69,11 +69,21 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
           </div>
         </div>
 
-        <div>
-          <p className="font-semibold">Customer:</p>
-          <p>
-            {appointment.user.firstName} {appointment.user.lastName}
-          </p>
+        <div className="grid grid-cols-2">
+          <div>
+            <p className="font-semibold">Customer:</p>
+            <p>
+              {appointment.user.firstName} {appointment.user.lastName}
+            </p>
+          </div>
+          <div>
+            <p className="font-semibold">Customer number:</p>
+            <p>
+              {appointment.user.phoneNumber
+                ? appointment.user.phoneNumber
+                : "No phone added."}
+            </p>
+          </div>
         </div>
 
         <div>
