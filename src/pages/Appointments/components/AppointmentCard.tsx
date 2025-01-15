@@ -46,11 +46,17 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
           {originalStatus}
         </span>
 
-        <div>
-          <p className="font-semibold">Appointment time:</p>
-          <p className="font-light">
-            {appointment.appointmentTime} / {appointment.appointmentDate}
-          </p>
+        <div className="grid grid-cols-2">
+          <div>
+            <p className="font-semibold">Appointment ID:</p>
+            <p className="font-light">{appointment.id}</p>
+          </div>
+          <div>
+            <p className="font-semibold">Appointment time:</p>
+            <p className="font-light">
+              {appointment.appointmentTime} / {appointment.appointmentDate}
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-2">
