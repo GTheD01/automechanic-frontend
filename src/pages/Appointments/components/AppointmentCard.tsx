@@ -1,7 +1,18 @@
 import { cn } from "@/lib/cn";
 import { Appointment, AppointmentStatus } from "@/types/Appointment";
+import { useState } from "react";
+import EditAppointmentModal from "./EditAppointmentModal";
 
 function AppointmentCard({ appointment }: { appointment: Appointment }) {
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [newStatus, setNewStatus] = useState<AppointmentStatus>(
+    appointment.appointmentStatus
+  );
+  const [originalStatus, setOriginalStatus] = useState<AppointmentStatus>(
+    appointment.appointmentStatus
+  );
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const appointmentStatusClasses: Record<AppointmentStatus, string> = {
     UPCOMING: "text-yellow-500",
     FINISHED: "text-green-500",
@@ -9,9 +20,19 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
     RESCHEDULED: "text-indigo-500",
   };
 
+  const handleSave = () => {
+    setOriginalStatus(newStatus);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    setNewStatus(originalStatus);
+  };
+
   const appointmentStatusClass =
     appointmentStatusClasses[
-      appointment.appointmentStatus as keyof typeof appointmentStatusClasses
+      originalStatus as keyof typeof appointmentStatusClasses
     ];
   return (
     <li className="shadow-xl py-8 px-4 md:flex md:justify-between md:items-center relative">
@@ -22,7 +43,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
             appointmentStatusClass
           )}
         >
-          {appointment.appointmentStatus}
+          {originalStatus}
         </span>
 
         <div>
@@ -67,9 +88,23 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
           </p>
         </div>
       </div>
-      <button className="bg-secondary text-white rounded-3xl py-2 px-4 text-sm sm:px-6 sm:text-base hover:bg-secondaryHover">
+
+      <button
+        onClick={() => setIsEditing(true)}
+        className="bg-secondary text-white rounded-3xl py-2 px-4 text-sm sm:px-6 sm:text-base hover:bg-secondaryHover"
+      >
         Edit
       </button>
+
+      <EditAppointmentModal
+        isOpen={isEditing}
+        newStatus={newStatus}
+        setNewStatus={setNewStatus}
+        onSave={handleSave}
+        onCancel={handleCancel}
+        isDropdownOpen={isDropdownOpen}
+        setIsDropdownOpen={setIsDropdownOpen}
+      />
     </li>
   );
 }
