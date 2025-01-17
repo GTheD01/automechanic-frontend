@@ -11,7 +11,7 @@ function Users() {
   const [filters, setFilters] = useState<UserFilters>({});
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["users", filters],
+    queryKey: ["users", filters, "4"],
     queryFn: fetchAllUsers,
     staleTime: 1000 * 60 * 5,
   });

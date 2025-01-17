@@ -94,14 +94,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
 
         <div>
           <p className="font-semibold">Description:</p>
-          <p>
-            {appointment.description} Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Beatae unde similique dolores ipsa velit nostrum
-            id ex tenetur natus ratione sequi voluptatibus impedit sit est
-            consequatur provident, accusantium, commodi corporis doloribus
-            facere dolorem! Voluptas nobis ipsa sit voluptatem animi eos
-            voluptates saepe fuga velit quis sed iste, et ad autem.
-          </p>
+          <p>{appointment.description}</p>
         </div>
       </div>
 

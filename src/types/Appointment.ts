@@ -18,7 +18,13 @@ export interface Appointment {
   lastModifiedDate: string;
 }
 
+export interface AppointmentRequest {
+  description: string;
+  appointmentDate: string;
+  appointmentTime: string;
+}
+
 export interface AppointmentFilters {
-  name?: string;
+  search?: string;
   page?: number;
 }

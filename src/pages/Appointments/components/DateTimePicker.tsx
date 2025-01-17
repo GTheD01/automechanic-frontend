@@ -1,13 +1,21 @@
-import { useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
-import { Appointment } from "@/types/Appointment";
+import { Appointment, AppointmentRequest } from "@/types/Appointment";
 
-const DateTimePicker = ({ appointments }: { appointments: Appointment[] }) => {
+interface DateTimePickerProps {
+  appointments: Appointment[];
+  selectedTime: string;
+  setAppointmentData: Dispatch<SetStateAction<AppointmentRequest>>;
+}
+
+const DateTimePicker = ({
+  appointments,
+  selectedTime,
+  setAppointmentData,
+}: DateTimePickerProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedTime, setSelectedTime] = useState("");
-
   const workingHours = [
     "09:00",
     "10:00",
@@ -25,8 +33,10 @@ const DateTimePicker = ({ appointments }: { appointments: Appointment[] }) => {
     const allWorkingHoursScheduled = appointments
       .filter((app) => app.appointmentDate === formattedDate)
       .map((app) => app.appointmentTime);
-    return workingHours.some(
-      (hour) => !allWorkingHoursScheduled.includes(hour)
+    return (
+      workingHours.some((hour) => !allWorkingHoursScheduled.includes(hour)) &&
+      date.getDay() !== 0 &&
+      new Date().toDateString() !== date.toDateString()
     );
   };
 
@@ -35,25 +45,33 @@ const DateTimePicker = ({ appointments }: { appointments: Appointment[] }) => {
     const scheduledTimes = appointments
       .filter((app) => app.appointmentDate === formattedDate)
       .map((app) => app.appointmentTime);
-    console.log(scheduledTimes);
     return workingHours.filter((hour) => !scheduledTimes.includes(hour));
+  };
+
+  const saveSelectedDate = (date: Date | null) => {
+    setSelectedDate(date);
+    const formattedDate = format(date!, "dd.MM.yyyy");
+    setAppointmentData((prevData) => ({
+      ...prevData,
+      appointmentDate: formattedDate,
+    }));
   };
 
   useEffect(() => {
     if (selectedDate) {
-      setSelectedTime("");
+      setAppointmentData((prevData) => ({ ...prevData, appointmentTime: "" }));
     }
   }, [selectedDate]);
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg">
+    <div className="max-w-2xl bg-white rounded-lg">
       <div className="mb-6">
         <label className="block text-gray-700 font-semibold mb-2">
           Select Date
         </label>
         <DatePicker
           selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
+          onChange={saveSelectedDate}
           minDate={new Date()}
           filterDate={isDateDisabled}
           dateFormat="dd.MM.yyyy"
@@ -69,7 +87,12 @@ const DateTimePicker = ({ appointments }: { appointments: Appointment[] }) => {
           </label>
           <select
             value={selectedTime}
-            onChange={(e) => setSelectedTime(e.target.value)}
+            onChange={(e) => {
+              setAppointmentData((prevData) => ({
+                ...prevData,
+                appointmentTime: e.target.value,
+              }));
+            }}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select a time</option>

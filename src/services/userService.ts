@@ -10,12 +10,12 @@ export const fetchAllUsers = async ({
   queryKey,
   signal,
 }: {
-  queryKey: [string, UserFilters];
+  queryKey: [string, UserFilters, string];
   signal: AbortSignal;
 }) => {
-  const [, userFilters] = queryKey;
+  const [, userFilters, size] = queryKey;
   const params = new URLSearchParams(userFilters as Record<string, string>);
-  const response = await apiClient.get(`/admin/users?size=4&${params}`, {
+  const response = await apiClient.get(`/admin/users?size=${size}&${params}`, {
     signal,
   });
   return response.data;

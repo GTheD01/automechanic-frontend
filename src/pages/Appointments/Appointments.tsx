@@ -4,11 +4,12 @@ import { fetchAllAppointments } from "@/services/appointmentService";
 import AppointmentsList from "./components/AppointmentsList";
 
 import CreateAppointmentModal from "./components/CreateAppointmentModal";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Pagination } from "@/components/Pagination";
 import { AppointmentFilters } from "@/types/Appointment";
 
 function Appointments() {
+  const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [appointmentFilters, setAppointmentFilters] =
     useState<AppointmentFilters>({});
@@ -16,10 +17,18 @@ function Appointments() {
     useState<boolean>(false);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["allAppointments", appointmentFilters],
+    queryKey: ["appointments", appointmentFilters, "2"],
     queryFn: fetchAllAppointments,
     staleTime: 1000 * 60 * 5,
   });
+
+  const handleSearchFilter = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setAppointmentFilters((prevFilters) => ({
+      ...prevFilters,
+      search,
+    }));
+  };
 
   const handleCurrentPage = (el: number) => {
     setCurrentPage(el);
@@ -50,16 +59,13 @@ function Appointments() {
         />
       )}
       <div className="md:flex md:justify-between mx-2">
-        <form
-          className="mb-2 flex md:w-1/2"
-          onSubmit={() => console.log("Submit")}
-        >
+        <form className="mb-2 flex md:w-1/2" onSubmit={handleSearchFilter}>
           <label className="sr-only">Search</label>
           <input
             placeholder="Search"
-            name="name"
-            value=""
-            onChange={(e) => console.log(e.target.value)}
+            name="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             className="outline-none border border-black md:text-base px-2 md:w-full w-1/2"
           />
