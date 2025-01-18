@@ -24,6 +24,10 @@ export interface AppointmentRequest {
   appointmentTime: string;
 }
 
+export interface AppointmentUpdateRequest {
+  appointmentStatus: AppointmentStatus;
+}
+
 export interface AppointmentFilters {
   search?: string;
   page?: number;

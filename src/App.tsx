@@ -10,7 +10,13 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        limit={3}
+        newestOnTop
+        autoClose={1000}
+        closeOnClick
+        hideProgressBar
+      />
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>

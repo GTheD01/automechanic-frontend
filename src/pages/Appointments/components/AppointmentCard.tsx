@@ -1,7 +1,11 @@
-import { cn } from "@/lib/cn";
-import { Appointment, AppointmentStatus } from "@/types/Appointment";
 import { useState } from "react";
-import EditAppointmentModal from "./EditAppointmentModal";
+import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { cn } from "@/lib/cn";
+import { updateAppointment } from "@/services/appointmentService";
+import { Appointment, AppointmentStatus } from "@/types/Appointment";
+import EditAppointmentModal from "@/pages/Appointments/components/EditAppointmentModal";
 
 function AppointmentCard({ appointment }: { appointment: Appointment }) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -20,7 +24,32 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
     RESCHEDULED: "text-indigo-500",
   };
 
+  const queryClient = useQueryClient();
+
+  const updateAppointmentMutation = useMutation({
+    mutationFn: updateAppointment,
+    onSuccess: () => {
+      toast.success("Successfully updated.");
+    },
+    onError: () => {
+      toast.error("Something went wrong... Try again later!");
+      setOriginalStatus(appointment.appointmentStatus);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["appointments"] });
+    },
+  });
+
   const handleSave = () => {
+    if (originalStatus === newStatus) {
+      setIsEditing(false);
+      return;
+    }
+    updateAppointmentMutation.mutate({
+      appointmentId: appointment.id,
+      appointmentUpdateRequest: { appointmentStatus: newStatus },
+    });
+
     setOriginalStatus(newStatus);
     setIsEditing(false);
   };
