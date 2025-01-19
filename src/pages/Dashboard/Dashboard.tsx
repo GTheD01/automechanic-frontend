@@ -1,6 +1,6 @@
 import { useUserContext } from "@/providers/UserContextProvider";
-import CustomerDashboard from "./CustomerDashboard";
-import AdminDashboard from "./AdminDashboard";
+import CustomerDashboard from "@/pages/Dashboard/CustomerDashboard";
+import AdminDashboard from "@/pages/Dashboard/AdminDashboard";
 
 function Dashboard() {
   const { user } = useUserContext();

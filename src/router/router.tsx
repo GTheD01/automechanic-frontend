@@ -15,6 +15,7 @@ import VerifyEmail from "@/pages/VerifyEmail";
 import Users from "@/pages/Users/Users";
 import Appointments from "@/pages/Appointments/Appointments";
 import AuthContextProvider from "@/providers/AuthContextProvider";
+import User from "@/pages/User";
 
 const router = createBrowserRouter([
   {
@@ -29,61 +30,63 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/customer",
+    path: "/customers",
     element: (
       <AuthContextProvider>
-        <AuthPagesLayout />
+        <AuthProtector />
       </AuthContextProvider>
     ),
     children: [
       {
-        path: "/customer/sign-in",
-        element: <SignIn />,
-      },
-      {
-        path: "/customer/sign-up",
-        element: <SignUp />,
-      },
-      {
-        path: "/customer/reset-password",
-        element: <ResetPassword />,
-      },
-      {
-        path: "/customer/reset-password/confirm",
-        element: <ResetPasswordConfirm />,
-      },
-      {
-        path: "/customer/verify-email",
-        element: <VerifyEmail />,
-      },
-    ],
-  },
-  {
-    element: (
-      <AuthContextProvider>
-        <UserContextProvider>
-          <AuthProtector />
-        </UserContextProvider>
-      </AuthContextProvider>
-    ),
-    children: [
-      {
-        element: <ProtectedPagesLayout />,
+        element: <AuthPagesLayout />,
         children: [
           {
-            path: "/dashboard",
+            path: "sign-in",
+            element: <SignIn />,
+          },
+          {
+            path: "sign-up",
+            element: <SignUp />,
+          },
+          {
+            path: "reset-password",
+            element: <ResetPassword />,
+          },
+          {
+            path: "reset-password/confirm",
+            element: <ResetPasswordConfirm />,
+          },
+          {
+            path: "verify-email",
+            element: <VerifyEmail />,
+          },
+        ],
+      },
+      {
+        element: (
+          <UserContextProvider>
+            <ProtectedPagesLayout />
+          </UserContextProvider>
+        ),
+        children: [
+          {
+            path: "dashboard",
             element: <Dashboard />,
           },
           {
-            path: "/users",
+            path: "users",
             element: <Users />,
           },
           {
-            path: "/appointments",
+            path: "users/:id",
+            element: <User />,
+          },
+          {
+            path: "appointments",
             element: <Appointments />,
           },
           {
-            path: "/reports",
+            path: "reports",
             element: <div>Reports</div>,
           },
         ],

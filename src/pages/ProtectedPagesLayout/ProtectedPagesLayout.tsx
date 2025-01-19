@@ -16,7 +16,7 @@ function ProtectedPagesLayout() {
   });
 
   if (status === "error") {
-    <Navigate to={"/customers/sign-in"} />;
+    return <Navigate to={"/customers/sign-in"} />;
   }
 
   useEffect(() => {

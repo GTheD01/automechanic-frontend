@@ -1,21 +1,17 @@
-import { verifyToken } from "@/services/authService";
-import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
   Dispatch,
   SetStateAction,
   useContext,
-  useEffect,
   useState,
 } from "react";
 
-interface UserContextType {
+interface AuthContextType {
   isAuthenticated: boolean;
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
-  isLoading: boolean;
 }
 
-export const AuthContext = createContext<UserContextType | undefined>(
+export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
 
@@ -24,22 +20,10 @@ export default function AuthContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { status, isLoading } = useQuery({
-    queryKey: ["verifyToken"],
-    queryFn: verifyToken,
-    retry: 0,
-  });
-
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsAuthenticated(status === "success");
-  }, [status]);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated, isLoading }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
@@ -48,7 +32,7 @@ export default function AuthContextProvider({
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuthContext must be used within a UserAuthProvider");
+    throw new Error("useAuthContext must be used within a AuthContextProvider");
   }
   return context;
 };

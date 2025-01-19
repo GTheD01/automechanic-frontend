@@ -18,7 +18,7 @@ function TopNavBar() {
     mutationFn: logout,
     onSuccess: () => {
       setIsAuthenticated(false);
-      navigate("/customer/sign-in");
+      navigate("/customers/sign-in");
     },
   });
 

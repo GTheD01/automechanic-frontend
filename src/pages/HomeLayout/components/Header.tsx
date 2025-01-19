@@ -44,7 +44,7 @@ function HeaderNav() {
       {!isLessThan && <Nav />}
 
       <Link
-        to={"/customer/sign-in"}
+        to={"/customers/sign-in"}
         className="border border-sky-200 p-4 md:tracking-wider hover:text-sky-200 text-sm sm:text-base"
       >
         Customers

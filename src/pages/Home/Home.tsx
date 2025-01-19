@@ -1,9 +1,9 @@
-import AboutUs from "./components/AboutUs";
-import AutoRepairServices from "./components/AutoRepairServices";
-import ContactUs from "./components/ContactUs";
-import CustomerReviews from "./components/CustomerReviews";
-import HeroSection from "./components/HeroSection";
-import WhyChooseUsSection from "./components/WhyChooseUsSection";
+import AboutUs from "@/pages/Home/components/AboutUs";
+import AutoRepairServices from "@/pages/Home/components/AutoRepairServices";
+import ContactUs from "@/pages/Home/components/ContactUs";
+import CustomerReviews from "@/pages/Home/components/CustomerReviews";
+import HeroSection from "@/pages/Home/components/HeroSection";
+import WhyChooseUsSection from "@/pages/Home/components/WhyChooseUsSection";
 
 function Home() {
   return (

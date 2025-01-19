@@ -13,7 +13,7 @@ function AutoRepairServices() {
           Our Auto Repair Services
         </h2>
         <Link
-          to="/customer/sign-up"
+          to="/customers/sign-up"
           className="bg-secondary text-white px-8 py-4 hover:bg-secondaryHover md:text-base text-sm text-center font-bold"
         >
           Become Our Customer

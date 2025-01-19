@@ -31,7 +31,7 @@ function useResetPassword() {
     mutationFn: resetPassword,
     onSuccess: () => {
       toast.success("Password reset token sent to your email!");
-      navigate("/customer/reset-password/confirm");
+      navigate("/customers/reset-password/confirm");
     },
     onError: (error: AxiosError) => {
       if (error.response?.data) {
