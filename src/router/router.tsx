@@ -1,21 +1,26 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "@/pages/Home/Home";
-import SignIn from "@/pages/SignIn";
-import SignUp from "@/pages/SignUp";
-import ResetPassword from "@/pages/ResetPassword";
-import ResetPasswordConfirm from "@/pages/ResetPasswordConfirm";
+import Spinner from "@/components/Spinner";
+
 import AuthPagesLayout from "@/pages/AuthPagesLayout/AuthPagesLayout";
 import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
-import AuthProtector from "@/lib/AuthProtector";
 import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
-import Dashboard from "@/pages/Dashboard/Dashboard";
+import AuthProtector from "@/lib/AuthProtector";
 import UserContextProvider from "@/providers/UserContextProvider";
-import VerifyEmail from "@/pages/VerifyEmail";
-import Users from "@/pages/Users/Users";
-import Appointments from "@/pages/Appointments/Appointments";
 import AuthContextProvider from "@/providers/AuthContextProvider";
-import User from "@/pages/User";
+
+const Home = lazy(() => import("@/pages/Home/Home"));
+const SignIn = lazy(() => import("@/pages/SignIn"));
+const SignUp = lazy(() => import("@/pages/SignUp"));
+const ResetPassword = lazy(() => import("@/pages/ResetPassword"));
+const ResetPasswordConfirm = lazy(() => import("@/pages/ResetPasswordConfirm"));
+const VerifyEmail = lazy(() => import("@/pages/VerifyEmail"));
+const Dashboard = lazy(() => import("@/pages/Dashboard/Dashboard"));
+const Users = lazy(() => import("@/pages/Users/Users"));
+const User = lazy(() => import("@/pages/User"));
+const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
+const Reports = lazy(() => import("@/pages/Reports"));
 
 const router = createBrowserRouter([
   {
@@ -24,7 +29,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<Spinner lg />}>
+            <Home />
+          </Suspense>
+        ),
       },
     ],
   },
@@ -42,23 +51,44 @@ const router = createBrowserRouter([
         children: [
           {
             path: "sign-in",
-            element: <SignIn />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                {" "}
+                <SignIn />
+              </Suspense>
+            ),
           },
           {
             path: "sign-up",
-            element: <SignUp />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <SignUp />{" "}
+              </Suspense>
+            ),
           },
           {
             path: "reset-password",
-            element: <ResetPassword />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <ResetPassword />{" "}
+              </Suspense>
+            ),
           },
           {
             path: "reset-password/confirm",
-            element: <ResetPasswordConfirm />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <ResetPasswordConfirm />{" "}
+              </Suspense>
+            ),
           },
           {
             path: "verify-email",
-            element: <VerifyEmail />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <VerifyEmail />{" "}
+              </Suspense>
+            ),
           },
         ],
       },
@@ -71,23 +101,43 @@ const router = createBrowserRouter([
         children: [
           {
             path: "dashboard",
-            element: <Dashboard />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <Dashboard />{" "}
+              </Suspense>
+            ),
           },
           {
             path: "users",
-            element: <Users />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <Users />{" "}
+              </Suspense>
+            ),
           },
           {
-            path: "users/:id",
-            element: <User />,
+            path: "users/:userId",
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <User />{" "}
+              </Suspense>
+            ),
           },
           {
             path: "appointments",
-            element: <Appointments />,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <Appointments />{" "}
+              </Suspense>
+            ),
           },
           {
             path: "reports",
-            element: <div>Reports</div>,
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <Reports />{" "}
+              </Suspense>
+            ),
           },
         ],
       },
