@@ -33,7 +33,7 @@ function useSignIn() {
       setIsAuthenticated(true);
       setFormData(initialFormData);
       toast.success("Successfully signed in!");
-      navigate("/customers/dashboard");
+      navigate("/dashboard");
     },
     onError: (error: AxiosError) => {
       if (error.response?.data) {

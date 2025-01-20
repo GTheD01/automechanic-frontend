@@ -33,10 +33,7 @@ function SignIn() {
         isLoading={isLoading}
         onSubmit={onSubmit}
       />
-      <Link
-        to={"/customers/reset-password"}
-        className="text-sm hover:text-neutral mb-2"
-      >
+      <Link to={"/reset-password"} className="text-sm hover:text-neutral mb-2">
         Forgotten your password?
       </Link>
       <div className="flex gap-1 border px-4 py-2">

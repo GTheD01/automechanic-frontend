@@ -7,7 +7,7 @@ function AuthPagesLayout() {
   const { isAuthenticated } = useAuthContext();
 
   if (isAuthenticated) {
-    return <Navigate to={"/customers/dashboard"} />;
+    return <Navigate to={"/dashboard"} />;
   }
 
   return (

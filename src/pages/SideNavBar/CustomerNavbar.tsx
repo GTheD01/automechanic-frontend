@@ -18,7 +18,7 @@ function CustomerNavbar() {
       </h2>
       <ul className="flex flex-col">
         <CustomNavLink
-          to="/customers/dashboard"
+          to="/dashboard"
           className="pl-4 py-2 sm:pl-6 sm:py-3 md:pl-8 md:py-4 text-sm md:text-base"
         >
           <span className="hidden sm:block">Dashboard</span>
@@ -29,14 +29,14 @@ function CustomerNavbar() {
           />
         </CustomNavLink>
         <CustomNavLink
-          to="/customers/my-cars"
+          to="/my-cars"
           className="pl-4 py-2 sm:pl-6 sm:py-3 md:pl-8 md:py-4 text-sm md:text-base"
         >
           <span className="hidden sm:block">My Cars</span>
           <img src={CarIcon} alt="Users Icon" className="w-6 h-6 sm:hidden" />
         </CustomNavLink>
         <CustomNavLink
-          to="/customers/my-appointments"
+          to="/my-appointments"
           className="pl-4 py-2 sm:pl-6 sm:py-3 md:pl-8 md:py-4 text-sm md:text-base"
         >
           <span className="hidden sm:block">My Appointments</span>
@@ -47,7 +47,7 @@ function CustomerNavbar() {
           />
         </CustomNavLink>
         <CustomNavLink
-          to="/customers/reports"
+          to="/reports"
           className="pl-4 py-2 sm:pl-6 sm:py-3 md:pl-8 md:py-4 text-sm md:text-base"
         >
           <span className="hidden sm:block">Reports</span>

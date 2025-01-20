@@ -93,7 +93,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/customers",
+        path: "",
         element: (
           <UserContextProvider>
             <ProtectedPagesLayout />
