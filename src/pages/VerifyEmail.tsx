@@ -16,13 +16,13 @@ function VerifyEmail() {
     mutationFn: verifyEmail,
     onSuccess: () => {
       toast.success("Successfully verified email!");
-      navigate("/customers/sign-in");
+      navigate("/sign-in");
     },
     onError: (error: AxiosError) => {
       if (error.response?.data) {
         const data = error.response.data as ApiResponseError;
         toast.error(data.message);
-        navigate("/customers/sign-in");
+        navigate("/sign-in");
       }
     },
   });

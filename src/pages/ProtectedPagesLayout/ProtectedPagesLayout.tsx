@@ -1,27 +1,20 @@
-import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Navigate, Outlet } from "react-router-dom";
 
 import TopNavBar from "./components/TopNavBar";
 import SideNavBar from "../SideNavBar/SideNavBar";
-import { fetchUser } from "@/services/userService";
-import { useUserContext } from "@/providers/UserContextProvider";
+import { useAuthContext } from "@/providers/AuthContextProvider";
+import Spinner from "@/components/Spinner";
 
 function ProtectedPagesLayout() {
-  const { setUser } = useUserContext();
-  const { data, status } = useQuery({
-    queryKey: ["user"],
-    queryFn: fetchUser,
-    retry: 0,
-  });
+  const { isAuthenticated, isLoading } = useAuthContext();
 
-  if (status === "error") {
-    return <Navigate to={"/customers/sign-in"} />;
+  if (isLoading) {
+    return <Spinner lg />;
   }
 
-  useEffect(() => {
-    setUser(data);
-  }, [data]);
+  if (!isAuthenticated) {
+    return <Navigate to={"/sign-in"} />;
+  }
 
   return (
     <div className="h-full flex">

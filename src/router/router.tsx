@@ -1,12 +1,11 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import Spinner from "@/components/Spinner";
 
 import AuthPagesLayout from "@/pages/AuthPagesLayout/AuthPagesLayout";
 import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
 import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
-import AuthProtector from "@/lib/AuthProtector";
 import UserContextProvider from "@/providers/UserContextProvider";
 import AuthContextProvider from "@/providers/AuthContextProvider";
 
@@ -18,7 +17,7 @@ const ResetPasswordConfirm = lazy(() => import("@/pages/ResetPasswordConfirm"));
 const VerifyEmail = lazy(() => import("@/pages/VerifyEmail"));
 const Dashboard = lazy(() => import("@/pages/Dashboard/Dashboard"));
 const Users = lazy(() => import("@/pages/Users/Users"));
-const User = lazy(() => import("@/pages/User"));
+const User = lazy(() => import("@/pages/User/User"));
 const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
 const Reports = lazy(() => import("@/pages/Reports"));
 
@@ -39,21 +38,21 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/customers",
+    path: "",
     element: (
       <AuthContextProvider>
-        <AuthProtector />
+        <Outlet />
       </AuthContextProvider>
     ),
     children: [
       {
+        path: "",
         element: <AuthPagesLayout />,
         children: [
           {
             path: "sign-in",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                {" "}
                 <SignIn />
               </Suspense>
             ),
@@ -62,7 +61,7 @@ const router = createBrowserRouter([
             path: "sign-up",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <SignUp />{" "}
+                <SignUp />
               </Suspense>
             ),
           },
@@ -70,7 +69,7 @@ const router = createBrowserRouter([
             path: "reset-password",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <ResetPassword />{" "}
+                <ResetPassword />
               </Suspense>
             ),
           },
@@ -78,7 +77,7 @@ const router = createBrowserRouter([
             path: "reset-password/confirm",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <ResetPasswordConfirm />{" "}
+                <ResetPasswordConfirm />
               </Suspense>
             ),
           },
@@ -86,13 +85,15 @@ const router = createBrowserRouter([
             path: "verify-email",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <VerifyEmail />{" "}
+                <VerifyEmail />
               </Suspense>
             ),
           },
         ],
       },
+
       {
+        path: "/customers",
         element: (
           <UserContextProvider>
             <ProtectedPagesLayout />
@@ -103,7 +104,7 @@ const router = createBrowserRouter([
             path: "dashboard",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <Dashboard />{" "}
+                <Dashboard />
               </Suspense>
             ),
           },
@@ -111,7 +112,7 @@ const router = createBrowserRouter([
             path: "users",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <Users />{" "}
+                <Users />
               </Suspense>
             ),
           },
@@ -119,7 +120,7 @@ const router = createBrowserRouter([
             path: "users/:userId",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <User />{" "}
+                <User />
               </Suspense>
             ),
           },
@@ -127,7 +128,7 @@ const router = createBrowserRouter([
             path: "appointments",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <Appointments />{" "}
+                <Appointments />
               </Suspense>
             ),
           },
@@ -135,7 +136,7 @@ const router = createBrowserRouter([
             path: "reports",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <Reports />{" "}
+                <Reports />
               </Suspense>
             ),
           },

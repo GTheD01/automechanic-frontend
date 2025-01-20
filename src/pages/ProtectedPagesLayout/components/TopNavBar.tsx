@@ -18,7 +18,7 @@ function TopNavBar() {
     mutationFn: logout,
     onSuccess: () => {
       setIsAuthenticated(false);
-      navigate("/customers/sign-in");
+      navigate("/sign-in");
     },
   });
 
@@ -27,7 +27,7 @@ function TopNavBar() {
   };
 
   return (
-    <main className="flex justify-between items-center p-8 mb-8 shadow-lg">
+    <header className="flex justify-between items-center p-8 mb-8 shadow-lg">
       <h2 className="text-sm sm:text-xl md:text-2xl">Automechanic</h2>
       <div className="flex">
         <div className="pl-4 relative group cursor-pointer">
@@ -55,7 +55,7 @@ function TopNavBar() {
           </div>
         </div>
       </div>
-    </main>
+    </header>
   );
 }
 

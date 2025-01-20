@@ -41,10 +41,7 @@ function SignIn() {
       </Link>
       <div className="flex gap-1 border px-4 py-2">
         <p>Don't have an account?</p>
-        <Link
-          to={"/customers/sign-up"}
-          className="text-blue-500 hover:text-blue-400"
-        >
+        <Link to={"/sign-up"} className="text-blue-500 hover:text-blue-400">
           Sign up
         </Link>
       </div>

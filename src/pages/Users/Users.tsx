@@ -14,6 +14,7 @@ function Users() {
     queryKey: ["users", filters, "4"],
     queryFn: fetchAllUsers,
     staleTime: 1000 * 60 * 5,
+    retry: 0,
   });
 
   const handleUserFilters = (e: ChangeEvent<HTMLInputElement>) => {

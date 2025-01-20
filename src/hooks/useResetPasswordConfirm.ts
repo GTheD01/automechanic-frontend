@@ -41,7 +41,7 @@ function useResetPasswordConfirm() {
     onSuccess: () => {
       setFormData(initialFormData);
       toast.success("Password successfully reset!");
-      navigate("/customers/sign-in");
+      navigate("/sign-in");
     },
     onError: (error: AxiosError) => {
       if (error.response?.data) {

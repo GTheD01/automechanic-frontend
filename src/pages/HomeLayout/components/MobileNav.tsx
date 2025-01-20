@@ -72,7 +72,7 @@ function MobileNav({
             Contact
           </a>
           <Link
-            to="/customers/sign-in"
+            to="/sign-in"
             className="px-16 mt-auto bg-white text-secondary hover:bg-secondaryHover hover:text-white py-4 font-semibold"
           >
             CUSTOMERS

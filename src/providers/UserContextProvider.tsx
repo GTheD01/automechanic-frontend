@@ -3,10 +3,13 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
 import { User } from "@/types/User";
+import { useQuery } from "@tanstack/react-query";
+import { fetchUser } from "@/services/userService";
 
 interface UserContextType {
   user: User | undefined;
@@ -22,7 +25,17 @@ export default function UserContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | undefined>(undefined);
+
+  const { data } = useQuery({
+    queryKey: ["user"],
+    queryFn: fetchUser,
+    retry: 0,
+  });
+
+  useEffect(() => {
+    setUser(data);
+  }, [data]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

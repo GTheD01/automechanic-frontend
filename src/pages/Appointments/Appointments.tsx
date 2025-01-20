@@ -20,6 +20,7 @@ function Appointments() {
     queryKey: ["appointments", appointmentFilters, "2"],
     queryFn: fetchAllAppointments,
     staleTime: 1000 * 60 * 5,
+    retry: 0,
   });
 
   const handleSearchFilter = (e: ChangeEvent<HTMLFormElement>) => {

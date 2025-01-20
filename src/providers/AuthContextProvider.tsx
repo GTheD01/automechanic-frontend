@@ -1,14 +1,19 @@
+import { verifyToken } from "@/services/authService";
+import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -20,10 +25,38 @@ export default function AuthContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { isSuccess, isPending, isError } = useQuery({
+    queryKey: ["verifyToken"],
+    queryFn: verifyToken,
+    retry: 0,
+    staleTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: false,
+  });
+
+  useEffect(() => {
+    if (isPending) {
+      setIsLoading(true);
+      return;
+    }
+
+    if (isSuccess) {
+      setIsAuthenticated(true);
+      setIsLoading(false);
+    }
+
+    if (isError) {
+      setIsAuthenticated(false);
+      setIsLoading(false);
+    }
+  }, [isSuccess, isError, isPending]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, setIsAuthenticated, isLoading, setIsLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );

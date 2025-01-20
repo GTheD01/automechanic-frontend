@@ -29,7 +29,7 @@ function ResetPassword() {
       />
 
       <Link
-        to={"/customers/sign-in"}
+        to={"/sign-in"}
         className="text-sm hover:text-neutral border px-4 py-2"
       >
         Back to Sign In

@@ -60,10 +60,7 @@ function SignUp() {
 
       <div className="flex gap-1">
         <p> Already have an account?</p>
-        <Link
-          to={"/customers/sign-in"}
-          className="text-blue-500 hover:text-blue-400"
-        >
+        <Link to={"/sign-in"} className="text-blue-500 hover:text-blue-400">
           Sign in
         </Link>
       </div>
