@@ -1,3 +1,4 @@
+import UserField from "@/components/UserField";
 import { User } from "@/types/User";
 import { Link } from "react-router-dom";
 
@@ -15,49 +16,23 @@ function UserCard({ user }: { user: User }) {
         <h4 className="font-bold text-xl mb-2">
           {user.firstName} {user.lastName}
         </h4>
-        <div className="grid lg:grid-cols-3 grid-cols-2 gap-y-3 break-words">
-          <div>
-            <p className="font-semibold border-b-2 w-fit text-sm md:text-base">
-              User ID:
-            </p>
-            <p className="text-sm md:text-base">{user.id}</p>
-          </div>
-          <div>
-            <p className="font-semibold border-b-2 w-fit text-sm md:text-base">
-              Email:
-            </p>
-            <p className="text-sm lg:text-base">{user.email}</p>
-          </div>
-          <div>
-            <p className="font-semibold border-b-2 w-fit text-sm md:text-base">
-              Role:
-            </p>
-            <p className="text-sm lg:text-base">{user.userRole}</p>
-          </div>
-          <div>
-            <p className="font-semibold border-b-2 w-fit text-sm md:text-base">
-              Phone Number:
-            </p>
-            <p className="text-sm lg:text-base">
-              {user.phoneNumber ? user.phoneNumber : "No phone added"}
-            </p>
-          </div>
-          <div>
-            <p className="font-semibold border-b-2 w-fit text-sm md:text-base">
-              Total Appointments:
-            </p>
-            <p className="text-sm lg:text-base">{user.appointmentCount}</p>
-          </div>
-          <div>
-            <p className="font-semibold border-b-2 w-fit text-sm md:text-base">
-              Total cars:
-            </p>
-            <p className="text-sm lg:text-base">{user.carsCount}</p>
-          </div>
+        <div className="grid lg:grid-cols-3 grid-cols-2 gap-y-3">
+          <UserField content={user.id} field="User ID" />
+          <UserField content={user.email} field="Email" />
+          <UserField content={user.userRole} field="Role" />
+          <UserField
+            content={user.phoneNumber ? user.phoneNumber : "No phone added."}
+            field="Phone Number"
+          />
+          <UserField
+            content={user.appointmentCount}
+            field="Total Appointments"
+          />
+          <UserField content={user.carsCount} field="Total cars" />
         </div>
       </div>
       <Link
-        to={`/users`}
+        to={`${user.id}/cars`}
         className="bg-secondary text-white rounded-3xl py-2 px-4 text-sm sm:px-6 sm:text-base hover:bg-secondaryHover"
       >
         Profile

@@ -123,6 +123,20 @@ const router = createBrowserRouter([
                 <User />
               </Suspense>
             ),
+            children: [
+              {
+                path: "cars",
+                element: <div>cars</div>,
+              },
+              {
+                path: "appointments",
+                element: <div>appointments</div>,
+              },
+              {
+                path: "reports",
+                element: <div>reports</div>,
+              },
+            ],
           },
           {
             path: "appointments",
