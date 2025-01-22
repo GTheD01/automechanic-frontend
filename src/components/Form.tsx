@@ -1,15 +1,9 @@
 import { ChangeEvent, FormEvent } from "react";
 import Input, { InputProps } from "./Input";
 import Spinner from "./Spinner";
+import { cn } from "@/lib/cn";
 
-// type FormMethod = "GET" | "POST" | "PUT" | "PATCH";
-
-enum FormMethod {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  PATCH = "PATCH",
-}
+type FormMethod = "GET" | "POST" | "PUT" | "PATCH";
 
 interface FormProps {
   inputConfig: InputProps[];
@@ -18,21 +12,30 @@ interface FormProps {
   isLoading: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  formClassName?: string;
+  buttonClassName?: string;
+  inputClassName?: string;
 }
 
 function Form({
   inputConfig,
-  method = FormMethod.POST,
+  method = "POST",
   onSubmit,
   btnText,
   onChange,
   isLoading,
+  buttonClassName,
+  formClassName,
+  inputClassName,
 }: FormProps) {
   return (
     <form
       method={method}
       onSubmit={onSubmit}
-      className="mt-8 mb-4 flex flex-col items-center space-y-4 min-w-72"
+      className={cn(
+        "mt-8 mb-4 flex flex-col items-center space-y-4 min-w-72",
+        formClassName
+      )}
     >
       {inputConfig.map((input) => (
         <Input
@@ -45,12 +48,16 @@ function Form({
           required={input.required}
           error={input.error}
           onChange={onChange}
+          className={inputClassName}
         />
       ))}
       <button
         disabled={isLoading}
         type="submit"
-        className="bg-secondary px-12 py-2 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer w-full flex justify-center"
+        className={cn(
+          "bg-secondary px-12 py-2 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer w-full flex justify-center",
+          buttonClassName
+        )}
       >
         {isLoading ? <Spinner md /> : btnText}
       </button>

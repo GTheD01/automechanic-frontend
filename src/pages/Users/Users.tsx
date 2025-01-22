@@ -48,7 +48,7 @@ function Users() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             type="text"
-            className="outline-none border border-black w-1/2 md:text-lg px-2"
+            className="outline-none border border-black w-1/2 p-2"
           />
           <button
             type="submit"

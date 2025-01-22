@@ -1,14 +1,16 @@
+import { cn } from "@/lib/cn";
 import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 
 export interface InputProps {
   type: HTMLInputTypeAttribute;
-  placeholder: string;
+  placeholder?: string;
   required?: boolean;
   name: string;
   label: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: string;
   value: string;
+  className?: string;
 }
 
 function Input({
@@ -20,6 +22,7 @@ function Input({
   onChange,
   error,
   value,
+  className,
 }: InputProps) {
   return (
     <div className="flex flex-col items-start w-80 md:w-96">
@@ -36,7 +39,10 @@ function Input({
         minLength={1}
         placeholder={placeholder}
         onChange={onChange}
-        className="outline-none text-white px-4 py-2 bg-transparent border border-white placeholder:text-neutral w-full"
+        className={cn(
+          "outline-none text-white px-4 py-2 bg-transparent border border-white placeholder:text-neutral w-full",
+          className
+        )}
       />
       {error && (
         <p className="text-red-500 font-light text-sm md:text-base">{error}</p>

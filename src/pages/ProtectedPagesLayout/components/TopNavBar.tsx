@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import { logout } from "@/services/authService";
@@ -39,12 +39,15 @@ function TopNavBar() {
 
           <div
             className="absolute top-5 sm:top-6 right-0 bg-primary text-white opacity-0 pointer-events-none flex flex-col
-        group-hover:opacity-100 group-hover:pointer-events-auto group-hover:visible transition-opacity duration-300"
+        group-hover:opacity-100 group-hover:pointer-events-auto group-hover:visible transition-opacity duration-300 z-10 min-w-24"
           >
-            <button className="hover:opacity-80 p-2 flex items-center gap-2">
+            <Link
+              to={"settings"}
+              className="hover:opacity-80 p-2 flex items-center gap-2"
+            >
               <img src={SettingsIcon} className="w-4 h-4" alt="Settings icon" />
               <span className="text-xs sm:text-sm md:text-base">Settings</span>
-            </button>
+            </Link>
             <button
               onClick={handleLogout}
               className="hover:opacity-80 p-2 flex items-center gap-2"

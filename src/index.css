@@ -26,3 +26,9 @@ body,
     scroll-behavior: smooth;
   }
 }
+
+@layer base {
+  li {
+    list-style: none;
+  }
+}
