@@ -1,10 +1,10 @@
+import apiClient from "@/services";
 import {
   LoginUser,
   RegisterUser,
   ResetPassword,
   ResetPasswordConfirm,
 } from "@/types/Auth";
-import apiClient from "./index";
 
 export const signin = async (loginFormData: LoginUser) => {
   const response = await apiClient.post("/auth/authenticate", loginFormData);

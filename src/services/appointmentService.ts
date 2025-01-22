@@ -1,9 +1,9 @@
+import apiClient from "@/services";
 import {
   AppointmentFilters,
   AppointmentRequest,
   AppointmentUpdateRequest,
 } from "@/types/Appointment";
-import apiClient from ".";
 
 export const fetchAllAppointments = async ({
   queryKey,

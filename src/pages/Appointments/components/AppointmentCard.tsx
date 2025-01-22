@@ -6,14 +6,15 @@ import { cn } from "@/lib/cn";
 import { updateAppointment } from "@/services/appointmentService";
 import { Appointment, AppointmentStatus } from "@/types/Appointment";
 import EditAppointmentModal from "@/pages/Appointments/components/EditAppointmentModal";
+import AppointmentField from "./AppointmentField";
 
 function AppointmentCard({ appointment }: { appointment: Appointment }) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [newStatus, setNewStatus] = useState<AppointmentStatus>(
-    appointment.appointmentStatus
+    appointment?.appointmentStatus
   );
   const [originalStatus, setOriginalStatus] = useState<AppointmentStatus>(
-    appointment.appointmentStatus
+    appointment?.appointmentStatus
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -33,7 +34,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
     },
     onError: () => {
       toast.error("Something went wrong... Try again later!");
-      setOriginalStatus(appointment.appointmentStatus);
+      setOriginalStatus(appointment?.appointmentStatus);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["appointments"] });
@@ -75,55 +76,45 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
           {originalStatus}
         </span>
 
-        <div className="grid grid-cols-2">
-          <div>
-            <p className="font-semibold">Appointment ID:</p>
-            <p className="font-light">{appointment.id}</p>
-          </div>
-          <div>
-            <p className="font-semibold">Appointment time:</p>
-            <p className="font-light">
-              {appointment.appointmentTime} / {appointment.appointmentDate}
-            </p>
-          </div>
-        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <AppointmentField field="Appointment ID:" content={appointment?.id} />
+          <AppointmentField
+            field="Appointment time"
+            content={`${appointment?.appointmentTime} / ${appointment?.appointmentDate}`}
+          />
 
-        <div className="grid grid-cols-2">
-          <div>
-            <p className="font-semibold">Created at:</p>
-            <p>{appointment.createdDate}</p>
-          </div>
+          <AppointmentField
+            field="Created at"
+            content={appointment?.createdDate}
+          />
+          <AppointmentField
+            field="Last modified at:"
+            content={
+              appointment?.lastModifiedDate
+                ? appointment?.lastModifiedDate
+                : "Not yet modified."
+            }
+          />
 
-          <div>
-            <p className="font-semibold">Last modified at:</p>
-            <p>
-              {appointment.lastModifiedDate
-                ? appointment.lastModifiedDate
-                : "Not yet modified."}
-            </p>
-          </div>
-        </div>
+          <AppointmentField
+            field="Customer"
+            content={
+              appointment?.user.firstName + " " + appointment?.user.lastName
+            }
+          />
+          <AppointmentField
+            field="Customer number"
+            content={
+              appointment?.user.phoneNumber
+                ? appointment?.user.phoneNumber
+                : "No phone added."
+            }
+          />
 
-        <div className="grid grid-cols-2">
-          <div>
-            <p className="font-semibold">Customer:</p>
-            <p>
-              {appointment.user.firstName} {appointment.user.lastName}
-            </p>
-          </div>
-          <div>
-            <p className="font-semibold">Customer number:</p>
-            <p>
-              {appointment.user.phoneNumber
-                ? appointment.user.phoneNumber
-                : "No phone added."}
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <p className="font-semibold">Description:</p>
-          <p>{appointment.description}</p>
+          <AppointmentField
+            field="Description"
+            content={appointment?.description}
+          />
         </div>
       </div>
 

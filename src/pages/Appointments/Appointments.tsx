@@ -68,7 +68,7 @@ function Appointments() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             type="text"
-            className="outline-none border border-black md:text-base px-2 md:w-full w-1/2"
+            className="outline-none border border-black md:text-base p-2 md:w-full w-1/2"
           />
           <button
             type="submit"
