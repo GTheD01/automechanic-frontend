@@ -1,5 +1,5 @@
+import apiClient from "@/services";
 import { User, UserFilters } from "@/types/User";
-import apiClient from ".";
 
 export const fetchUser = async (): Promise<User> => {
   const response = await apiClient.get("/users/me");
@@ -18,5 +18,19 @@ export const fetchAllUsers = async ({
   const response = await apiClient.get(`/admin/users?size=${size}&${params}`, {
     signal,
   });
+  return response.data;
+};
+
+export const updateUserProfile = async ({
+  userId,
+  updateProfileUserData,
+}: {
+  userId: string;
+  updateProfileUserData: Partial<User>;
+}) => {
+  const response = await apiClient.put(
+    `/users/${userId}`,
+    updateProfileUserData
+  );
   return response.data;
 };

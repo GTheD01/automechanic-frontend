@@ -20,6 +20,7 @@ const Users = lazy(() => import("@/pages/Users/Users"));
 const User = lazy(() => import("@/pages/User/User"));
 const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
 const Reports = lazy(() => import("@/pages/Reports"));
+const UserSettings = lazy(() => import("@/pages/UserSettings"));
 
 const router = createBrowserRouter([
   {
@@ -151,6 +152,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Spinner lg />}>
                 <Reports />
+              </Suspense>
+            ),
+          },
+          {
+            path: "settings",
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <UserSettings />
               </Suspense>
             ),
           },
