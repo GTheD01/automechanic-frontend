@@ -10,11 +10,13 @@ import UserContextProvider from "@/providers/UserContextProvider";
 import AuthContextProvider from "@/providers/AuthContextProvider";
 
 const Home = lazy(() => import("@/pages/Home/Home"));
-const SignIn = lazy(() => import("@/pages/SignIn"));
-const SignUp = lazy(() => import("@/pages/SignUp"));
-const ResetPassword = lazy(() => import("@/pages/ResetPassword"));
-const ResetPasswordConfirm = lazy(() => import("@/pages/ResetPasswordConfirm"));
-const VerifyEmail = lazy(() => import("@/pages/VerifyEmail"));
+const SignIn = lazy(() => import("@/pages/AuthPages/SignIn"));
+const SignUp = lazy(() => import("@/pages/AuthPages/SignUp"));
+const ResetPassword = lazy(() => import("@/pages/AuthPages/ResetPassword"));
+const ResetPasswordConfirm = lazy(
+  () => import("@/pages/AuthPages/ResetPasswordConfirm")
+);
+const VerifyEmail = lazy(() => import("@/pages/AuthPages/VerifyEmail"));
 const Dashboard = lazy(() => import("@/pages/Dashboard/Dashboard"));
 const Users = lazy(() => import("@/pages/Users/Users"));
 const User = lazy(() => import("@/pages/User/User"));
