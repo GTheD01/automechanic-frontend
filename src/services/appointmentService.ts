@@ -1,5 +1,6 @@
 import apiClient from "@/services";
 import {
+  Appointment,
   AppointmentFilters,
   AppointmentRequest,
   AppointmentUpdateRequest,
@@ -36,7 +37,7 @@ export const updateAppointment = async ({
   appointmentId,
   appointmentUpdateRequest,
 }: {
-  appointmentId: string;
+  appointmentId: Appointment["id"];
   appointmentUpdateRequest: AppointmentUpdateRequest;
 }): Promise<any> => {
   const response = await apiClient.patch(

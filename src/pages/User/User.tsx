@@ -2,21 +2,32 @@ import { Link, Outlet, useParams } from "react-router-dom";
 
 import SubMenu from "./components/SubMenu";
 import UserField from "@/components/UserField";
+import { useQuery } from "@tanstack/react-query";
+import { getUserProfile } from "@/services/userService";
+import Spinner from "@/components/Spinner";
 
 export type MenuItem = "Cars" | "Appointments" | "Reports";
 
 function User() {
   const { userId } = useParams();
-  const user = {
-    firstName: "Sinalco",
-    lastName: "Cola",
-    id: "1",
-    email: "something@gmail",
-    userRole: "ADMIN",
-    phoneNumber: "0492342342",
-    appointmentCount: 0,
-    carsCount: 0,
-  };
+
+  const {
+    data: user,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["user", userId],
+    queryFn: getUserProfile,
+    staleTime: 1000 * 60 * 15,
+  });
+
+  if (isLoading) {
+    return <Spinner lg />;
+  }
+
+  if (isError || !user) {
+    return <div>Couldn't load the user!</div>;
+  }
 
   const SubMenuItems: MenuItem[] = ["Cars", "Appointments", "Reports"];
 

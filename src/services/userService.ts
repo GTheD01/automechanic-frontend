@@ -1,4 +1,5 @@
 import apiClient from "@/services";
+import { Car } from "@/types/Car";
 import { User, UserFilters } from "@/types/User";
 
 export const fetchUser = async (): Promise<User> => {
@@ -25,12 +26,32 @@ export const updateUserProfile = async ({
   userId,
   updateProfileUserData,
 }: {
-  userId: string;
+  userId: User["id"];
   updateProfileUserData: Partial<User>;
 }) => {
   const response = await apiClient.put(
     `/users/${userId}`,
     updateProfileUserData
   );
+  return response.data;
+};
+
+export const getUserProfile = async ({
+  queryKey,
+}: {
+  queryKey: [string, User["id"] | undefined];
+}): Promise<User> => {
+  const [_, userId] = queryKey;
+  const response = await apiClient.get(`admin/users/${userId}`);
+  return response.data;
+};
+
+export const getUserCars = async ({
+  queryKey,
+}: {
+  queryKey: [string, User["id"] | undefined];
+}): Promise<Car[]> => {
+  const [_, userId] = queryKey;
+  const response = await apiClient.get(`cars/user/${userId}`);
   return response.data;
 };

@@ -8,6 +8,7 @@ import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
 import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
 import UserContextProvider from "@/providers/UserContextProvider";
 import AuthContextProvider from "@/providers/AuthContextProvider";
+import UserCars from "@/pages/UserCars";
 
 const Home = lazy(() => import("@/pages/Home/Home"));
 const SignIn = lazy(() => import("@/pages/AuthPages/SignIn"));
@@ -129,7 +130,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "cars",
-                element: <div>cars</div>,
+                element: <UserCars />,
               },
               {
                 path: "appointments",
