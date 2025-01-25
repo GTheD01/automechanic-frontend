@@ -25,6 +25,7 @@ const Reports = lazy(() => import("@/pages/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
 const UserCars = lazy(() => import("@/pages/UserCars"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
+const UserAppointments = lazy(() => import("@/pages/UserAppointments"));
 
 const router = createBrowserRouter([
   {
@@ -139,7 +140,11 @@ const router = createBrowserRouter([
               },
               {
                 path: "appointments",
-                element: <div>appointments</div>,
+                element: (
+                  <Suspense fallback={<Spinner />}>
+                    <UserAppointments />
+                  </Suspense>
+                ),
               },
               {
                 path: "reports",

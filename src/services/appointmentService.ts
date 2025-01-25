@@ -5,6 +5,7 @@ import {
   AppointmentRequest,
   AppointmentUpdateRequest,
 } from "@/types/Appointment";
+import { User } from "@/types/User";
 
 export const fetchAllAppointments = async ({
   queryKey,
@@ -45,5 +46,15 @@ export const updateAppointment = async ({
     appointmentUpdateRequest
   );
 
+  return response.data;
+};
+
+export const getUserAppointments = async ({
+  queryKey,
+}: {
+  queryKey: [string, User["id"] | undefined];
+}) => {
+  const [_, userId] = queryKey;
+  const response = await apiClient.get(`admin/appointments/${userId}`);
   return response.data;
 };
