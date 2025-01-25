@@ -31,10 +31,14 @@ export default function UserContextProvider({
     queryKey: ["user"],
     queryFn: fetchUser,
     retry: 0,
+    staleTime: 1000 * 60 * 15,
+    enabled: !user,
   });
 
   useEffect(() => {
-    setUser(data);
+    if (data && data !== user) {
+      setUser(data);
+    }
   }, [data]);
 
   return (

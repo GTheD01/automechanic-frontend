@@ -8,7 +8,6 @@ import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
 import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
 import UserContextProvider from "@/providers/UserContextProvider";
 import AuthContextProvider from "@/providers/AuthContextProvider";
-import UserCars from "@/pages/UserCars";
 
 const Home = lazy(() => import("@/pages/Home/Home"));
 const SignIn = lazy(() => import("@/pages/AuthPages/SignIn"));
@@ -24,6 +23,8 @@ const User = lazy(() => import("@/pages/User/User"));
 const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
 const Reports = lazy(() => import("@/pages/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
+const UserCars = lazy(() => import("@/pages/UserCars"));
+const UserProfile = lazy(() => import("@/pages/UserProfile"));
 
 const router = createBrowserRouter([
   {
@@ -130,7 +131,11 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "cars",
-                element: <UserCars />,
+                element: (
+                  <Suspense fallback={<Spinner lg />}>
+                    <UserCars />
+                  </Suspense>
+                ),
               },
               {
                 path: "appointments",
@@ -155,6 +160,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Spinner lg />}>
                 <Reports />
+              </Suspense>
+            ),
+          },
+          {
+            path: "profile",
+            element: (
+              <Suspense fallback={<Spinner lg />}>
+                <UserProfile />
               </Suspense>
             ),
           },

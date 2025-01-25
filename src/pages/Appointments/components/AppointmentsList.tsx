@@ -17,8 +17,12 @@ function AppointmentsList({
     return <Spinner lg />;
   }
 
-  if (isError) {
-    return <p>There was an error fetching appointments</p>;
+  if (isError || !appointments) {
+    return (
+      <p>
+        There was an error fetching your appointments. Please try again later.
+      </p>
+    );
   }
   return (
     <ul>

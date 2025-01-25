@@ -5,7 +5,11 @@ import AdminDashboard from "@/pages/Dashboard/AdminDashboard";
 function Dashboard() {
   const { user } = useUserContext();
 
-  if (user?.userRole === "ADMIN") {
+  if (!user) {
+    return <p>Couldn't fetch user.</p>;
+  }
+
+  if (user.userRole === "ADMIN") {
     return <AdminDashboard />;
   }
 
