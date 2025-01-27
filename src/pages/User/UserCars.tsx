@@ -1,5 +1,5 @@
 import Spinner from "@/components/Spinner";
-import { getUserCars } from "@/services/userService";
+import { getUserCars } from "@/services/carsService";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -40,10 +40,18 @@ function UserCars() {
               <span className="font-bold">Brand: </span>
               <span>{car.carBrand.name}</span>
             </p>
-            <p>
-              <span className="font-bold">Model: </span>
-              <span>{car.model.name}</span>
-            </p>
+            <div className="flex gap-4">
+              <p>
+                <span className="font-bold">Model: </span>
+                <span>{car.model.name}</span>
+              </p>
+              {car.version && (
+                <p>
+                  <span className="font-bold">Version: </span>
+                  <span>{car.version}</span>
+                </p>
+              )}
+            </div>
             <p>
               <span className="font-bold">Year: </span>
               <span>{car.year}</span>

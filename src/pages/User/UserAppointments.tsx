@@ -1,7 +1,7 @@
 import { getUserAppointments } from "@/services/appointmentService";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import AppointmentsList from "./Appointments/components/AppointmentsList";
+import AppointmentsList from "../Appointments/components/AppointmentsList";
 
 function UserAppointments() {
   const { userId } = useParams();

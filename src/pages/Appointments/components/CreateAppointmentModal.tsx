@@ -12,6 +12,17 @@ import { Appointment, AppointmentRequest } from "@/types/Appointment";
 import { CreateAppointmentSchema } from "@/validations/appointmentValidationSchemas";
 import Spinner from "@/components/Spinner";
 
+const initialErrors = {
+  appointmentDate: "",
+  appointmentTime: "",
+  description: "",
+};
+const initialAppointmentData = {
+  appointmentDate: "",
+  appointmentTime: "",
+  description: "",
+};
+
 function CreateAppointmentModal({
   appointments,
   modalStateHandler,
@@ -19,16 +30,6 @@ function CreateAppointmentModal({
   appointments: Appointment[];
   modalStateHandler: Dispatch<boolean>;
 }) {
-  const initialErrors = {
-    appointmentDate: "",
-    appointmentTime: "",
-    description: "",
-  };
-  const initialAppointmentData = {
-    appointmentDate: "",
-    appointmentTime: "",
-    description: "",
-  };
   const [appointmentData, setAppointmentData] = useState<AppointmentRequest>(
     initialAppointmentData
   );

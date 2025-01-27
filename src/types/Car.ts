@@ -1,9 +1,9 @@
-interface CarBrand {
+export interface CarBrand {
   id: string;
   name: string;
 }
 
-interface CarModel {
+export interface CarModel {
   id: string;
   name: string;
 }
@@ -13,4 +13,12 @@ export interface Car {
   carBrand: CarBrand;
   year: number;
   model: CarModel;
+  version: string;
+}
+
+export interface CarDataProps {
+  year: string;
+  brandName: CarBrand["name"];
+  modelName: CarModel["name"];
+  version: string;
 }

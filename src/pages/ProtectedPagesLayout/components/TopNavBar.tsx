@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { logout } from "@/services/authService";
 import { useAuthContext } from "@/providers/AuthContextProvider";
@@ -12,18 +12,23 @@ import { useUserContext } from "@/providers/UserContextProvider";
 const TopNavBar = () => {
   const navigate = useNavigate();
 
-  const { user } = useUserContext();
+  const { user, setUser } = useUserContext();
   const { setIsAuthenticated } = useAuthContext();
+
+  const queryClient = useQueryClient();
 
   const logoutMutation = useMutation({
     mutationFn: logout,
     onSuccess: () => {
       setIsAuthenticated(false);
       navigate("/sign-in");
+      queryClient.clear();
     },
   });
 
   const handleLogout = () => {
+    setUser(undefined);
+    setIsAuthenticated(false);
     logoutMutation.mutate();
   };
 

@@ -23,9 +23,10 @@ const User = lazy(() => import("@/pages/User/User"));
 const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
 const Reports = lazy(() => import("@/pages/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
-const UserCars = lazy(() => import("@/pages/UserCars"));
+const UserCars = lazy(() => import("@/pages/User/UserCars"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
-const UserAppointments = lazy(() => import("@/pages/UserAppointments"));
+const UserAppointments = lazy(() => import("@/pages/User/UserAppointments"));
+const LoggedInUserCars = lazy(() => import("@/pages/MyCars/LoggedInUserCars"));
 
 const router = createBrowserRouter([
   {
@@ -114,6 +115,7 @@ const router = createBrowserRouter([
               </Suspense>
             ),
           },
+          // ADMIN ROUTES
           {
             path: "users",
             element: (
@@ -160,6 +162,7 @@ const router = createBrowserRouter([
               </Suspense>
             ),
           },
+          // --------------------------------------------
           {
             path: "reports",
             element: (
@@ -181,6 +184,15 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Spinner lg />}>
                 <UserSettings />
+              </Suspense>
+            ),
+          },
+          // USER ROUTES
+          {
+            path: "/my-cars",
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <LoggedInUserCars />
               </Suspense>
             ),
           },
