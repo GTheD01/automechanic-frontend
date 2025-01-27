@@ -16,7 +16,6 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
   const [originalStatus, setOriginalStatus] = useState<AppointmentStatus>(
     appointment?.appointmentStatus
   );
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const appointmentStatusClasses: Record<AppointmentStatus, string> = {
     UPCOMING: "text-yellow-500",
@@ -131,8 +130,6 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
         setNewStatus={setNewStatus}
         onSave={handleSave}
         onCancel={handleCancel}
-        isDropdownOpen={isDropdownOpen}
-        setIsDropdownOpen={setIsDropdownOpen}
       />
     </li>
   );

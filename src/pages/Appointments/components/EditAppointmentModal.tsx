@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { AppointmentStatus } from "@/types/Appointment";
 
 type EditAppointmentModalProps = {
@@ -6,8 +8,6 @@ type EditAppointmentModalProps = {
   setNewStatus: (status: AppointmentStatus) => void;
   onSave: () => void;
   onCancel: () => void;
-  isDropdownOpen: boolean;
-  setIsDropdownOpen: (isOpen: boolean) => void;
 };
 
 function EditAppointmentModal({
@@ -16,10 +16,9 @@ function EditAppointmentModal({
   setNewStatus,
   onSave,
   onCancel,
-  isDropdownOpen,
-  setIsDropdownOpen,
 }: EditAppointmentModalProps) {
   if (!isOpen) return null;
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleStatusChange = (status: AppointmentStatus) => {
     setNewStatus(status);

@@ -1,10 +1,10 @@
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { fetchAllAppointments } from "@/services/appointmentService";
 import AppointmentsList from "./components/AppointmentsList";
 
 import CreateAppointmentModal from "./components/CreateAppointmentModal";
-import { ChangeEvent, useEffect, useState } from "react";
 import { Pagination } from "@/components/Pagination";
 import { AppointmentFilters } from "@/types/Appointment";
 
@@ -31,13 +31,16 @@ function Appointments() {
     }));
   };
 
-  const handleCurrentPage = (el: number) => {
-    setCurrentPage(el);
-    setAppointmentFilters((prevFilters) => ({
-      ...prevFilters,
-      page: el - 1,
-    }));
-  };
+  const handleCurrentPage = useCallback(
+    (el: number) => {
+      setCurrentPage(el);
+      setAppointmentFilters((prevFilters) => ({
+        ...prevFilters,
+        page: el - 1,
+      }));
+    },
+    [currentPage]
+  );
 
   useEffect(() => {
     if (createAppointmentModal) {
