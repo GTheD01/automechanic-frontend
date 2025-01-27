@@ -1,6 +1,7 @@
-import { cn } from "@/lib/cn";
 import { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
+
+import { cn } from "@/lib/cn";
 
 interface SubMenuItemProps {
   children: ReactNode;
@@ -8,6 +9,7 @@ interface SubMenuItemProps {
 }
 
 function SubMenuItem({ children, to }: SubMenuItemProps) {
+  // TODO: Change NavLink to prevent re-renders of the ProtectedPagesLayout
   return (
     <NavLink
       to={to}

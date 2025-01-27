@@ -1,9 +1,10 @@
-import { ChangeEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { ChangeEvent, useCallback, useState } from "react";
+
 import { UserFilters } from "@/types/User";
 import UsersList from "./components/UsersList";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAllUsers } from "@/services/userService";
 import { Pagination } from "@/components/Pagination";
+import { fetchAllUsers } from "@/services/userService";
 
 function Users() {
   const [name, setName] = useState("");
@@ -29,13 +30,16 @@ function Users() {
     setFilters((prevFilters) => ({ ...prevFilters, name }));
   };
 
-  const handleCurrentPage = (el: number) => {
-    setCurrentPage(el);
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      page: el - 1,
-    }));
-  };
+  const handleCurrentPage = useCallback(
+    (el: number) => {
+      setCurrentPage(el);
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        page: el - 1,
+      }));
+    },
+    [currentPage]
+  );
 
   return (
     <main>

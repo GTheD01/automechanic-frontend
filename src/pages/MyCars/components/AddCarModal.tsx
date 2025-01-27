@@ -1,13 +1,15 @@
-import { addCar, getBrandModels, getCarBrands } from "@/services/carsService";
+import { z } from "zod";
+import { AxiosError } from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
+import { ChangeEvent, Dispatch, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import Spinner from "@/components/Spinner";
 import { ApiResponseError } from "@/types/Auth";
 import { Car, CarDataProps } from "@/types/Car";
 import { AddCarSchema } from "@/validations/carValidationSchemas";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-import { ChangeEvent, Dispatch, useState } from "react";
-import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
-import { z } from "zod";
+import { addCar, getBrandModels, getCarBrands } from "@/services/carsService";
 
 const initialCarData: CarDataProps = {
   brandName: "",
@@ -198,8 +200,7 @@ function AddCarModal({
             type="submit"
             className="bg-secondary text-white rounded-3xl py-2 px-4 self-center sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base mt-2"
           >
-            {/* {addCarMutation.isPending ? <Spinner /> : "Submit"} */}
-            Submit
+            {addCarMutation.isPending ? <Spinner /> : "Submit"}
           </button>
         </form>
       </div>

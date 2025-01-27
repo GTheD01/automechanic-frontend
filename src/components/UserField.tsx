@@ -1,10 +1,12 @@
+import React from "react";
+
 interface UserFieldProps {
   field: string;
   content: string | number;
   [key: string]: any;
 }
 
-function UserField({ field, content, ...props }: UserFieldProps) {
+const UserField = React.memo(({ field, content, ...props }: UserFieldProps) => {
   return (
     <div {...props}>
       <p className="font-semibold border-b-2 w-fit text-sm md:text-base">
@@ -13,6 +15,6 @@ function UserField({ field, content, ...props }: UserFieldProps) {
       <p className="text-sm lg:text-base">{content}</p>
     </div>
   );
-}
+});
 
 export default UserField;
