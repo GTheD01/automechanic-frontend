@@ -6,3 +6,10 @@ export interface AdminDashboardResponse {
   totalReports: number;
   upcomingAppointment: Appointment;
 }
+
+export interface UserDashboardResponse {
+  totalUserAppointments: number;
+  totalUserCars: number;
+  totalUserReports: number;
+  upcomingUserAppointment: Appointment;
+}

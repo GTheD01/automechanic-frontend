@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useCallback, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { UserFilters } from "@/types/User";
 import UsersList from "./components/UsersList";
