@@ -1,16 +1,15 @@
 import { z } from "zod";
 import { AxiosError } from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { ChangeEvent, Dispatch, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import Spinner from "@/components/Spinner";
 import { ApiResponseError } from "@/types/Auth";
-import DateTimePicker from "@/pages/Appointments/components/DateTimePicker";
 import { createAppointment } from "@/services/appointmentService";
 import { Appointment, AppointmentRequest } from "@/types/Appointment";
+import DateTimePicker from "@/pages/Appointments/components/DateTimePicker";
 import { CreateAppointmentSchema } from "@/validations/appointmentValidationSchemas";
-import Spinner from "@/components/Spinner";
 
 const initialErrors = {
   appointmentDate: "",
@@ -45,20 +44,7 @@ function CreateAppointmentModal({
       toast.success("Appointment scheduled");
       modalStateHandler(false);
     },
-    onMutate: async (newAppointment) => {
-      await queryClient.cancelQueries({ queryKey: ["appointments"] });
-
-      const previousAppointments = queryClient.getQueryData(["appointments"]);
-
-      queryClient.setQueryData(["appointments"], (old: Appointment[]) => [
-        ...(old || []),
-        { id: uuidv4(), ...newAppointment },
-      ]);
-
-      return { previousAppointments };
-    },
-    onError: (error: AxiosError, _, context) => {
-      queryClient.setQueryData(["appointments"], context?.previousAppointments);
+    onError: (error: AxiosError) => {
       const data = error?.response?.data as ApiResponseError;
       toast.error(data.message);
     },

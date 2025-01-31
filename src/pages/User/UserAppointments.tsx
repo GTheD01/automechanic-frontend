@@ -1,31 +1,40 @@
-import { getUserAppointments } from "@/services/appointmentService";
+import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+
+import { Pagination } from "@/components/Pagination";
+import { getUserAppointments } from "@/services/appointmentService";
 import AppointmentsList from "../Appointments/components/AppointmentsList";
 
 function UserAppointments() {
   const { userId } = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
 
-  //   TODO: Add pagination
-  const {
-    data: userAppointments,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["userAppointments", userId],
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["userAppointments", userId, "2", currentPage - 1],
     queryFn: getUserAppointments,
   });
 
-  if (userAppointments?.length < 1) {
-    return <p className="ml-2 mt-2">The user has no appointments added.</p>;
-  }
+  const handleCurrentPage = useCallback(
+    (el: number) => {
+      setCurrentPage(el);
+    },
+    [currentPage]
+  );
 
   return (
-    <AppointmentsList
-      appointments={userAppointments}
-      isError={isError}
-      isLoading={isLoading}
-    />
+    <>
+      <AppointmentsList
+        appointments={data?.content}
+        isError={isError}
+        isLoading={isLoading}
+      />
+      <Pagination
+        currentPage={currentPage}
+        handleCurrentPage={handleCurrentPage}
+        totalPages={data?.page?.totalPages}
+      />
+    </>
   );
 }
 

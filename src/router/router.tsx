@@ -27,6 +27,9 @@ const UserCars = lazy(() => import("@/pages/User/UserCars"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
 const UserAppointments = lazy(() => import("@/pages/User/UserAppointments"));
 const LoggedInUserCars = lazy(() => import("@/pages/MyCars/LoggedInUserCars"));
+const LoggedInUserAppointments = lazy(
+  () => import("@/pages/MyAppointments/LoggedInUserAppointments")
+);
 
 const router = createBrowserRouter([
   {
@@ -193,6 +196,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Spinner />}>
                 <LoggedInUserCars />
+              </Suspense>
+            ),
+          },
+          {
+            path: "/my-appointments",
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <LoggedInUserAppointments />
               </Suspense>
             ),
           },

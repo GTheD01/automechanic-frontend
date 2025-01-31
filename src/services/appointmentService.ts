@@ -52,9 +52,28 @@ export const updateAppointment = async ({
 export const getUserAppointments = async ({
   queryKey,
 }: {
-  queryKey: [string, User["id"] | undefined];
+  queryKey: [string, User["id"] | undefined, string, number];
 }) => {
-  const [_, userId] = queryKey;
-  const response = await apiClient.get(`admin/appointments/${userId}`);
+  const [_, userId, size, page] = queryKey;
+  const response = await apiClient.get(
+    `admin/appointments/${userId}?size=${size}&page=${page}`
+  );
+  return response.data;
+};
+
+export const getLoggedInUserAppointments = async ({
+  queryKey,
+  signal,
+}: {
+  queryKey: [string, string, number];
+  signal: AbortSignal;
+}) => {
+  const [, size, page] = queryKey;
+  const response = await apiClient.get(
+    `appointments/me?size=${size}&page=${page}`,
+    {
+      signal,
+    }
+  );
   return response.data;
 };

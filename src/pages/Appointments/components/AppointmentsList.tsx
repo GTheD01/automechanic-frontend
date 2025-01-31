@@ -16,9 +16,13 @@ const AppointmentsList = React.memo(
       return <Spinner lg />;
     }
 
+    if (appointments.length < 1) {
+      return <p className="pl-2 pt-2">User has no appointments.</p>;
+    }
+
     if (isError || !appointments) {
       return (
-        <p>
+        <p className="pl-2 pt-2">
           There was an error fetching your appointments. Please try again later.
         </p>
       );

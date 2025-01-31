@@ -3,10 +3,10 @@ import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cn } from "@/lib/cn";
+import AppointmentField from "./AppointmentField";
 import { updateAppointment } from "@/services/appointmentService";
 import { Appointment, AppointmentStatus } from "@/types/Appointment";
 import EditAppointmentModal from "@/pages/Appointments/components/EditAppointmentModal";
-import AppointmentField from "./AppointmentField";
 
 function AppointmentCard({ appointment }: { appointment: Appointment }) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -76,7 +76,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
         </span>
 
         <div className="grid grid-cols-2 gap-2">
-          <AppointmentField field="Appointment ID:" content={appointment?.id} />
+          <AppointmentField field="Appointment ID" content={appointment?.id} />
           <AppointmentField
             field="Appointment time"
             content={`${appointment?.appointmentTime} / ${appointment?.appointmentDate}`}
@@ -87,7 +87,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
             content={appointment?.createdDate}
           />
           <AppointmentField
-            field="Last modified at:"
+            field="Last modified at"
             content={
               appointment?.lastModifiedDate
                 ? appointment?.lastModifiedDate
@@ -98,14 +98,14 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
           <AppointmentField
             field="Customer"
             content={
-              appointment?.user.firstName + " " + appointment?.user.lastName
+              appointment?.user?.firstName + " " + appointment?.user?.lastName
             }
           />
           <AppointmentField
             field="Customer number"
             content={
-              appointment?.user.phoneNumber
-                ? appointment?.user.phoneNumber
+              appointment?.user?.phoneNumber
+                ? appointment?.user?.phoneNumber
                 : "No phone added."
             }
           />
