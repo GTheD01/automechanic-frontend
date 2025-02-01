@@ -1,7 +1,7 @@
 import Spinner from "@/components/Spinner";
 
 import { useQuery } from "@tanstack/react-query";
-import AppointmentCard from "../Appointments/components/AppointmentCard";
+import AppointmentCard from "@/pages/Appointments/components/AppointmentCard";
 import { getUserDashboard } from "@/services/dashboardService";
 
 function CustomerDashboard() {

@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
-import Nav from "./Nav";
-import useIsLessThan from "@/hooks/useIsLessThan";
-import menuBurgerSvg from "@/assets/svgs/menu-burger.svg";
-
 import { useState } from "react";
-import MobileNav from "./MobileNav";
+import { Link } from "react-router-dom";
+
+import useIsLessThan from "@/hooks/useIsLessThan";
+import Nav from "@/pages/HomeLayout/components/Nav";
+import MobileNav from "@/pages/HomeLayout/components/MobileNav";
+
+import menuBurgerSvg from "@/assets/svgs/menu-burger.svg";
 
 function HeaderNav() {
   const [openMobileNav, setOpenMobileNav] = useState<boolean>(false);

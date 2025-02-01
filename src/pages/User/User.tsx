@@ -1,15 +1,20 @@
-import { Link, Outlet, useParams } from "react-router-dom";
-
-import SubMenu from "./components/SubMenu";
-import UserField from "@/components/UserField";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getUserProfile } from "@/services/userService";
+import { Link, useParams } from "react-router-dom";
+
 import Spinner from "@/components/Spinner";
+import UserCars from "@/pages/User/UserCars";
+import UserField from "@/components/UserField";
+import SubMenu from "@/pages/User/components/SubMenu";
+import { getUserProfile } from "@/services/userService";
+import UserAppointments from "@/pages/User/UserAppointments";
 
 export type MenuItem = "Cars" | "Appointments" | "Reports";
 
 function User() {
   const { userId } = useParams();
+
+  const [selectedMenuItem, setSelectedMenuItem] = useState<MenuItem>("Cars");
 
   const {
     data: user,
@@ -76,8 +81,14 @@ function User() {
           />
         </div>
       </div>
-      <SubMenu subMenuItems={SubMenuItems} />
-      <Outlet />
+      <SubMenu
+        subMenuItems={SubMenuItems}
+        selectedMenuItem={selectedMenuItem}
+        onSelectMenuItem={setSelectedMenuItem}
+      />
+      {selectedMenuItem === "Cars" && <UserCars />}
+      {selectedMenuItem === "Appointments" && <UserAppointments />}
+      {selectedMenuItem === "Reports" && <div>reports</div>}
     </section>
   );
 }

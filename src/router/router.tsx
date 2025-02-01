@@ -23,12 +23,10 @@ const User = lazy(() => import("@/pages/User/User"));
 const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
 const Reports = lazy(() => import("@/pages/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
-const UserCars = lazy(() => import("@/pages/User/UserCars"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
-const UserAppointments = lazy(() => import("@/pages/User/UserAppointments"));
-const LoggedInUserCars = lazy(() => import("@/pages/MyCars/LoggedInUserCars"));
-const LoggedInUserAppointments = lazy(
-  () => import("@/pages/MyAppointments/LoggedInUserAppointments")
+const MyCars = lazy(() => import("@/pages/MyCars/MyCars"));
+const MyAppointments = lazy(
+  () => import("@/pages/MyAppointments/MyAppointments")
 );
 
 const router = createBrowserRouter([
@@ -134,28 +132,6 @@ const router = createBrowserRouter([
                 <User />
               </Suspense>
             ),
-            children: [
-              {
-                path: "cars",
-                element: (
-                  <Suspense fallback={<Spinner lg />}>
-                    <UserCars />
-                  </Suspense>
-                ),
-              },
-              {
-                path: "appointments",
-                element: (
-                  <Suspense fallback={<Spinner />}>
-                    <UserAppointments />
-                  </Suspense>
-                ),
-              },
-              {
-                path: "reports",
-                element: <div>reports</div>,
-              },
-            ],
           },
           {
             path: "appointments",
@@ -195,7 +171,7 @@ const router = createBrowserRouter([
             path: "/my-cars",
             element: (
               <Suspense fallback={<Spinner />}>
-                <LoggedInUserCars />
+                <MyCars />
               </Suspense>
             ),
           },
@@ -203,7 +179,7 @@ const router = createBrowserRouter([
             path: "/my-appointments",
             element: (
               <Suspense fallback={<Spinner />}>
-                <LoggedInUserAppointments />
+                <MyAppointments />
               </Suspense>
             ),
           },

@@ -1,15 +1,14 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 
-import { fetchAllAppointments } from "@/services/appointmentService";
-import AppointmentsList from "./components/AppointmentsList";
-
-import CreateAppointmentModal from "./components/CreateAppointmentModal";
 import { Pagination } from "@/components/Pagination";
 import { AppointmentFilters } from "@/types/Appointment";
+import { fetchAllAppointments } from "@/services/appointmentService";
+import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
+import CreateAppointmentModal from "@/pages/Appointments/components/CreateAppointmentModal";
 
 function Appointments() {
-  const [search, setSearch] = useState("");
+  const searchRef = useRef<HTMLInputElement | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [appointmentFilters, setAppointmentFilters] =
     useState<AppointmentFilters>({});
@@ -27,7 +26,7 @@ function Appointments() {
     e.preventDefault();
     setAppointmentFilters((prevFilters) => ({
       ...prevFilters,
-      search,
+      search: searchRef?.current?.value,
     }));
   };
 
@@ -66,10 +65,9 @@ function Appointments() {
         <form className="mb-2 flex md:w-1/2" onSubmit={handleSearchFilter}>
           <label className="sr-only">Search</label>
           <input
+            ref={searchRef}
             placeholder="Search"
             name="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
             type="text"
             className="outline-none border border-black md:text-base p-2 md:w-full w-1/2"
           />
@@ -87,6 +85,9 @@ function Appointments() {
           Create appointment
         </button>
       </div>
+      {data?.content?.length < 1 && (
+        <p className="pl-2 pt-2">No appointments found.</p>
+      )}
       <AppointmentsList
         appointments={data?.content}
         isError={isError}

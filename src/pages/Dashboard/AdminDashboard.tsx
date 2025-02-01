@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getAdminDashboard } from "@/services/dashboardService";
-import AppointmentCard from "../Appointments/components/AppointmentCard";
 import Spinner from "@/components/Spinner";
+import { getAdminDashboard } from "@/services/dashboardService";
+import AppointmentCard from "@/pages/Appointments/components/AppointmentCard";
 
 function AdminDashboard() {
   const { data, isLoading, isError } = useQuery({

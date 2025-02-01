@@ -2,11 +2,11 @@ import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { Pagination } from "@/components/Pagination";
-import AppointmentsList from "../Appointments/components/AppointmentsList";
+import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 import { getLoggedInUserAppointments } from "@/services/appointmentService";
-import CreateAppointmentModal from "../Appointments/components/CreateAppointmentModal";
+import CreateAppointmentModal from "@/pages/Appointments/components/CreateAppointmentModal";
 
-function LoggedInUserAppointments() {
+function MyAppointments() {
   // TODO: Implement search filter?
   const [currentPage, setCurrentPage] = useState(1);
   const [createAppointmentModal, setCreateAppointmentModal] =
@@ -36,10 +36,14 @@ function LoggedInUserAppointments() {
 
       <button
         onClick={() => setCreateAppointmentModal(true)}
-        className="mx-2 bg-secondary text-white rounded-3xl py-2 px-4 sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base"
+        className="ml-2 bg-secondary text-white rounded-3xl py-2 px-4 sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base"
       >
         Create appointment
       </button>
+
+      {data?.content?.length < 1 && (
+        <p className="pl-2 pt-2">User has no appointments.</p>
+      )}
 
       <AppointmentsList
         appointments={data?.content}
@@ -56,4 +60,4 @@ function LoggedInUserAppointments() {
   );
 }
 
-export default LoggedInUserAppointments;
+export default MyAppointments;

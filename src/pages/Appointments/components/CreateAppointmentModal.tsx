@@ -11,6 +11,8 @@ import { Appointment, AppointmentRequest } from "@/types/Appointment";
 import DateTimePicker from "@/pages/Appointments/components/DateTimePicker";
 import { CreateAppointmentSchema } from "@/validations/appointmentValidationSchemas";
 
+// TODO: Add Car field so User can select the Car he wants for appointment
+
 const initialErrors = {
   appointmentDate: "",
   appointmentTime: "",

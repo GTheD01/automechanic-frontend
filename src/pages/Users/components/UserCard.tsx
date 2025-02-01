@@ -1,6 +1,7 @@
-import UserField from "@/components/UserField";
-import { User } from "@/types/User";
 import { Link } from "react-router-dom";
+
+import { User } from "@/types/User";
+import UserField from "@/components/UserField";
 
 function UserCard({ user }: { user: User }) {
   return (
@@ -32,7 +33,7 @@ function UserCard({ user }: { user: User }) {
         </div>
       </div>
       <Link
-        to={`${user.id}/cars`}
+        to={`${user.id}`}
         className="bg-secondary text-white rounded-3xl py-2 px-4 text-sm sm:px-6 sm:text-base hover:bg-secondaryHover"
       >
         Profile

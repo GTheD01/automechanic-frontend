@@ -1,8 +1,8 @@
 import React from "react";
 
-import Spinner from "@/components/Spinner";
-import UserCard from "./UserCard";
 import { User } from "@/types/User";
+import Spinner from "@/components/Spinner";
+import UserCard from "@/pages/Users/components/UserCard";
 
 interface UsersListProps {
   users: User[];

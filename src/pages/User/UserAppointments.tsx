@@ -1,10 +1,10 @@
+import { useParams } from "react-router-dom";
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
 
 import { Pagination } from "@/components/Pagination";
 import { getUserAppointments } from "@/services/appointmentService";
-import AppointmentsList from "../Appointments/components/AppointmentsList";
+import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 
 function UserAppointments() {
   const { userId } = useParams();

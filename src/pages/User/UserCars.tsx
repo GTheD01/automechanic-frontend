@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 import Spinner from "@/components/Spinner";
 import { getUserCars } from "@/services/carsService";
-import UserCarList from "../MyCars/components/UserCarList";
+import UserCarList from "@/pages/MyCars/components/UserCarList";
 
 function UserCars() {
   const { userId } = useParams();

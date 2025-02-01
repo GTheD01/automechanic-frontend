@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import TopNavBar from "./components/TopNavBar";
-import SideNavBar from "../SideNavBar/SideNavBar";
-import { useAuthContext } from "@/providers/AuthContextProvider";
 import Spinner from "@/components/Spinner";
+import SideNavBar from "@/pages/SideNavBar/SideNavBar";
+import { useAuthContext } from "@/providers/AuthContextProvider";
+import TopNavBar from "@/pages/ProtectedPagesLayout/components/TopNavBar";
 
 function ProtectedPagesLayout() {
   const { isAuthenticated, isLoading } = useAuthContext();

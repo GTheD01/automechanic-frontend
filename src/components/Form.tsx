@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent } from "react";
-import Input, { InputProps } from "./Input";
-import Spinner from "./Spinner";
+
 import { cn } from "@/lib/cn";
+import Spinner from "@/components/Spinner";
+import Input, { InputProps } from "@/components/Input";
 
 type FormMethod = "GET" | "POST" | "PUT" | "PATCH";
 

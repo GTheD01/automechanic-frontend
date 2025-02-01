@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Car } from "@/types/Car";
-import UserCarCard from "./UserCarCard";
+import UserCarCard from "@/pages/MyCars/components/UserCarCard";
 
 const UserCarList = React.memo(({ userCars }: { userCars: Car[] }) => {
   return (

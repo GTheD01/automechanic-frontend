@@ -2,7 +2,7 @@ import React from "react";
 
 import Spinner from "@/components/Spinner";
 import { Appointment } from "@/types/Appointment";
-import AppointmentCard from "./AppointmentCard";
+import AppointmentCard from "@/pages/Appointments/components/AppointmentCard";
 
 interface AppointmentsListProps {
   appointments: Appointment[];
@@ -14,10 +14,6 @@ const AppointmentsList = React.memo(
   ({ appointments, isError, isLoading }: AppointmentsListProps) => {
     if (isLoading) {
       return <Spinner lg />;
-    }
-
-    if (appointments.length < 1) {
-      return <p className="pl-2 pt-2">User has no appointments.</p>;
     }
 
     if (isError || !appointments) {

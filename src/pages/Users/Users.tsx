@@ -1,13 +1,13 @@
-import { ChangeEvent, useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { ChangeEvent, useCallback, useRef, useState } from "react";
 
 import { UserFilters } from "@/types/User";
-import UsersList from "./components/UsersList";
+import UsersList from "@/pages/Users/components/UsersList";
 import { Pagination } from "@/components/Pagination";
 import { fetchAllUsers } from "@/services/userService";
 
 function Users() {
-  const [name, setName] = useState("");
+  const nameRef = useRef<HTMLInputElement | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<UserFilters>({});
 
@@ -27,7 +27,13 @@ function Users() {
 
   const handleSearchFilter = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFilters((prevFilters) => ({ ...prevFilters, name }));
+    if (!nameRef) {
+      return;
+    }
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      name: nameRef?.current?.value,
+    }));
   };
 
   const handleCurrentPage = useCallback(
@@ -49,8 +55,7 @@ function Users() {
           <input
             placeholder="Search by name"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            ref={nameRef}
             type="text"
             className="outline-none border border-black w-1/2 p-2"
           />

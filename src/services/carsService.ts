@@ -1,6 +1,6 @@
-import { Car, CarBrand, CarDataProps, CarModel } from "@/types/Car";
+import apiClient from "@/services";
 import { User } from "@/types/User";
-import apiClient from ".";
+import { Car, CarBrand, CarDataProps, CarModel } from "@/types/Car";
 
 export const getUserCars = async ({
   queryKey,

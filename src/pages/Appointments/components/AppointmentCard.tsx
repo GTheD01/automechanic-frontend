@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cn } from "@/lib/cn";
-import AppointmentField from "./AppointmentField";
 import { updateAppointment } from "@/services/appointmentService";
 import { Appointment, AppointmentStatus } from "@/types/Appointment";
+import AppointmentField from "@/pages/Appointments/components/AppointmentField";
 import EditAppointmentModal from "@/pages/Appointments/components/EditAppointmentModal";
 
 function AppointmentCard({ appointment }: { appointment: Appointment }) {
@@ -63,6 +63,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
     appointmentStatusClasses[
       originalStatus as keyof typeof appointmentStatusClasses
     ];
+
   return (
     <li className="shadow-xl py-8 px-4 md:flex md:justify-between md:items-center relative">
       <div className="md:w-2/3 mb-8 md:mb-0 space-y-2">
@@ -76,6 +77,7 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
         </span>
 
         <div className="grid grid-cols-2 gap-2">
+          {/* TODO: Change appointment id with selected Car */}
           <AppointmentField field="Appointment ID" content={appointment?.id} />
           <AppointmentField
             field="Appointment time"

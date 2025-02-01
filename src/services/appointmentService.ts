@@ -1,11 +1,11 @@
 import apiClient from "@/services";
+import { User } from "@/types/User";
 import {
   Appointment,
   AppointmentFilters,
   AppointmentRequest,
   AppointmentUpdateRequest,
 } from "@/types/Appointment";
-import { User } from "@/types/User";
 
 export const fetchAllAppointments = async ({
   queryKey,
@@ -18,6 +18,7 @@ export const fetchAllAppointments = async ({
   const params = new URLSearchParams(
     appointmentFilters as Record<string, string>
   );
+
   const response = await apiClient.get(
     `admin/appointments?size=${size}&${params}`,
     {
