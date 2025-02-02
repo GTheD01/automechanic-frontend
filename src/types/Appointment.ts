@@ -1,4 +1,5 @@
 import { User } from "@/types/User";
+import { Car } from "./Car";
 
 export enum AppointmentStatus {
   UPCOMING = "UPCOMING",
@@ -16,12 +17,7 @@ export interface Appointment {
   user: User;
   createdDate: string;
   lastModifiedDate: string;
-}
-
-export interface AppointmentRequest {
-  description: string;
-  appointmentDate: string;
-  appointmentTime: string;
+  car: Car;
 }
 
 export interface AppointmentUpdateRequest {

@@ -1,13 +1,16 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
-import { Appointment, AppointmentRequest } from "@/types/Appointment";
+import DatePicker from "react-datepicker";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+
+import { Appointment } from "@/types/Appointment";
+import { AppointmentForm } from "./CreateAppointmentModal";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 interface DateTimePickerProps {
   appointments: Appointment[];
   selectedTime: string;
-  setAppointmentData: Dispatch<SetStateAction<AppointmentRequest>>;
+  setAppointmentData: Dispatch<SetStateAction<AppointmentForm>>;
 }
 
 const DateTimePicker = ({
@@ -65,7 +68,7 @@ const DateTimePicker = ({
 
   return (
     <div className="max-w-2xl bg-white rounded-lg">
-      <div className="mb-6">
+      <div>
         <label className="block text-gray-700 font-semibold mb-2">
           Select Date
         </label>
@@ -81,7 +84,7 @@ const DateTimePicker = ({
       </div>
 
       {selectedDate && (
-        <div className="mb-6">
+        <div className="mt-4">
           <label className="block text-gray-700 font-semibold mb-2">
             Select Time
           </label>

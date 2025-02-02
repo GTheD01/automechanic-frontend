@@ -3,9 +3,9 @@ import { User } from "@/types/User";
 import {
   Appointment,
   AppointmentFilters,
-  AppointmentRequest,
   AppointmentUpdateRequest,
 } from "@/types/Appointment";
+import { AppointmentForm } from "@/pages/Appointments/components/CreateAppointmentModal";
 
 export const fetchAllAppointments = async ({
   queryKey,
@@ -28,9 +28,7 @@ export const fetchAllAppointments = async ({
   return response.data;
 };
 
-export const createAppointment = async (
-  appointmentData: AppointmentRequest
-) => {
+export const createAppointment = async (appointmentData: AppointmentForm) => {
   const response = await apiClient.post(`/appointments`, appointmentData);
   return response.data;
 };

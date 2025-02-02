@@ -77,8 +77,15 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
         </span>
 
         <div className="grid grid-cols-2 gap-2">
-          {/* TODO: Change appointment id with selected Car */}
-          <AppointmentField field="Appointment ID" content={appointment?.id} />
+          <AppointmentField
+            field="Car"
+            content={`
+              ${appointment?.car.carBrand.name} 
+              ${appointment?.car?.model?.name} 
+              ${appointment?.car?.version}
+              (${appointment?.car?.year})
+            `}
+          />
           <AppointmentField
             field="Appointment time"
             content={`${appointment?.appointmentTime} / ${appointment?.appointmentDate}`}

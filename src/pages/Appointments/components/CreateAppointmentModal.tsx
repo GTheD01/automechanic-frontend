@@ -2,27 +2,30 @@ import { z } from "zod";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { ChangeEvent, Dispatch, useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import Spinner from "@/components/Spinner";
 import { ApiResponseError } from "@/types/Auth";
+import { Appointment } from "@/types/Appointment";
+import { getLoggedInUserCars } from "@/services/carsService";
 import { createAppointment } from "@/services/appointmentService";
-import { Appointment, AppointmentRequest } from "@/types/Appointment";
 import DateTimePicker from "@/pages/Appointments/components/DateTimePicker";
 import { CreateAppointmentSchema } from "@/validations/appointmentValidationSchemas";
-
-// TODO: Add Car field so User can select the Car he wants for appointment
 
 const initialErrors = {
   appointmentDate: "",
   appointmentTime: "",
   description: "",
+  carId: "",
 };
 const initialAppointmentData = {
   appointmentDate: "",
   appointmentTime: "",
   description: "",
+  carId: "",
 };
+
+export type AppointmentForm = z.infer<typeof CreateAppointmentSchema>;
 
 function CreateAppointmentModal({
   appointments,
@@ -31,12 +34,17 @@ function CreateAppointmentModal({
   appointments: Appointment[];
   modalStateHandler: Dispatch<boolean>;
 }) {
-  const [appointmentData, setAppointmentData] = useState<AppointmentRequest>(
+  const [appointmentData, setAppointmentData] = useState<AppointmentForm>(
     initialAppointmentData
   );
-  const [errors, setErrors] = useState<AppointmentRequest>(initialErrors);
+  const [errors, setErrors] = useState<AppointmentForm>(initialErrors);
 
   const queryClient = useQueryClient();
+
+  const { data: userCars } = useQuery({
+    queryKey: ["userCars"],
+    queryFn: getLoggedInUserCars,
+  });
 
   const createAppointmentMutation = useMutation({
     mutationFn: createAppointment,
@@ -87,12 +95,37 @@ function CreateAppointmentModal({
         <h3 className="font-semibold text-center text-2xl mb-6">
           Create Appointment
         </h3>
-        <form onSubmit={createAppointmentHandler} className="flex flex-col">
+        <form
+          onSubmit={createAppointmentHandler}
+          className="flex flex-col gap-4"
+        >
           <DateTimePicker
             appointments={appointments}
             selectedTime={appointmentData?.appointmentTime}
             setAppointmentData={setAppointmentData}
           />
+          <div className="flex flex-col">
+            <label htmlFor="car">Car</label>
+            <select
+              className="border outline-none p-2"
+              value={appointmentData.carId}
+              onChange={(e) =>
+                setAppointmentData((prevAppointmentData) => ({
+                  ...prevAppointmentData,
+                  carId: e.target.value,
+                }))
+              }
+              name="car"
+            >
+              <option>Select</option>
+              {userCars?.map((car) => (
+                <option key={car.id} value={car.id}>
+                  {car.carBrand.name} {car.model.name} {car.version} ({car.year}
+                  )
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="flex flex-col">
             <label htmlFor="description">Description</label>
             <textarea

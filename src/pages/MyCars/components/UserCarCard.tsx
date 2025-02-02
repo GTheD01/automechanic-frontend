@@ -4,7 +4,7 @@ function UserCarCard({ car }: { car: Car }) {
   return (
     <li
       key={car.id}
-      className="space-y-2 border-b-2 pl-4 flex justify-between items-center"
+      className="space-y-2 border-b-2 px-2 py-2 flex justify-between items-center"
     >
       <div>
         <p>
