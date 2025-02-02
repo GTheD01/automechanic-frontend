@@ -54,7 +54,7 @@ function Appointments() {
   }, [createAppointmentModal]);
 
   return (
-    <main>
+    <section>
       {createAppointmentModal && (
         <CreateAppointmentModal
           appointments={data?.content}
@@ -98,7 +98,7 @@ function Appointments() {
         handleCurrentPage={handleCurrentPage}
         totalPages={data?.page.totalPages}
       />
-    </main>
+    </section>
   );
 }
 

@@ -48,7 +48,7 @@ function Users() {
   );
 
   return (
-    <main>
+    <section>
       <div className="pl-2 border-b-2">
         <form className="mb-2 flex" onSubmit={handleSearchFilter}>
           <label className="sr-only">Search by name</label>
@@ -105,7 +105,7 @@ function Users() {
         currentPage={currentPage}
         handleCurrentPage={handleCurrentPage}
       />
-    </main>
+    </section>
   );
 }
 

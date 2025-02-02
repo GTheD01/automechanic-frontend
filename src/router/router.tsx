@@ -25,6 +25,7 @@ const Reports = lazy(() => import("@/pages/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
 const MyCars = lazy(() => import("@/pages/MyCars/MyCars"));
+const UserCarPage = lazy(() => import("@/pages/UserCarPage"));
 const MyAppointments = lazy(
   () => import("@/pages/MyAppointments/MyAppointments")
 );
@@ -172,6 +173,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Spinner />}>
                 <MyCars />
+              </Suspense>
+            ),
+          },
+          {
+            path: "/my-cars/:carId",
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <UserCarPage />
               </Suspense>
             ),
           },

@@ -8,7 +8,7 @@ function UserProfile() {
     return <p>Couldn't fetch the user.</p>;
   }
   return (
-    <main>
+    <section>
       <div>
         <h3 className="my-8 text-3xl font-bold text-center border-b-2">
           {user.firstName} {user.lastName}
@@ -46,7 +46,7 @@ function UserProfile() {
           />
         </div>
       </div>
-    </main>
+    </section>
   );
 }
 

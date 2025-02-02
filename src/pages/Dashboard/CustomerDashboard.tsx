@@ -12,7 +12,7 @@ function CustomerDashboard() {
   });
 
   return (
-    <main>
+    <section>
       <h3 className="text-xl font-semibold ml-2 mb-4">Upcoming Appointment</h3>
       {isLoading && <Spinner md />}
       {isError && <p>Couldn't fetch the upcoming appointment</p>}
@@ -44,7 +44,7 @@ function CustomerDashboard() {
           <p className="text-sm md:text-base font-medium">Total Reports</p>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
 
