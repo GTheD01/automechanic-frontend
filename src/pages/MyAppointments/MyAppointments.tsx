@@ -36,7 +36,7 @@ function MyAppointments() {
 
       <button
         onClick={() => setCreateAppointmentModal(true)}
-        className="ml-2 bg-secondary text-white rounded-3xl py-2 px-4 sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base"
+        className="ml-2 bg-secondary text-white rounded-3xl py-2 px-4 sm:px-6 hover:bg-secondaryHover text-sm lg:text-base"
       >
         Create appointment
       </button>

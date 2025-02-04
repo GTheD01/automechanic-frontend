@@ -6,9 +6,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { User } from "@/types/User";
-import { useQuery } from "@tanstack/react-query";
 import { fetchUser } from "@/services/userService";
 
 interface UserContextType {

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
   Dispatch,
+  PropsWithChildren,
   SetStateAction,
   useContext,
   useEffect,
@@ -20,11 +21,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
 
-export default function AuthContextProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AuthContextProvider({ children }: PropsWithChildren) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
 

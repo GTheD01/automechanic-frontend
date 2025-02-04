@@ -7,8 +7,16 @@ import { updateAppointment } from "@/services/appointmentService";
 import { Appointment, AppointmentStatus } from "@/types/Appointment";
 import AppointmentField from "@/pages/Appointments/components/AppointmentField";
 import EditAppointmentModal from "@/pages/Appointments/components/EditAppointmentModal";
+import { useUserContext } from "@/providers/UserContextProvider";
 
-function AppointmentCard({ appointment }: { appointment: Appointment }) {
+function AppointmentCard({
+  appointment,
+  carPage,
+}: {
+  appointment: Appointment;
+  carPage?: boolean;
+}) {
+  const { user } = useUserContext();
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [newStatus, setNewStatus] = useState<AppointmentStatus>(
     appointment?.appointmentStatus
@@ -77,20 +85,21 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
         </span>
 
         <div className="grid grid-cols-2 gap-2">
-          <AppointmentField
-            field="Car"
-            content={`
-              ${appointment?.car.carBrand.name} 
+          {!carPage && (
+            <AppointmentField
+              field="Car"
+              content={`
+              ${appointment?.car?.carBrand?.name} 
               ${appointment?.car?.model?.name} 
               ${appointment?.car?.version}
               (${appointment?.car?.year})
             `}
-          />
+            />
+          )}
           <AppointmentField
             field="Appointment time"
             content={`${appointment?.appointmentTime} / ${appointment?.appointmentDate}`}
           />
-
           <AppointmentField
             field="Created at"
             content={appointment?.createdDate}
@@ -103,43 +112,50 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
                 : "Not yet modified."
             }
           />
-
-          <AppointmentField
-            field="Customer"
-            content={
-              appointment?.user?.firstName + " " + appointment?.user?.lastName
-            }
-          />
-          <AppointmentField
-            field="Customer number"
-            content={
-              appointment?.user?.phoneNumber
-                ? appointment?.user?.phoneNumber
-                : "No phone added."
-            }
-          />
-
+          {!carPage && (
+            <AppointmentField
+              field="Customer"
+              content={
+                appointment?.user?.firstName + " " + appointment?.user?.lastName
+              }
+            />
+          )}
+          {!carPage && (
+            <AppointmentField
+              field="Customer number"
+              content={
+                appointment?.user?.phoneNumber
+                  ? appointment?.user?.phoneNumber
+                  : "No phone added."
+              }
+            />
+          )}
           <AppointmentField
             field="Description"
             content={appointment?.description}
+            className={`${carPage && "col-span-2"}`}
           />
         </div>
       </div>
 
-      <button
-        onClick={() => setIsEditing(true)}
-        className="bg-secondary text-white rounded-3xl py-2 px-4 text-sm sm:px-6 sm:text-base hover:bg-secondaryHover"
-      >
-        Edit
-      </button>
+      {user?.userRole === "ADMIN" && (
+        <button
+          onClick={() => setIsEditing(true)}
+          className="bg-secondary text-white rounded-3xl py-2 px-4 text-sm sm:px-6 sm:text-base hover:bg-secondaryHover"
+        >
+          Edit
+        </button>
+      )}
 
-      <EditAppointmentModal
-        isOpen={isEditing}
-        newStatus={newStatus}
-        setNewStatus={setNewStatus}
-        onSave={handleSave}
-        onCancel={handleCancel}
-      />
+      {user?.userRole === "ADMIN" && (
+        <EditAppointmentModal
+          isOpen={isEditing}
+          newStatus={newStatus}
+          setNewStatus={setNewStatus}
+          onSave={handleSave}
+          onCancel={handleCancel}
+        />
+      )}
     </li>
   );
 }

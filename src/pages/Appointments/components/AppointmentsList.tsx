@@ -8,10 +8,11 @@ interface AppointmentsListProps {
   appointments: Appointment[];
   isLoading: boolean;
   isError: boolean;
+  carPage?: boolean;
 }
 
 const AppointmentsList = React.memo(
-  ({ appointments, isError, isLoading }: AppointmentsListProps) => {
+  ({ appointments, isError, isLoading, carPage }: AppointmentsListProps) => {
     if (isLoading) {
       return <Spinner lg />;
     }
@@ -26,7 +27,11 @@ const AppointmentsList = React.memo(
     return (
       <ul>
         {appointments?.map((appointment) => (
-          <AppointmentCard key={appointment.id} appointment={appointment} />
+          <AppointmentCard
+            key={appointment.id}
+            appointment={appointment}
+            carPage={carPage}
+          />
         ))}
       </ul>
     );
