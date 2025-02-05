@@ -1,12 +1,11 @@
 import { User } from "@/types/User";
 import { Car } from "./Car";
 
-export enum AppointmentStatus {
-  UPCOMING = "UPCOMING",
-  FINISHED = "FINISHED",
-  CANCELLED = "CANCELLED",
-  RESCHEDULED = "RESCHEDULED",
-}
+export type AppointmentStatus =
+  | "UPCOMING"
+  | "FINISHED"
+  | "CANCELLED"
+  | "RESCHEDULED";
 
 export interface Appointment {
   id: string;
