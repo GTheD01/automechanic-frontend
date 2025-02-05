@@ -28,7 +28,7 @@ function Modal({ open, onClose, children }: PropsWithChildren<ModalProps>) {
       ref={dialog}
       onClose={onClose}
       onClick={handleBackdropClick}
-      className="backdrop:bg-black/60 bg-neutral border-none p-4 min-w-80 w-[30%] rounded-lg shadow-lg"
+      className="backdrop:bg-black/60 bg-primary border-none p-4 min-w-80 w-[30%] rounded-lg shadow-lg"
     >
       {open ? children : null}
     </dialog>,
