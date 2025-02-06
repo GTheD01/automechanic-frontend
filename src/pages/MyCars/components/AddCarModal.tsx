@@ -66,10 +66,21 @@ function AddCarModal({
       await queryClient.cancelQueries({ queryKey: ["userCars"] });
 
       const previousCars = queryClient.getQueryData(["userCars"]);
+      const newCarModified = {
+        id: uuidv4(),
+        year: newCar.year,
+        version: newCar.version,
+        carBrand: {
+          name: newCar.brandName,
+        },
+        model: {
+          name: newCar.modelName,
+        },
+      };
 
       queryClient.setQueryData(["userCars"], (old: Car[]) => [
         ...(old || []),
-        { id: uuidv4(), ...newCar },
+        newCarModified,
       ]);
 
       return { previousCars };

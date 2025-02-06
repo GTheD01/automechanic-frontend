@@ -24,6 +24,11 @@ body {
   padding: 0;
 }
 
+#root,
+body {
+  height: 100%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html,
   body,

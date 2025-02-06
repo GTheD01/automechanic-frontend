@@ -1,14 +1,18 @@
-import Spinner from "@/components/Spinner";
-import { getCar } from "@/services/carsService";
-import { useQuery } from "@tanstack/react-query";
-import { Link, Navigate, useParams } from "react-router-dom";
-import AppointmentsList from "../Appointments/components/AppointmentsList";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+import Spinner from "@/components/Spinner";
+import { deleteCar, getCar } from "@/services/carsService";
+import AppointmentsList from "../Appointments/components/AppointmentsList";
 import CarDeleteConfirmationModal from "./components/CarDeleteConfirmationModal";
+import { Car } from "@/types/Car";
 
 function UserCarPage() {
   const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
   const { carId } = useParams();
+  const navigate = useNavigate();
 
   const {
     data: carData,
@@ -20,18 +24,43 @@ function UserCarPage() {
     retry: 0,
   });
 
-  if (isError) {
-    return <Navigate to={"/my-cars"} />;
-  }
-
   const handleOnCloseDeleteCarModal = () => {
     setDeleteConfirmationModal(false);
   };
 
+  const queryClient = useQueryClient();
+
+  const deleteCarMutation = useMutation({
+    mutationKey: ["userCars"],
+    mutationFn: deleteCar,
+    onSuccess: () => {
+      toast.success("Car successfully deleted.");
+      navigate("/my-cars");
+    },
+    onMutate: async (newCar) => {
+      await queryClient.cancelQueries({ queryKey: ["userCars"] });
+
+      const previousCars = queryClient.getQueryData(["userCars"]);
+
+      queryClient.setQueryData(["userCars"], (old: Car[]) =>
+        old.filter((car) => car.id.toString() !== newCar)
+      );
+
+      return { previousCars };
+    },
+    onError: () => {
+      toast.error("Couldn't delete the car. Try again later!");
+    },
+  });
+
   const deleteCarHandler = () => {
-    console.log("Deleted car");
+    deleteCarMutation.mutate(carId);
     handleOnCloseDeleteCarModal();
   };
+
+  if (isError) {
+    return <Navigate to={"/my-cars"} />;
+  }
 
   return (
     <>

@@ -1,7 +1,7 @@
 import apiClient from "@/services";
 import { User } from "@/types/User";
-import { Car, CarBrand, CarDataProps, CarModel } from "@/types/Car";
 import { Appointment } from "@/types/Appointment";
+import { Car, CarBrand, CarDataProps, CarModel } from "@/types/Car";
 
 export const getUserCars = async ({
   queryKey,
@@ -45,5 +45,10 @@ export const getCar = async ({
 }): Promise<Car & { appointments: Appointment[] }> => {
   const [_, carId] = queryKey;
   const response = await apiClient.get(`/cars/${carId}`);
+  return response.data;
+};
+
+export const deleteCar = async (carId: Car["id"] | undefined) => {
+  const response = await apiClient.delete(`/cars/${carId}`);
   return response.data;
 };
