@@ -27,7 +27,11 @@ function MyCars() {
       >
         Add car
       </button>
-      {addCarModal && <AddCarModal setCarModalState={setAddCarModal} />}
+
+      <AddCarModal
+        carModalState={addCarModal}
+        setCarModalState={setAddCarModal}
+      />
 
       {isLoading && (
         <div className="pl-2 pt-2">

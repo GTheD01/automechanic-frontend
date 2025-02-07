@@ -79,7 +79,7 @@ const DateTimePicker = ({
           filterDate={isDateDisabled}
           dateFormat="dd.MM.yyyy"
           placeholderText="Select a date"
-          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 cursor-pointer"
         />
       </div>
 

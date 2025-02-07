@@ -14,7 +14,11 @@ function CarDeleteConfirmationModal({
   bodyText,
 }: CarDeleteConfirmationModalProps) {
   return (
-    <Modal open={deleteConfirmationModal} onClose={handleOnCloseDeleteCarModal}>
+    <Modal
+      open={deleteConfirmationModal}
+      onClose={handleOnCloseDeleteCarModal}
+      className="bg-primary"
+    >
       <div className="text-center">
         <h5 className="text-2xl font-semibold text-white">
           Are you sure you want to delete this car?

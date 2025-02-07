@@ -7,7 +7,6 @@ import { getLoggedInUserAppointments } from "@/services/appointmentService";
 import CreateAppointmentModal from "@/pages/Appointments/components/CreateAppointmentModal";
 
 function MyAppointments() {
-  // TODO: Implement search filter?
   const [currentPage, setCurrentPage] = useState(1);
   const [createAppointmentModal, setCreateAppointmentModal] =
     useState<boolean>(false);
@@ -25,14 +24,17 @@ function MyAppointments() {
     [currentPage]
   );
 
+  const onCloseCreateAppointmentHandler = () => {
+    setCreateAppointmentModal(false);
+  };
+
   return (
     <section>
-      {createAppointmentModal && (
-        <CreateAppointmentModal
-          appointments={data?.content}
-          modalStateHandler={setCreateAppointmentModal}
-        />
-      )}
+      <CreateAppointmentModal
+        appointments={data?.content}
+        modalState={createAppointmentModal}
+        onClose={onCloseCreateAppointmentHandler}
+      />
 
       <button
         onClick={() => setCreateAppointmentModal(true)}

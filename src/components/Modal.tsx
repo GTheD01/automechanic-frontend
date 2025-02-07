@@ -4,17 +4,24 @@ import { createPortal } from "react-dom";
 interface ModalProps {
   open: boolean;
   onClose: () => void;
+  className?: string;
 }
 
-function Modal({ open, onClose, children }: PropsWithChildren<ModalProps>) {
+function Modal({
+  children,
+  open,
+  onClose,
+  className,
+}: PropsWithChildren<ModalProps>) {
   const dialog = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
+    const modal = dialog.current;
     if (open) {
-      dialog?.current?.showModal();
-    } else {
-      dialog?.current?.close();
+      modal?.showModal();
     }
+
+    return () => modal?.close();
   }, [open]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -28,7 +35,7 @@ function Modal({ open, onClose, children }: PropsWithChildren<ModalProps>) {
       ref={dialog}
       onClose={onClose}
       onClick={handleBackdropClick}
-      className="backdrop:bg-black/60 bg-primary border-none p-4 min-w-80 w-[30%] rounded-lg shadow-lg"
+      className={`backdrop:bg-black/60 border-none p-4 min-w-80 w-[30%] rounded-lg shadow-lg ${className}`}
     >
       {open ? children : null}
     </dialog>,
