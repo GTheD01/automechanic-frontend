@@ -53,14 +53,18 @@ function Appointments() {
     };
   }, [createAppointmentModal]);
 
+  const onClose = () => {
+    setCreateAppointmentModal(false);
+  };
+
   return (
     <section>
-      {createAppointmentModal && (
-        <CreateAppointmentModal
-          appointments={data?.content}
-          modalStateHandler={setCreateAppointmentModal}
-        />
-      )}
+      <CreateAppointmentModal
+        appointments={data?.content}
+        onClose={onClose}
+        modalState={createAppointmentModal}
+      />
+
       <div className="md:flex md:justify-between mx-2">
         <form className="mb-2 flex md:w-1/2" onSubmit={handleSearchFilter}>
           <label className="sr-only">Search</label>
