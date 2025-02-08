@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useCallback, useRef, useState } from "react";
 
+import Spinner from "@/components/Spinner";
 import { Pagination } from "@/components/Pagination";
 import { AppointmentFilters } from "@/types/Appointment";
 import { fetchAllAppointments } from "@/services/appointmentService";
@@ -41,18 +42,6 @@ function Appointments() {
     [currentPage]
   );
 
-  useEffect(() => {
-    if (createAppointmentModal) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [createAppointmentModal]);
-
   const onClose = () => {
     setCreateAppointmentModal(false);
   };
@@ -89,19 +78,24 @@ function Appointments() {
           Create appointment
         </button>
       </div>
-      {data?.content?.length < 1 && (
+
+      {isLoading && <Spinner lg />}
+      {isError && (
+        <p className="pl-2 pt-2">
+          There was an error fetching your appointments. Please try again later.
+        </p>
+      )}
+      {data && data.content && data.content.length < 1 && (
         <p className="pl-2 pt-2">No appointments found.</p>
       )}
-      <AppointmentsList
-        appointments={data?.content}
-        isError={isError}
-        isLoading={isLoading}
-      />
-      <Pagination
-        currentPage={currentPage}
-        handleCurrentPage={handleCurrentPage}
-        totalPages={data?.page.totalPages}
-      />
+      {data && data.content && <AppointmentsList appointments={data.content} />}
+      {data && data.page && (
+        <Pagination
+          currentPage={currentPage}
+          handleCurrentPage={handleCurrentPage}
+          totalPages={data.page.totalPages}
+        />
+      )}
     </section>
   );
 }

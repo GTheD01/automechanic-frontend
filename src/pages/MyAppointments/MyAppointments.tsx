@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+import Spinner from "@/components/Spinner";
 import { Pagination } from "@/components/Pagination";
 import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 import { getLoggedInUserAppointments } from "@/services/appointmentService";
@@ -43,21 +44,23 @@ function MyAppointments() {
         Create appointment
       </button>
 
-      {data?.content?.length < 1 && (
-        <p className="pl-2 pt-2">User has no appointments.</p>
+      {isLoading && <Spinner lg />}
+      {data && data.content && data.content.length < 1 && (
+        <p className="pl-2 pt-2">No appointments found.</p>
       )}
-
-      <AppointmentsList
-        appointments={data?.content}
-        isError={isError}
-        isLoading={isLoading}
-      />
-
-      <Pagination
-        currentPage={currentPage}
-        handleCurrentPage={handleCurrentPage}
-        totalPages={data?.page?.totalPages}
-      />
+      {isError && (
+        <p className="pl-2 pt-2">
+          There was an error fetching your appointments. Please try again later.
+        </p>
+      )}
+      {data && data.content && <AppointmentsList appointments={data.content} />}
+      {data && data.page && (
+        <Pagination
+          currentPage={currentPage}
+          handleCurrentPage={handleCurrentPage}
+          totalPages={data.page.totalPages}
+        />
+      )}
     </section>
   );
 }
