@@ -52,3 +52,14 @@ export const deleteCar = async (carId: Car["id"] | undefined) => {
   const response = await apiClient.delete(`/cars/${carId}`);
   return response.data;
 };
+
+export const editCar = async ({
+  carId,
+  carData,
+}: {
+  carId: Car["id"] | undefined;
+  carData: CarDataProps;
+}) => {
+  const response = await apiClient.put(`/cars/${carId}`, carData);
+  return response.data;
+};

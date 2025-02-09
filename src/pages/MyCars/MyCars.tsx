@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import Spinner from "@/components/Spinner";
-import { getLoggedInUserCars } from "@/services/carsService";
+import { getLoggedInUserCars } from "@/services/carService";
 import AddCarModal from "@/pages/MyCars/components/AddCarModal";
 import UserCarList from "@/pages/MyCars/components/UserCarList";
 

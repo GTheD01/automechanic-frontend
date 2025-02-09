@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import Spinner from "@/components/Spinner";
-import { getUserCars } from "@/services/carsService";
+import { getUserCars } from "@/services/carService";
 import UserCarList from "@/pages/MyCars/components/UserCarList";
 
 function UserCars() {

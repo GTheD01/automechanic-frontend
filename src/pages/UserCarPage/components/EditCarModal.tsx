@@ -1,23 +1,14 @@
-import { z } from "zod";
-import { AxiosError } from "axios";
-import { v4 as uuidv4 } from "uuid";
-import { toast } from "react-toastify";
-import { ChangeEvent, Dispatch, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
 import Modal from "@/components/Modal";
 import Spinner from "@/components/Spinner";
+import { editCar, getBrandModels, getCarBrands } from "@/services/carService";
 import { ApiResponseError } from "@/types/Auth";
 import { Car, CarDataProps } from "@/types/Car";
 import { AddCarSchema } from "@/validations/carValidationSchemas";
-import { addCar, getBrandModels, getCarBrands } from "@/services/carService";
-
-const initialCarData: CarDataProps = {
-  brandName: "",
-  modelName: "",
-  year: "",
-  version: "",
-};
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { ChangeEvent, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { z } from "zod";
 
 const initialErrors: CarDataProps = {
   brandName: "",
@@ -26,17 +17,33 @@ const initialErrors: CarDataProps = {
   version: "",
 };
 
-function AddCarModal({
-  setCarModalState,
-  carModalState,
+function EditCarModal({
+  open,
+  onClose,
+  car,
 }: {
-  setCarModalState: Dispatch<boolean>;
-  carModalState: boolean;
+  open: boolean;
+  onClose: () => void;
+  car: Partial<Car> | undefined;
 }) {
-  const [carData, setCarData] = useState<CarDataProps>(initialCarData);
-  const [errors, setErrors] = useState<CarDataProps>(initialErrors);
+  const [carData, setCarData] = useState<CarDataProps>({
+    brandName: "",
+    modelName: "",
+    version: "",
+    year: "",
+  });
 
-  const { brandName, modelName, year } = carData;
+  useEffect(() => {
+    setCarData({
+      brandName: car?.carBrand?.name || "",
+      modelName: car?.model?.name || "",
+      version: car?.version || "",
+      year: car?.year?.toString() || "",
+    });
+  }, [car]);
+
+  const [errors, setErrors] = useState<CarDataProps>(initialErrors);
+  const { brandName, modelName, year, version } = carData;
 
   const { data: carBrands } = useQuery({
     queryKey: ["carBrands"],
@@ -50,58 +57,33 @@ function AddCarModal({
     enabled: !!brandName,
   });
 
-  const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setCarData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
   const queryClient = useQueryClient();
 
-  const addCarMutation = useMutation({
-    mutationFn: addCar,
+  const editCarMutation = useMutation({
+    mutationKey: ["userCar"],
+    mutationFn: editCar,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userCar"] });
       queryClient.invalidateQueries({ queryKey: ["userCars"] });
-      setCarData(initialCarData);
-      toast.success("Car added");
-      setCarModalState(false);
+      queryClient.invalidateQueries({ queryKey: ["appointments"] });
+
+      setCarData(carData);
+      toast.success("Successfully edited.");
+      onClose();
     },
-    onMutate: async (newCar) => {
-      await queryClient.cancelQueries({ queryKey: ["userCars"] });
-
-      const previousCars = queryClient.getQueryData(["userCars"]);
-      const newCarModified = {
-        id: uuidv4(),
-        year: newCar.year,
-        version: newCar.version,
-        carBrand: {
-          name: newCar.brandName,
-        },
-        model: {
-          name: newCar.modelName,
-        },
-      };
-
-      queryClient.setQueryData(["userCars"], (old: Car[]) => [
-        ...(old || []),
-        newCarModified,
-      ]);
-
-      return { previousCars };
-    },
-    onError: (error: AxiosError, _, context) => {
-      queryClient.setQueryData(["userCars"], context?.previousCars);
+    onError: (error: AxiosError) => {
       const data = error?.response?.data as ApiResponseError;
       toast.error(data.message);
     },
   });
 
-  const addCarHandler = (e: ChangeEvent<HTMLFormElement>) => {
+  const editCarHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setErrors(initialErrors);
     try {
       AddCarSchema.parse(carData);
-      addCarMutation.mutate(carData);
+      editCarMutation.mutate({ carId: car?.id, carData });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -115,16 +97,21 @@ function AddCarModal({
     }
   };
 
+  const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setCarData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   const onCloseAddCarModalHandler = () => {
-    setCarModalState(false);
+    onClose();
     setErrors(initialErrors);
   };
 
   return (
-    <Modal open={carModalState} onClose={onCloseAddCarModalHandler}>
+    <Modal open={open} onClose={onCloseAddCarModalHandler}>
       <h3 className="font-semibold text-center text-2xl mb-6">Add car</h3>
 
-      <form onSubmit={addCarHandler} className="flex flex-col gap-4">
+      <form onSubmit={editCarHandler} className="flex flex-col gap-4">
         <div className="flex flex-col">
           <label htmlFor="year">Brand</label>
           <select
@@ -173,6 +160,7 @@ function AddCarModal({
             name="version"
             placeholder="eg. GTI, Turbo"
             className="border outline-none p-2"
+            value={version}
             onChange={(e) =>
               setCarData((prevData) => ({
                 ...prevData,
@@ -209,11 +197,11 @@ function AddCarModal({
             type="submit"
             className="bg-secondary text-white rounded-3xl py-2 px-4 self-center sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base mt-2"
           >
-            {addCarMutation.isPending ? <Spinner /> : "Submit"}
+            {editCarMutation.isPending ? <Spinner /> : "Submit"}
           </button>
 
           <button
-            onClick={() => setCarModalState(false)}
+            onClick={onClose}
             type="button"
             className="text-secondary rounded-3xl py-2 px-4 self-center sm:px-6 mb-2 text-sm lg:text-base mt-2 border hover:bg-black/10"
           >
@@ -225,4 +213,4 @@ function AddCarModal({
   );
 }
 
-export default AddCarModal;
+export default EditCarModal;

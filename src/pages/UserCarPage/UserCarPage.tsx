@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import Spinner from "@/components/Spinner";
-import { deleteCar, getCar } from "@/services/carsService";
+import EditCarModal from "./components/EditCarModal";
+import { deleteCar, getCar } from "@/services/carService";
 import AppointmentsList from "../Appointments/components/AppointmentsList";
 import CarDeleteConfirmationModal from "./components/CarDeleteConfirmationModal";
-import { Car } from "@/types/Car";
 
 function UserCarPage() {
-  const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
+  const [deleteConfirmationModal, setDeleteConfirmationModal] =
+    useState<boolean>(false);
+  const [editCarModal, setEditCarModal] = useState<boolean>(false);
   const { carId } = useParams();
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ function UserCarPage() {
     isError,
     isLoading,
   } = useQuery({
-    queryKey: ["car", carId],
+    queryKey: ["userCar", carId],
     queryFn: getCar,
     retry: 0,
   });
@@ -28,25 +30,16 @@ function UserCarPage() {
     setDeleteConfirmationModal(false);
   };
 
-  const queryClient = useQueryClient();
+  const handleOnCloseEditCarModal = () => {
+    setEditCarModal(false);
+  };
 
   const deleteCarMutation = useMutation({
-    mutationKey: ["userCars"],
+    mutationKey: ["userCar"],
     mutationFn: deleteCar,
     onSuccess: () => {
       toast.success("Car successfully deleted.");
       navigate("/my-cars");
-    },
-    onMutate: async (newCar) => {
-      await queryClient.cancelQueries({ queryKey: ["userCars"] });
-
-      const previousCars = queryClient.getQueryData(["userCars"]);
-
-      queryClient.setQueryData(["userCars"], (old: Car[]) =>
-        old.filter((car) => car.id.toString() !== newCar)
-      );
-
-      return { previousCars };
     },
     onError: () => {
       toast.error("Couldn't delete the car. Try again later!");
@@ -58,12 +51,26 @@ function UserCarPage() {
     handleOnCloseDeleteCarModal();
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center pt-12">
+        <Spinner md />
+      </div>
+    );
+  }
+
   if (isError) {
     return <Navigate to={"/my-cars"} />;
   }
 
   return (
     <>
+      <EditCarModal
+        open={editCarModal}
+        onClose={handleOnCloseEditCarModal}
+        car={carData}
+      />
+
       <CarDeleteConfirmationModal
         deleteConfirmationModal={deleteConfirmationModal}
         handleOnCloseDeleteCarModal={handleOnCloseDeleteCarModal}
@@ -77,12 +84,6 @@ function UserCarPage() {
         >
           Back to Cars List
         </Link>
-        {isLoading && (
-          <div className="flex items-center justify-center pt-12">
-            <Spinner md />
-          </div>
-        )}
-
         <div className="pt-8 border-b-2 flex items-center justify-center flex-col gap-3 pb-4">
           <h5 className="font-semibold text-2xl">
             {carData && carData.carBrand?.name}
@@ -102,7 +103,10 @@ function UserCarPage() {
             </div>
           </div>
           <div>
-            <button className="bg-yellow-500 hover:bg-yellow-600 p-2 w-20 text-white">
+            <button
+              className="bg-yellow-500 hover:bg-yellow-600 p-2 w-20 text-white"
+              onClick={() => setEditCarModal(true)}
+            >
               EDIT
             </button>
             <button
@@ -117,12 +121,7 @@ function UserCarPage() {
           <p>This car has no appointments yet.</p>
         )}
         {carData && (
-          <AppointmentsList
-            appointments={carData.appointments}
-            isError={isError}
-            isLoading={isLoading}
-            carPage
-          />
+          <AppointmentsList appointments={carData.appointments} carPage />
         )}
       </section>
     </>

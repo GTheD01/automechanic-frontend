@@ -8,7 +8,7 @@ import Modal from "@/components/Modal";
 import Spinner from "@/components/Spinner";
 import { ApiResponseError } from "@/types/Auth";
 import { Appointment } from "@/types/Appointment";
-import { getLoggedInUserCars } from "@/services/carsService";
+import { getLoggedInUserCars } from "@/services/carService";
 import { createAppointment } from "@/services/appointmentService";
 import DateTimePicker from "@/pages/Appointments/components/DateTimePicker";
 import { CreateAppointmentSchema } from "@/validations/appointmentValidationSchemas";

@@ -11,7 +11,7 @@ export interface CarModel {
 export interface Car {
   id: string;
   carBrand: CarBrand;
-  year: number;
+  year: string;
   model: CarModel;
   version: string;
 }
