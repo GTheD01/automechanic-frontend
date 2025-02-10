@@ -6,7 +6,7 @@ import { ChangeEvent, Dispatch, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import Modal from "@/components/Modal";
-import Spinner from "@/components/Spinner";
+import CarForm from "@/components/CarForm";
 import { ApiResponseError } from "@/types/Auth";
 import { Car, CarDataProps } from "@/types/Car";
 import { AddCarSchema } from "@/validations/carValidationSchemas";
@@ -36,7 +36,7 @@ function AddCarModal({
   const [carData, setCarData] = useState<CarDataProps>(initialCarData);
   const [errors, setErrors] = useState<CarDataProps>(initialErrors);
 
-  const { brandName, modelName, year } = carData;
+  const { brandName } = carData;
 
   const { data: carBrands } = useQuery({
     queryKey: ["carBrands"],
@@ -50,7 +50,9 @@ function AddCarModal({
     enabled: !!brandName,
   });
 
-  const handleOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleOnChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setCarData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -120,107 +122,23 @@ function AddCarModal({
     setErrors(initialErrors);
   };
 
+  const closeModalHandler = () => {
+    setCarModalState(false);
+  };
+
   return (
     <Modal open={carModalState} onClose={onCloseAddCarModalHandler}>
       <h3 className="font-semibold text-center text-2xl mb-6">Add car</h3>
-
-      <form onSubmit={addCarHandler} className="flex flex-col gap-4">
-        <div className="flex flex-col">
-          <label htmlFor="year">Brand</label>
-          <select
-            className="border p-2 outline-none"
-            value={brandName}
-            onChange={handleOnChange}
-            name="brandName"
-          >
-            <option>Select</option>
-            {carBrands?.map((brand) => (
-              <option key={brand.id} value={brand.name}>
-                {brand.name}
-              </option>
-            ))}
-          </select>
-          {errors.brandName && (
-            <p className="text-red-500 text-sm sm:text-base">
-              {errors.brandName}
-            </p>
-          )}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="carModel">Model</label>
-          <select
-            className="border outline-none p-2"
-            value={modelName}
-            onChange={handleOnChange}
-            name="modelName"
-          >
-            <option>Select</option>
-            {brandModels?.map((model) => (
-              <option key={model.id}>{model.name}</option>
-            ))}
-          </select>
-          {errors.modelName && (
-            <p className="text-red-500 text-sm sm:text-base">
-              {errors.modelName}
-            </p>
-          )}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="version">Version</label>
-          <input
-            id="version"
-            name="version"
-            placeholder="eg. GTI, Turbo"
-            className="border outline-none p-2"
-            onChange={(e) =>
-              setCarData((prevData) => ({
-                ...prevData,
-                version: e.target.value,
-              }))
-            }
-          />
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="year">Year</label>
-          <select
-            className="border outline-none p-2"
-            value={year}
-            onChange={handleOnChange}
-            name="year"
-          >
-            <option>Select</option>
-            {Array.from(
-              { length: new Date().getFullYear() - 1990 + 1 },
-              (_, index) => 1990 + index
-            ).map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-          {errors.year && (
-            <p className="text-red-500 text-sm sm:text-base">{errors.year}</p>
-          )}
-        </div>
-        <div className="text-center space-x-1">
-          <button
-            type="submit"
-            className="bg-secondary text-white rounded-3xl py-2 px-4 self-center sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base mt-2"
-          >
-            {addCarMutation.isPending ? <Spinner /> : "Submit"}
-          </button>
-
-          <button
-            onClick={() => setCarModalState(false)}
-            type="button"
-            className="text-secondary rounded-3xl py-2 px-4 self-center sm:px-6 mb-2 text-sm lg:text-base mt-2 border hover:bg-black/10"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+      <CarForm
+        handleOnChange={handleOnChange}
+        carActionHandler={addCarHandler}
+        brandModels={brandModels || []}
+        carBrands={carBrands || []}
+        carData={carData}
+        errors={errors}
+        isPending={addCarMutation.isPending}
+        onModalClose={closeModalHandler}
+      />
     </Modal>
   );
 }
