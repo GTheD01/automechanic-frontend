@@ -8,6 +8,7 @@ import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
 import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
 import UserContextProvider from "@/providers/UserContextProvider";
 import AuthContextProvider from "@/providers/AuthContextProvider";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const Home = lazy(() => import("@/pages/Home/Home"));
 const SignIn = lazy(() => import("@/pages/AuthPages/SignIn"));
@@ -121,25 +122,31 @@ const router = createBrowserRouter([
           {
             path: "users",
             element: (
-              <Suspense fallback={<Spinner lg />}>
-                <Users />
-              </Suspense>
+              <ProtectedRoute role="ADMIN">
+                <Suspense fallback={<Spinner lg />}>
+                  <Users />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: "users/:userId",
             element: (
-              <Suspense fallback={<Spinner lg />}>
-                <User />
-              </Suspense>
+              <ProtectedRoute role="ADMIN">
+                <Suspense fallback={<Spinner lg />}>
+                  <User />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: "appointments",
             element: (
-              <Suspense fallback={<Spinner lg />}>
-                <Appointments />
-              </Suspense>
+              <ProtectedRoute role="ADMIN">
+                <Suspense fallback={<Spinner lg />}>
+                  <Appointments />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           // --------------------------------------------
@@ -171,25 +178,31 @@ const router = createBrowserRouter([
           {
             path: "/my-cars",
             element: (
-              <Suspense fallback={<Spinner />}>
-                <MyCars />
-              </Suspense>
+              <ProtectedRoute role="USER">
+                <Suspense fallback={<Spinner />}>
+                  <MyCars />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: "/my-cars/:carId",
             element: (
-              <Suspense fallback={<Spinner />}>
-                <UserCarPage />
-              </Suspense>
+              <ProtectedRoute role="USER">
+                <Suspense fallback={<Spinner />}>
+                  <UserCarPage />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
           {
             path: "/my-appointments",
             element: (
-              <Suspense fallback={<Spinner />}>
-                <MyAppointments />
-              </Suspense>
+              <ProtectedRoute role="USER">
+                <Suspense fallback={<Spinner />}>
+                  <MyAppointments />
+                </Suspense>
+              </ProtectedRoute>
             ),
           },
         ],
