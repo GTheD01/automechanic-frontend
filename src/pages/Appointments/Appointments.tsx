@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 
+import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import { Pagination } from "@/components/Pagination";
 import { AppointmentFilters } from "@/types/Appointment";
@@ -54,29 +55,29 @@ function Appointments() {
         modalState={createAppointmentModal}
       />
 
-      <div className="md:flex md:justify-between mx-2">
-        <form className="mb-2 flex md:w-1/2" onSubmit={handleSearchFilter}>
+      <div className="md:flex md:justify-between mx-2 md:items-center">
+        <form
+          className="flex md:w-1/2 mb-2 md:mb-0"
+          onSubmit={handleSearchFilter}
+        >
           <label className="sr-only">Search</label>
           <input
             ref={searchRef}
             placeholder="Search"
             name="search"
             type="text"
-            className="outline-none border border-black md:text-base p-2 md:w-full w-1/2"
+            className="outline-none border border-black md:text-base p-1 md:w-full w-1/2"
           />
-          <button
-            type="submit"
-            className="bg-secondary hover:bg-secondaryHover text-white px-4"
-          >
+          <Button className="px-4 py-2" type="submit">
             Search
-          </button>
+          </Button>
         </form>
-        <button
+        <Button
           onClick={() => setCreateAppointmentModal(true)}
-          className="bg-secondary text-white rounded-3xl py-2 px-4 sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base"
+          className="py-2 px-4 rounded-3xl"
         >
           Create appointment
-        </button>
+        </Button>
       </div>
 
       {isLoading && <Spinner lg />}

@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
 
+import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import UserCars from "@/pages/User/UserCars";
 import UserField from "@/components/UserField";
@@ -38,12 +39,10 @@ function User() {
 
   return (
     <section>
-      <Link
-        to={"/users"}
-        className="bg-secondary hover:bg-secondaryHover text-white px-4 py-2"
-      >
+      <Button to="/users" link className="py-2 px-4">
         Back to Users
-      </Link>
+      </Button>
+
       <div>
         <h3 className="my-8 text-3xl font-bold text-center border-b-2">
           {user.firstName} {user.lastName}

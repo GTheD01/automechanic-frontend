@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+
 function ContactUs() {
   return (
     <div id="contact" className="bg-primary mt-20 px-4 lg:py-10 lg:px-28 pt-4">
@@ -60,9 +62,7 @@ function ContactUs() {
             maxLength={350}
             className="resize-none outline-none text-black p-1 h-44 md:h-36 w-4/5 mb-2 max-w-[700px]"
           />
-          <button className="bg-secondary px-4 py-2 hover:bg-secondaryHover">
-            Submit
-          </button>
+          <Button className="py-2 px-4">Submit</Button>
         </div>
       </form>
     </div>

@@ -1,9 +1,10 @@
-import engineMaintenanceImg from "@/assets/images/engine-maintenance.webp";
-import brakeRepairImg from "@/assets/images/brake-repair.webp";
-import airConditioningImg from "@/assets/images/air-conditioning-service.webp";
-import glassRepairImg from "@/assets/images/auto-glass-repair.webp";
+import Button from "@/components/Button";
 import RepairServiceCard from "@/components/RepairServiceCard";
-import { Link } from "react-router-dom";
+
+import brakeRepairImg from "@/assets/images/brake-repair.webp";
+import glassRepairImg from "@/assets/images/auto-glass-repair.webp";
+import engineMaintenanceImg from "@/assets/images/engine-maintenance.webp";
+import airConditioningImg from "@/assets/images/air-conditioning-service.webp";
 
 function AutoRepairServices() {
   return (
@@ -12,12 +13,9 @@ function AutoRepairServices() {
         <h2 className="lg:text-5xl md:text-3xl text-2xl text-primary font-medium">
           Our Auto Repair Services
         </h2>
-        <Link
-          to="/sign-up"
-          className="bg-secondary text-white px-8 py-4 hover:bg-secondaryHover md:text-base text-sm text-center font-bold"
-        >
+        <Button to="/sign-up" link className="py-4 px-8 font-bold">
           Become Our Customer
-        </Link>
+        </Button>
       </div>
       <p className="text-primary max-w-[65%] mt-8 sm:text-base text-sm">
         At our auto repair center, we offer a comprehensive range of services to

@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import { Pagination } from "@/components/Pagination";
 import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
@@ -37,12 +38,12 @@ function MyAppointments() {
         onClose={onCloseCreateAppointmentHandler}
       />
 
-      <button
+      <Button
         onClick={() => setCreateAppointmentModal(true)}
-        className="ml-2 bg-secondary text-white rounded-3xl py-2 px-4 sm:px-6 hover:bg-secondaryHover text-sm lg:text-base"
+        className="py-2 px-4 sm-px-6 ml-2 rounded-3xl"
       >
         Create appointment
-      </button>
+      </Button>
 
       {isLoading && <Spinner lg />}
       {data && data.content && data.content.length < 1 && (

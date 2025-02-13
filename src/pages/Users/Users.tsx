@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 
+import Button from "@/components/Button";
 import { UserFilters } from "@/types/User";
-import UsersList from "@/pages/Users/components/UsersList";
 import { Pagination } from "@/components/Pagination";
 import { fetchAllUsers } from "@/services/userService";
+import UsersList from "@/pages/Users/components/UsersList";
 
 function Users() {
   const nameRef = useRef<HTMLInputElement | null>(null);
@@ -59,12 +60,9 @@ function Users() {
             type="text"
             className="outline-none border border-black w-1/2 p-2"
           />
-          <button
-            type="submit"
-            className="bg-secondary hover:bg-secondaryHover text-white px-4"
-          >
+          <Button className="px-4" type="submit">
             Search
-          </button>
+          </Button>
         </form>
         <div className="my-6">
           <div className="flex gap-1">

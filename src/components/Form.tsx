@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent } from "react";
 
+import Button from "./Button";
 import { cn } from "@/lib/cn";
 import Spinner from "@/components/Spinner";
 import Input, { InputProps } from "@/components/Input";
@@ -25,7 +26,6 @@ function Form({
   btnText,
   onChange,
   isLoading,
-  buttonClassName,
   formClassName,
   inputClassName,
 }: FormProps) {
@@ -52,16 +52,9 @@ function Form({
           className={inputClassName}
         />
       ))}
-      <button
-        disabled={isLoading}
-        type="submit"
-        className={cn(
-          "bg-secondary px-12 py-2 tracking-wider lg:text-lg md:text-base text-sm hover:bg-secondaryHover cursor-pointer w-full flex justify-center",
-          buttonClassName
-        )}
-      >
+      <Button className="px-12 py-2">
         {isLoading ? <Spinner md /> : btnText}
-      </button>
+      </Button>
     </form>
   );
 }

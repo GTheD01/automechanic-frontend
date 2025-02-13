@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
+import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import EditCarModal from "./components/EditCarModal";
 import { deleteCar, getCar } from "@/services/carService";
@@ -78,12 +79,10 @@ function UserCarPage() {
         bodyText={`${carData?.carBrand.name} ${carData?.model.name} ${carData?.version} (${carData?.year})`}
       />
       <section>
-        <Link
-          to={"/my-cars"}
-          className="bg-secondary hover:bg-secondaryHover text-white px-4 py-2"
-        >
+        <Button to="/my-cars" link className="py-2 px-4">
           Back to Cars List
-        </Link>
+        </Button>
+
         <div className="pt-8 border-b-2 flex items-center justify-center flex-col gap-3 pb-4">
           <h5 className="font-semibold text-2xl">
             {carData && carData.carBrand?.name}

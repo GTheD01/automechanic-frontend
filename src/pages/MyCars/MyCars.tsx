@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import { getLoggedInUserCars } from "@/services/carService";
 import AddCarModal from "@/pages/MyCars/components/AddCarModal";
@@ -21,12 +22,12 @@ function MyCars() {
 
   return (
     <div>
-      <button
-        className="ml-2 bg-secondary hover:bg-secondaryHover text-white px-6 py-2 rounded-3xl"
+      <Button
         onClick={() => setAddCarModal(true)}
+        className="ml-2 py-2 px-6 rounded-3xl"
       >
         Add car
-      </button>
+      </Button>
 
       <AddCarModal
         carModalState={addCarModal}

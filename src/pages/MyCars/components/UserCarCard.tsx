@@ -1,5 +1,5 @@
 import { Car } from "@/types/Car";
-import { Link } from "react-router-dom";
+import Button from "@/components/Button";
 
 function UserCarCard({ car }: { car: Car }) {
   return (
@@ -29,12 +29,9 @@ function UserCarCard({ car }: { car: Car }) {
           <span>{car?.year}</span>
         </p>
       </div>
-      <Link
-        to={`${car.id}`}
-        className="bg-secondary hover:bg-secondaryHover px-4 py-2 text-white rounded-3xl"
-      >
+      <Button link to={`${car.id}`} className="py-2 px-4 rounded-3xl">
         Overview
-      </Link>
+      </Button>
     </li>
   );
 }
