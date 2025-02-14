@@ -52,7 +52,7 @@ function Form({
           className={inputClassName}
         />
       ))}
-      <Button className="px-12 py-2">
+      <Button className="px-12 py-2" type="submit">
         {isLoading ? <Spinner md /> : btnText}
       </Button>
     </form>

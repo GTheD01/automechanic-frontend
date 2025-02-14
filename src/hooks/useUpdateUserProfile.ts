@@ -40,6 +40,8 @@ function useUpdateUserProfile() {
       if (error.response?.data) {
         const data = error.response.data as ApiResponseError;
         toast.error(data.message);
+      } else {
+        toast.error("An unexpected error occurred. Please try again later.");
       }
     },
   });
