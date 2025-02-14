@@ -147,12 +147,13 @@ function AppointmentCard({
         </button>
       )}
 
-      {user?.userRole === "ADMIN" && (
+      {user && user.userRole === "ADMIN" && (
         <EditAppointmentModal
           isOpen={isEditing}
           newStatus={newStatus}
           setNewStatus={setNewStatus}
           onSave={handleSave}
+          isPending={updateAppointmentMutation.isPending}
           onCancel={handleCancel}
         />
       )}

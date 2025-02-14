@@ -140,22 +140,31 @@ function CreateAppointmentModal({
             {error}
           </p>
         ))}
-        <div className="text-center space-x-1">
-          <button
-            type="submit"
-            className="bg-secondary text-white rounded-3xl py-2 px-4 self-center sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base mt-2"
-          >
-            {createAppointmentMutation.isPending ? <Spinner /> : "Submit"}
-          </button>
 
-          <button
-            onClick={onCloseCreateAppointmentModalHandler}
-            type="button"
-            className="text-secondary rounded-3xl py-2 px-4 self-center sm:px-6 mb-2 text-sm lg:text-base mt-2 border hover:bg-black/10"
-          >
-            Cancel
-          </button>
-        </div>
+        {createAppointmentMutation.isPending && (
+          <div className="flex justify-center">
+            <Spinner lg />
+          </div>
+        )}
+
+        {!createAppointmentMutation.isPending && (
+          <div className="text-center space-x-1">
+            <button
+              type="submit"
+              className="bg-secondary text-white rounded-3xl py-2 px-4 self-center sm:px-6 hover:bg-secondaryHover mb-2 text-sm lg:text-base mt-2"
+            >
+              Submit
+            </button>
+
+            <button
+              onClick={onCloseCreateAppointmentModalHandler}
+              type="button"
+              className="text-secondary rounded-3xl py-2 px-4 self-center sm:px-6 mb-2 text-sm lg:text-base mt-2 border hover:bg-black/10"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </form>
     </Modal>
   );

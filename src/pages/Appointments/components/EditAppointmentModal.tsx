@@ -1,11 +1,13 @@
 import { useState } from "react";
 
+import Spinner from "@/components/Spinner";
 import { AppointmentStatus } from "@/types/Appointment";
 
 type EditAppointmentModalProps = {
   isOpen: boolean;
   newStatus: AppointmentStatus;
   setNewStatus: (status: AppointmentStatus) => void;
+  isPending: boolean;
   onSave: () => void;
   onCancel: () => void;
 };
@@ -14,6 +16,7 @@ function EditAppointmentModal({
   isOpen,
   newStatus,
   setNewStatus,
+  isPending,
   onSave,
   onCancel,
 }: EditAppointmentModalProps) {
@@ -65,20 +68,28 @@ function EditAppointmentModal({
           </div>
         </div>
 
-        <div className="mt-4 flex justify-end">
-          <button
-            onClick={onSave}
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-600 transition duration-200"
-          >
-            Save
-          </button>
-          <button
-            onClick={onCancel}
-            className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-200"
-          >
-            Cancel
-          </button>
-        </div>
+        {isPending && (
+          <div className="flex justify-center">
+            <Spinner md />
+          </div>
+        )}
+
+        {!isPending && (
+          <div className="mt-4 flex justify-end">
+            <button
+              onClick={onSave}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-blue-600 transition duration-200"
+            >
+              Save
+            </button>
+            <button
+              onClick={onCancel}
+              className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-200"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
