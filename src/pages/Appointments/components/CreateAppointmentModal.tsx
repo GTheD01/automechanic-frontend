@@ -58,8 +58,12 @@ function CreateAppointmentModal({
       onClose();
     },
     onError: (error: AxiosError) => {
-      const data = error?.response?.data as ApiResponseError;
-      toast.error(data.message);
+      if (error.response && error.response.data) {
+        const data = error.response.data as ApiResponseError;
+        toast.error(data.message);
+      } else {
+        toast.error("An unknown error occured. Please try again later.");
+      }
     },
   });
 

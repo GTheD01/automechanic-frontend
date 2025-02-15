@@ -22,7 +22,7 @@ const Dashboard = lazy(() => import("@/pages/Dashboard/Dashboard"));
 const Users = lazy(() => import("@/pages/Users/Users"));
 const User = lazy(() => import("@/pages/User/User"));
 const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
-const Reports = lazy(() => import("@/pages/Reports"));
+const Reports = lazy(() => import("@/pages/Reports/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
 const MyCars = lazy(() => import("@/pages/MyCars/MyCars"));
