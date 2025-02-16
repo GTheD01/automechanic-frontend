@@ -2,7 +2,7 @@ import { z } from "zod";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Modal from "@/components/Modal";
 import Spinner from "@/components/Spinner";
@@ -12,6 +12,8 @@ import {
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
 import { createReport } from "@/services/reportService";
+import { Report } from "@/types/Report";
+import { v4 as uuidv4 } from "uuid";
 
 const initialReportFormData = {
   description: "",
@@ -29,6 +31,8 @@ function CreateReportModal({
   );
   const [errors, setErrors] = useState<ReportForm>({ description: "" });
 
+  const queryClient = useQueryClient();
+
   const createReportMutation = useMutation({
     mutationKey: ["reports"],
     mutationFn: createReport,
@@ -36,6 +40,36 @@ function CreateReportModal({
       toast.success("Report created!");
       onClose();
       setReportFormData(initialReportFormData);
+    },
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ["reports"] });
+
+      const previousReports = queryClient.getQueryData(["reports"]);
+
+      const now = new Date();
+      const currTime = now.toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      const currDate = now
+        .toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+        .replace(/\//g, ".");
+
+      queryClient.setQueryData(["reports"], (oldReports: Report[]) => [
+        ...(oldReports || []),
+        {
+          id: uuidv4(),
+          description: reportFormData.description,
+          answer: "Not answered yet.",
+          createdAt: currTime + " / " + currDate,
+        },
+      ]);
+
+      return { previousReports };
     },
     onError: (error: AxiosError) => {
       if (error.response && error.response.data) {

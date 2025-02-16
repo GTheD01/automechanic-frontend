@@ -1,13 +1,22 @@
 import Button from "@/components/Button";
 import CreateReportModal from "./components/CreateReportModal";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getLoggedInUserReports } from "@/services/reportService";
+import Spinner from "@/components/Spinner";
 
 function UserReports() {
   const [createReportModal, setCreateReportModal] = useState<boolean>(false);
 
+  const { data: userReports, isLoading } = useQuery({
+    queryKey: ["reports"],
+    queryFn: getLoggedInUserReports,
+  });
+
   const onClose = () => {
     setCreateReportModal(false);
   };
+
   return (
     <div>
       <CreateReportModal modalState={createReportModal} onClose={onClose} />
@@ -17,7 +26,27 @@ function UserReports() {
       >
         Create report
       </Button>
-      <p className="ml-2 mt-2">No reports found.</p>
+      {isLoading && <Spinner md />}
+      {userReports && userReports.length < 1 && (
+        <p className="ml-2 mt-2">No reports found.</p>
+      )}
+      {userReports &&
+        userReports.map((report) => (
+          <div key={report.id} className="pl-4 pt-4 border-b">
+            <div>
+              <p className="font-semibold">Created at:</p>
+              <span>{report.createdAt}</span>
+            </div>
+            <div>
+              <p className="font-semibold">Description:</p>
+              <span>{report.description}</span>
+            </div>
+            <div>
+              <p className="font-semibold">Answer:</p>
+              <span>{report.answer ?? "Not answered yet."}</span>
+            </div>
+          </div>
+        ))}
     </div>
   );
 }
