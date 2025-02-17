@@ -1,9 +1,10 @@
-import Button from "@/components/Button";
-import CreateReportModal from "./components/CreateReportModal";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getLoggedInUserReports } from "@/services/reportService";
+
+import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
+import CreateReportModal from "./components/CreateReportModal";
+import { getLoggedInUserReports } from "@/services/reportService";
 
 function UserReports() {
   const [createReportModal, setCreateReportModal] = useState<boolean>(false);
@@ -18,7 +19,7 @@ function UserReports() {
   };
 
   return (
-    <div>
+    <section>
       <CreateReportModal modalState={createReportModal} onClose={onClose} />
       <Button
         className="py-2 px-4 rounded-3xl ml-2"
@@ -30,24 +31,29 @@ function UserReports() {
       {userReports && userReports.length < 1 && (
         <p className="ml-2 mt-2">No reports found.</p>
       )}
-      {userReports &&
-        userReports.map((report) => (
-          <div key={report.id} className="pl-4 pt-4 border-b">
-            <div>
-              <p className="font-semibold">Created at:</p>
-              <span>{report.createdAt}</span>
-            </div>
-            <div>
-              <p className="font-semibold">Description:</p>
-              <span>{report.description}</span>
-            </div>
-            <div>
-              <p className="font-semibold">Answer:</p>
-              <span>{report.answer ?? "Not answered yet."}</span>
-            </div>
-          </div>
-        ))}
-    </div>
+      {userReports && (
+        <ul>
+          {userReports.map((report) => (
+            <li key={report.id} className="px-4 pt-4 border-b">
+              <div>
+                <div>
+                  <p className="font-semibold">Created at:</p>
+                  <span>{report.createdAt}</span>
+                </div>
+                <div>
+                  <p className="font-semibold">Description:</p>
+                  <span>{report.description}</span>
+                </div>
+                <div>
+                  <p className="font-semibold">Answer:</p>
+                  <span>{report.answer ?? "Not answered yet."}</span>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
 

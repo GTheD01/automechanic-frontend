@@ -11,3 +11,8 @@ export const getLoggedInUserReports = async (): Promise<Report[]> => {
   const response = await apiClient.get("/reports/me");
   return response.data;
 };
+
+export const getAllReports = async (): Promise<Report[]> => {
+  const response = await apiClient.get("/admin/reports");
+  return response.data;
+};

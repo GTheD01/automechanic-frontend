@@ -1,10 +1,12 @@
 import { z } from "zod";
 import { AxiosError } from "axios";
+import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Modal from "@/components/Modal";
+import { Report } from "@/types/Report";
 import Spinner from "@/components/Spinner";
 import {
   CreateReportSchema,
@@ -12,8 +14,6 @@ import {
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
 import { createReport } from "@/services/reportService";
-import { Report } from "@/types/Report";
-import { v4 as uuidv4 } from "uuid";
 
 const initialReportFormData = {
   description: "",
@@ -64,7 +64,7 @@ function CreateReportModal({
         {
           id: uuidv4(),
           description: reportFormData.description,
-          answer: "Not answered yet.",
+          answer: null,
           createdAt: currTime + " / " + currDate,
         },
       ]);
