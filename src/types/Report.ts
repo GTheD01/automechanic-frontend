@@ -7,3 +7,7 @@ export interface Report {
   answer: string;
   user: User;
 }
+
+export interface AnswerReportData {
+  answer: string;
+}

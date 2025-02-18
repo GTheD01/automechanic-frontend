@@ -14,13 +14,16 @@ function UserReports() {
     queryFn: getLoggedInUserReports,
   });
 
-  const onClose = () => {
+  const onCloseCreateReportModal = () => {
     setCreateReportModal(false);
   };
 
   return (
     <section>
-      <CreateReportModal modalState={createReportModal} onClose={onClose} />
+      <CreateReportModal
+        modalState={createReportModal}
+        onClose={onCloseCreateReportModal}
+      />
       <Button
         className="py-2 px-4 rounded-3xl ml-2"
         onClick={() => setCreateReportModal(true)}

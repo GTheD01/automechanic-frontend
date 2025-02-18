@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { AxiosError } from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -9,65 +8,58 @@ import Modal from "@/components/Modal";
 import { Report } from "@/types/Report";
 import Spinner from "@/components/Spinner";
 import {
-  CreateReportSchema,
-  CreateReportForm,
+  AnswerReportForm,
+  AnswerReportSchema,
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
-import { createReport } from "@/services/reportService";
+import { answerReport } from "@/services/reportService";
 
-const initialReportFormData = {
-  description: "",
+const initialAnswerReportFormData = {
+  answer: "",
 };
 
-function CreateReportModal({
+function AnswerReportModal({
   modalState,
   onClose,
+  reportId,
 }: {
   modalState: boolean;
   onClose: () => void;
+  reportId: string;
 }) {
-  const [reportFormData, setReportFormData] = useState<CreateReportForm>(
-    initialReportFormData
-  );
-  const [errors, setErrors] = useState<CreateReportForm>({ description: "" });
+  const [answerReportFormData, setAnswerReportFormData] =
+    useState<AnswerReportForm>(initialAnswerReportFormData);
+  const [errors, setErrors] = useState<AnswerReportForm>({ answer: "" });
 
   const queryClient = useQueryClient();
 
-  const createReportMutation = useMutation({
+  const answerReportMutation = useMutation({
     mutationKey: ["reports"],
-    mutationFn: createReport,
+    mutationFn: answerReport,
     onSuccess: () => {
       toast.success("Report created!");
       onClose();
-      setReportFormData(initialReportFormData);
+      setAnswerReportFormData(initialAnswerReportFormData);
     },
-    onMutate: async () => {
+    onMutate: async (reportAnswer) => {
       await queryClient.cancelQueries({ queryKey: ["reports"] });
 
       const previousReports = queryClient.getQueryData(["reports"]);
 
-      const now = new Date();
-      const currTime = now.toLocaleTimeString("en-GB", {
-        hour: "2-digit",
-        minute: "2-digit",
+      queryClient.setQueryData(["reports"], (oldReports: Report[]) => {
+        const reportIdx = oldReports.findIndex(
+          (report) => report.id === reportAnswer.reportId
+        );
+        if (reportIdx > -1) {
+          const report = oldReports[reportIdx];
+          const updatedReport = {
+            ...report,
+            answer: reportAnswer.answerReportFormData.answer,
+          };
+          oldReports[reportIdx] = updatedReport;
+        }
+        return oldReports;
       });
-      const currDate = now
-        .toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })
-        .replace(/\//g, ".");
-
-      queryClient.setQueryData(["reports"], (oldReports: Report[]) => [
-        ...(oldReports || []),
-        {
-          id: uuidv4(),
-          description: reportFormData.description,
-          answer: null,
-          createdAt: currTime + " / " + currDate,
-        },
-      ]);
 
       return { previousReports };
     },
@@ -81,12 +73,12 @@ function CreateReportModal({
     },
   });
 
-  const createReportHandler = (e: ChangeEvent<HTMLFormElement>) => {
+  const answerReportHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      CreateReportSchema.parse(reportFormData);
-      createReportMutation.mutate(reportFormData);
+      AnswerReportSchema.parse(answerReportFormData);
+      answerReportMutation.mutate({ reportId, answerReportFormData });
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -102,22 +94,22 @@ function CreateReportModal({
 
   const onCloseHandler = () => {
     onClose();
-    setReportFormData(initialReportFormData);
-    setErrors({ description: "" });
+    setAnswerReportFormData(initialAnswerReportFormData);
+    setErrors({ answer: "" });
   };
 
   return (
     <Modal open={modalState} onClose={onCloseHandler}>
-      <h2 className="text-center font-semibold text-2xl mb-4">Create Report</h2>
-      <form onSubmit={createReportHandler}>
+      <h2 className="text-center font-semibold text-2xl mb-4">Answer Report</h2>
+      <form onSubmit={answerReportHandler}>
         <textarea
           placeholder="Enter your message"
           className="w-full h-48 max-h-96 min-h-16 border p-2 outline-none"
-          value={reportFormData.description}
+          value={answerReportFormData.answer}
           onChange={(e) =>
-            setReportFormData((prevData) => ({
+            setAnswerReportFormData((prevData) => ({
               ...prevData,
-              description: e.target.value,
+              answer: e.target.value,
             }))
           }
         />
@@ -126,12 +118,12 @@ function CreateReportModal({
             {error}
           </p>
         ))}
-        {createReportMutation.isPending && (
+        {answerReportMutation.isPending && (
           <div className="flex justify-center">
             <Spinner md />
           </div>
         )}
-        {!createReportMutation.isPending && (
+        {!answerReportMutation.isPending && (
           <div className="text-center space-x-1">
             <button
               type="submit"
@@ -154,4 +146,4 @@ function CreateReportModal({
   );
 }
 
-export default CreateReportModal;
+export default AnswerReportModal;
