@@ -36,7 +36,6 @@ function useSignIn() {
       navigate("/dashboard");
     },
     onError: (error: AxiosError) => {
-      console.log(error);
       if (error.response && error.response.data) {
         const data = error.response.data as ApiResponseError;
         toast.error(data.message);

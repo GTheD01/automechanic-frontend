@@ -8,7 +8,7 @@ import Spinner from "@/components/Spinner";
 import EditCarModal from "./components/EditCarModal";
 import { deleteCar, getCar } from "@/services/carService";
 import AppointmentsList from "../Appointments/components/AppointmentsList";
-import CarDeleteConfirmationModal from "./components/DeleteConfirmationModal";
+import CarDeleteConfirmationModal from "../../components/DeleteConfirmationModal";
 
 function UserCarPage() {
   const [deleteConfirmationModal, setDeleteConfirmationModal] =

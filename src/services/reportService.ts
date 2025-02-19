@@ -30,3 +30,8 @@ export const answerReport = async ({
   );
   return response.data;
 };
+
+export const deleteReport = async ({ reportId }: { reportId: string }) => {
+  const response = await apiClient.delete(`/admin/reports/${reportId}`);
+  return response.data;
+};

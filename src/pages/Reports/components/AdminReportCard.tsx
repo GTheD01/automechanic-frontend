@@ -1,13 +1,15 @@
 import { Report } from "@/types/Report";
 import Button from "@/components/Button";
 
-function AdminReportCard({
+const AdminReportCard = ({
   report,
   onOpenAnswerReportModal,
+  onOpenDeleteReportModal,
 }: {
   report: Report;
   onOpenAnswerReportModal: () => void;
-}) {
+  onOpenDeleteReportModal: () => void;
+}) => {
   return (
     <li className="px-4 pt-4 border-b flex justify-between items-center">
       <div>
@@ -41,12 +43,15 @@ function AdminReportCard({
             Answer
           </Button>
         )}
-        <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-3xl">
+        <button
+          className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-3xl"
+          onClick={onOpenDeleteReportModal}
+        >
           Delete
         </button>
       </div>
     </li>
   );
-}
+};
 
 export default AdminReportCard;
