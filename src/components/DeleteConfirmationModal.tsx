@@ -1,28 +1,28 @@
 import Modal from "@/components/Modal";
 
 interface CarDeleteConfirmationModalProps {
-  deleteConfirmationModal: boolean;
-  handleOnCloseDeleteCarModal: () => void;
+  modalState: boolean;
+  handleOnCloseModal: () => void;
   onDelete: () => void;
   bodyText: string;
+  headerText: string;
 }
 
-function CarDeleteConfirmationModal({
-  deleteConfirmationModal,
-  handleOnCloseDeleteCarModal,
+function DeleteConfirmationModal({
+  modalState,
+  handleOnCloseModal,
   onDelete,
   bodyText,
+  headerText,
 }: CarDeleteConfirmationModalProps) {
   return (
     <Modal
-      open={deleteConfirmationModal}
-      onClose={handleOnCloseDeleteCarModal}
+      open={modalState}
+      onClose={handleOnCloseModal}
       className="bg-primary"
     >
       <div className="text-center">
-        <h5 className="text-2xl font-semibold text-white">
-          Are you sure you want to delete this car?
-        </h5>
+        <h5 className="text-2xl font-semibold text-white">{headerText}</h5>
         <p className="text-white">{bodyText}</p>
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
@@ -33,7 +33,7 @@ function CarDeleteConfirmationModal({
           </button>
           <button
             className="bg-white hover:opacity-80 py-2 w-14"
-            onClick={handleOnCloseDeleteCarModal}
+            onClick={handleOnCloseModal}
           >
             No
           </button>
@@ -43,4 +43,4 @@ function CarDeleteConfirmationModal({
   );
 }
 
-export default CarDeleteConfirmationModal;
+export default DeleteConfirmationModal;

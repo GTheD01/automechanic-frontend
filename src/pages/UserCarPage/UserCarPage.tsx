@@ -8,7 +8,7 @@ import Spinner from "@/components/Spinner";
 import EditCarModal from "./components/EditCarModal";
 import { deleteCar, getCar } from "@/services/carService";
 import AppointmentsList from "../Appointments/components/AppointmentsList";
-import CarDeleteConfirmationModal from "./components/CarDeleteConfirmationModal";
+import CarDeleteConfirmationModal from "./components/DeleteConfirmationModal";
 
 function UserCarPage() {
   const [deleteConfirmationModal, setDeleteConfirmationModal] =
@@ -73,10 +73,11 @@ function UserCarPage() {
       />
 
       <CarDeleteConfirmationModal
-        deleteConfirmationModal={deleteConfirmationModal}
-        handleOnCloseDeleteCarModal={handleOnCloseDeleteCarModal}
+        modalState={deleteConfirmationModal}
+        handleOnCloseModal={handleOnCloseDeleteCarModal}
         onDelete={deleteCarHandler}
         bodyText={`${carData?.carBrand.name} ${carData?.model.name} ${carData?.version} (${carData?.year})`}
+        headerText="Are you sure you want to delete this car?"
       />
       <section>
         <Button to="/my-cars" link className="py-2 px-4">
