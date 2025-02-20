@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 
-import Button from "@/components/Button";
 import { UserFilters } from "@/types/User";
+import SearchFilter from "@/components/SearchFilter";
 import { Pagination } from "@/components/Pagination";
 import { fetchAllUsers } from "@/services/userService";
 import UsersList from "@/pages/Users/components/UsersList";
@@ -51,19 +51,8 @@ function Users() {
   return (
     <section>
       <div className="pl-2 border-b-2">
-        <form className="mb-2 flex" onSubmit={handleSearchFilter}>
-          <label className="sr-only">Search by name</label>
-          <input
-            placeholder="Search by name"
-            name="name"
-            ref={nameRef}
-            type="text"
-            className="outline-none border border-black w-1/2 p-2"
-          />
-          <Button className="px-4" type="submit">
-            Search
-          </Button>
-        </form>
+        <SearchFilter handleSearchFilter={handleSearchFilter} ref={nameRef} />
+
         <div className="my-6">
           <div className="flex gap-1">
             <label htmlFor="hasAppointments" className="text-sm sm:text-base">

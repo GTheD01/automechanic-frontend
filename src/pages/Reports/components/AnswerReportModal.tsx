@@ -37,7 +37,7 @@ function AnswerReportModal({
     mutationKey: ["reports"],
     mutationFn: answerReport,
     onSuccess: () => {
-      toast.success("Report created!");
+      toast.success("Report answered!");
       onClose();
       setAnswerReportFormData(initialAnswerReportFormData);
     },
