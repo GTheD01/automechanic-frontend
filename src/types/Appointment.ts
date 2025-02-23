@@ -1,5 +1,5 @@
+import { Car } from "@/types/Car";
 import { User } from "@/types/User";
-import { Car } from "./Car";
 
 export type AppointmentStatus =
   | "UPCOMING"

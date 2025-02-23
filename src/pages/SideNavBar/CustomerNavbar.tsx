@@ -1,9 +1,9 @@
 import CustomNavLink from "@/components/CustomNavLink";
 
+import CarIcon from "@/assets/svgs/car.svg";
+import ReportsIcon from "@/assets/svgs/reports.svg";
 import DashboardIcon from "@/assets/svgs/dashboard.svg";
 import AppointmentsIcon from "@/assets/svgs/appointments.svg";
-import ReportsIcon from "@/assets/svgs/reports.svg";
-import CarIcon from "@/assets/svgs/car.svg";
 
 function CustomerNavbar() {
   return (

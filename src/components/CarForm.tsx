@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 
-import Spinner from "./Spinner";
+import Spinner from "@/components/Spinner";
 import { CarBrand, CarDataProps, CarModel } from "@/types/Car";
 
 interface CarFormProps {

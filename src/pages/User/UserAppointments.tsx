@@ -2,10 +2,10 @@ import { useParams } from "react-router-dom";
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+import Spinner from "@/components/Spinner";
 import { Pagination } from "@/components/Pagination";
 import { getUserAppointments } from "@/services/appointmentService";
 import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
-import Spinner from "@/components/Spinner";
 
 function UserAppointments() {
   const { userId } = useParams();

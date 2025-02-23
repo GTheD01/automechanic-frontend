@@ -1,6 +1,6 @@
-import { useUserContext } from "@/providers/UserContextProvider";
 import AdminNavbar from "@/pages/SideNavBar/AdminNavbar";
 import CustomerNavbar from "@/pages/SideNavBar/CustomerNavbar";
+import { useUserContext } from "@/providers/UserContextProvider";
 
 const SideNavBar = () => {
   const { user } = useUserContext();

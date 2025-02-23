@@ -1,13 +1,13 @@
-import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
+import { useCallback, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Report } from "@/types/Report";
 import Spinner from "@/components/Spinner";
-import AdminReportsList from "./components/AdminReportsList";
-import AnswerReportModal from "./components/AnswerReportModal";
 import { deleteReport, getAllReports } from "@/services/reportService";
-import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
+import AdminReportsList from "@/pages/Reports/components/AdminReportsList";
+import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import AnswerReportModal from "@/pages/Reports/components/AnswerReportModal";
 
 function AdminReports() {
   const {

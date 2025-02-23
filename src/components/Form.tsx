@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent } from "react";
 
-import Button from "./Button";
 import { cn } from "@/lib/cn";
+import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import Input, { InputProps } from "@/components/Input";
 

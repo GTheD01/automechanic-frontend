@@ -5,10 +5,10 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
-import EditCarModal from "./components/EditCarModal";
 import { deleteCar, getCar } from "@/services/carService";
-import AppointmentsList from "../Appointments/components/AppointmentsList";
-import CarDeleteConfirmationModal from "../../components/DeleteConfirmationModal";
+import EditCarModal from "@/pages/UserCarPage/components/EditCarModal";
+import CarDeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 
 function UserCarPage() {
   const [deleteConfirmationModal, setDeleteConfirmationModal] =

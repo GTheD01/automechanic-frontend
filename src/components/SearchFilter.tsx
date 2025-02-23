@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
-import Button from "./Button";
+
+import Button from "@/components/Button";
 
 interface SearchFilterProps {
   handleSearchFilter: (e: ChangeEvent<HTMLFormElement>) => void;

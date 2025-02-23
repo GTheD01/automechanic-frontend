@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
-import CreateReportModal from "./components/CreateReportModal";
 import { getLoggedInUserReports } from "@/services/reportService";
+import CreateReportModal from "@/pages/Reports/components/CreateReportModal";
 
 function UserReports() {
   const [createReportModal, setCreateReportModal] = useState<boolean>(false);

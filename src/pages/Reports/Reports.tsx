@@ -1,5 +1,5 @@
-import UserReports from "./UserReports";
-import AdminReports from "./AdminReports";
+import UserReports from "@/pages/Reports/UserReports";
+import AdminReports from "@/pages/Reports/AdminReports";
 import { useUserContext } from "@/providers/UserContextProvider";
 
 function Reports() {

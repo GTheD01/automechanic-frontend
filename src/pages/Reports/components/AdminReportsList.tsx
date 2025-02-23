@@ -1,6 +1,7 @@
 import React from "react";
+
 import { Report } from "@/types/Report";
-import AdminReportCard from "./AdminReportCard";
+import AdminReportCard from "@/pages/Reports/components/AdminReportCard";
 
 const AdminReportsList = React.memo(
   ({
