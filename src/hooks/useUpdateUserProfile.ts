@@ -5,10 +5,9 @@ import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { ApiResponseError } from "@/types/Auth";
-
-import { UpdateUserProfileSchema } from "@/validations/userValidationSchemas";
 import { updateUserProfile } from "@/services/userService";
 import { useUserContext } from "@/providers/UserContextProvider";
+import { UpdateUserProfileSchema } from "@/validations/userValidationSchemas";
 
 type UpdateUserProfileForm = z.infer<typeof UpdateUserProfileSchema>;
 

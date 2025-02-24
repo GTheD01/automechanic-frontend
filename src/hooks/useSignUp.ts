@@ -1,12 +1,12 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { AxiosError } from "axios";
-
 import { z } from "zod";
-import { RegisterUserSchema } from "@/validations/authValidationSchemas";
-import { useMutation } from "@tanstack/react-query";
-import { signup } from "@/services/authService";
+import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { ChangeEvent, FormEvent, useState } from "react";
+
+import { signup } from "@/services/authService";
 import { ApiResponseError } from "@/types/Auth";
+import { RegisterUserSchema } from "@/validations/authValidationSchemas";
 
 type RegistrationForm = z.infer<typeof RegisterUserSchema>;
 

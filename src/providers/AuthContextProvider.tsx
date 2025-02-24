@@ -1,5 +1,3 @@
-import { verifyToken } from "@/services/authService";
-import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
   Dispatch,
@@ -9,6 +7,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+import { verifyToken } from "@/services/authService";
 
 interface AuthContextType {
   isAuthenticated: boolean;

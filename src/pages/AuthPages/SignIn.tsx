@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 import Form from "@/components/Form";
-import { InputProps } from "@/components/Input";
 import useSignIn from "@/hooks/useSignIn";
+import { InputProps } from "@/components/Input";
 
 function SignIn() {
   const { formData, errors, onChange, onSubmit, isLoading } = useSignIn();

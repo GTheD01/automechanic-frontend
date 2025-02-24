@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { ResetPasswordSchema } from "@/validations/authValidationSchemas";
-import { resetPassword } from "@/services/authService";
 import { ApiResponseError } from "@/types/Auth";
-import { useNavigate } from "react-router-dom";
+import { resetPassword } from "@/services/authService";
+import { ResetPasswordSchema } from "@/validations/authValidationSchemas";
 
 type ResetPasswordForm = z.infer<typeof ResetPasswordSchema>;
 

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 import Form from "@/components/Form";
-import { InputProps } from "@/components/Input";
 import useSignUp from "@/hooks/useSignUp";
+import { InputProps } from "@/components/Input";
 
 function SignUp() {
   const { formData, onChange, errors, onSubmit, isLoading } = useSignUp();

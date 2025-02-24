@@ -1,11 +1,12 @@
-import Spinner from "@/components/Spinner";
-import { verifyEmail } from "@/services/authService";
-import { ApiResponseError } from "@/types/Auth";
-import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
+import Spinner from "@/components/Spinner";
+import { ApiResponseError } from "@/types/Auth";
+import { verifyEmail } from "@/services/authService";
 
 function VerifyEmail() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function VerifyEmail() {
 
   const verifyEmailMutation = useMutation({
     mutationFn: verifyEmail,
+    retry: 0,
     onSuccess: () => {
       toast.success("Successfully verified email!");
       navigate("/sign-in");

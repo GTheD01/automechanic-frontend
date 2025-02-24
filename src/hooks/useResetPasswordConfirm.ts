@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { ResetPasswordConfirmSchema } from "@/validations/authValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
 import { confirmResetPassword } from "@/services/authService";
+import { ResetPasswordConfirmSchema } from "@/validations/authValidationSchemas";
 
 type ResetPasswordConfirmForm = z.infer<typeof ResetPasswordConfirmSchema>;
 
