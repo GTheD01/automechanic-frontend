@@ -6,7 +6,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import { deleteCar, getCar } from "@/services/carService";
-import EditCarModal from "@/pages/UserCarPage/components/EditCarModal";
+import EditCarModal from "@/pages/MyCarPage/components/EditCarModal";
 import CarDeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 

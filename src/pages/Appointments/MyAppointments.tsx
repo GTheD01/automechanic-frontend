@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import { Pagination } from "@/components/Pagination";
-import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 import { getLoggedInUserAppointments } from "@/services/appointmentService";
+import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 import CreateAppointmentModal from "@/pages/Appointments/components/CreateAppointmentModal";
 
 function MyAppointments() {

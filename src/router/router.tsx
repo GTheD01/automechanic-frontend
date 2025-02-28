@@ -3,7 +3,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import Spinner from "@/components/Spinner";
 
-import AuthPagesLayout from "@/pages/AuthPagesLayout/AuthPagesLayout";
+import AuthPagesLayout from "@/pages/AuthPages/AuthPagesLayout";
 import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
 import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
 import UserContextProvider from "@/providers/UserContextProvider";
@@ -26,9 +26,9 @@ const Reports = lazy(() => import("@/pages/Reports/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
 const MyCars = lazy(() => import("@/pages/MyCars/MyCars"));
-const UserCarPage = lazy(() => import("@/pages/UserCarPage/UserCarPage"));
+const MyCarPage = lazy(() => import("@/pages/MyCarPage/MyCarPage"));
 const MyAppointments = lazy(
-  () => import("@/pages/MyAppointments/MyAppointments")
+  () => import("@/pages/Appointments/MyAppointments")
 );
 
 const router = createBrowserRouter([
@@ -190,7 +190,7 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute role="USER">
                 <Suspense fallback={<Spinner />}>
-                  <UserCarPage />
+                  <MyCarPage />
                 </Suspense>
               </ProtectedRoute>
             ),

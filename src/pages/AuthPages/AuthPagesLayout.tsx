@@ -1,7 +1,8 @@
 import { Link, Navigate, Outlet } from "react-router-dom";
-import exitArrowSvg from "@/assets/svgs/exit-arrow.svg";
 
 import { useAuthContext } from "@/providers/AuthContextProvider";
+
+import exitArrowSvg from "@/assets/svgs/exit-arrow.svg";
 
 function AuthPagesLayout() {
   const { isAuthenticated } = useAuthContext();
