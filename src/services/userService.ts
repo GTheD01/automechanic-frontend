@@ -1,5 +1,6 @@
 import apiClient from "@/services";
 import { User, UserFilters } from "@/types/User";
+import { PageableResponse } from "@/types/GlobalTypes";
 
 export const fetchUser = async (): Promise<User> => {
   const response = await apiClient.get("/users/me");
@@ -12,7 +13,7 @@ export const fetchAllUsers = async ({
 }: {
   queryKey: [string, UserFilters, string];
   signal: AbortSignal;
-}) => {
+}): Promise<PageableResponse<User[]>> => {
   const [, userFilters, size] = queryKey;
   const params = new URLSearchParams(userFilters as Record<string, string>);
   const response = await apiClient.get(`/admin/users?size=${size}&${params}`, {

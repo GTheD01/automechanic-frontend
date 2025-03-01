@@ -94,12 +94,17 @@ function AdminReports() {
             <Spinner md />
           </div>
         )}
+        {reports && reports.length < 1 && (
+          <p className="ml-2 mt-2">No reports added yet.</p>
+        )}
         {isError && <p>Couldn't fetch reports.</p>}
-        <AdminReportsList
-          reports={reports}
-          onOpenAnswerReportModal={onOpenAnswerReportModal}
-          onOpenDeleteReportModal={onOpenDeleteReportModal}
-        />
+        {reports && reports.length > 0 && (
+          <AdminReportsList
+            reports={reports}
+            onOpenAnswerReportModal={onOpenAnswerReportModal}
+            onOpenDeleteReportModal={onOpenDeleteReportModal}
+          />
+        )}
       </section>
     </>
   );

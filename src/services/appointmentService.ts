@@ -1,10 +1,11 @@
-import apiClient from "@/services";
-import { User } from "@/types/User";
 import {
   Appointment,
   AppointmentFilters,
   AppointmentUpdateRequest,
 } from "@/types/Appointment";
+import apiClient from "@/services";
+import { User } from "@/types/User";
+import { PageableResponse } from "@/types/GlobalTypes";
 import { AppointmentForm } from "@/pages/Appointments/components/CreateAppointmentModal";
 
 export const fetchAllAppointments = async ({
@@ -13,7 +14,7 @@ export const fetchAllAppointments = async ({
 }: {
   queryKey: [string, AppointmentFilters, string];
   signal: AbortSignal;
-}) => {
+}): Promise<PageableResponse<Appointment>> => {
   const [, appointmentFilters, size] = queryKey;
   const params = new URLSearchParams(
     appointmentFilters as Record<string, string>

@@ -81,17 +81,21 @@ function Users() {
           </div>
         </div>
       </div>
-      <UsersList
-        isError={isError}
-        isLoading={isLoading}
-        users={data?.content}
-      />
+      {data && data.content.length > 0 && (
+        <UsersList
+          isError={isError}
+          isLoading={isLoading}
+          users={data.content}
+        />
+      )}
 
-      <Pagination
-        totalPages={data?.page?.totalPages}
-        currentPage={currentPage}
-        handleCurrentPage={handleCurrentPage}
-      />
+      {data && data.page && (
+        <Pagination
+          totalPages={data.page.totalPages}
+          currentPage={currentPage}
+          handleCurrentPage={handleCurrentPage}
+        />
+      )}
     </section>
   );
 }
