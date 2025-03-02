@@ -1,5 +1,6 @@
 import CustomNavLink from "@/components/CustomNavLink";
 
+import CarIcon from "@/assets/svgs/car.svg";
 import UsersIcon from "@/assets/svgs/users.svg";
 import ReportsIcon from "@/assets/svgs/reports.svg";
 import DashboardIcon from "@/assets/svgs/dashboard.svg";
@@ -56,6 +57,13 @@ function AdminNavbar() {
             alt="Reports Icon"
             className="w-6 h-6 sm:hidden"
           />
+        </CustomNavLink>
+        <CustomNavLink
+          to="/car-brands"
+          className="pl-4 py-2 sm:pl-6 sm:py-3 md:pl-8 md:py-4 text-sm md:text-base"
+        >
+          <span className="hidden sm:block">Car Brands</span>
+          <img src={CarIcon} alt="Reports Icon" className="w-6 h-6 sm:hidden" />
         </CustomNavLink>
       </ul>
     </>

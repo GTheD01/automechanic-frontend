@@ -1,6 +1,7 @@
 import apiClient from "@/services";
 import { User } from "@/types/User";
 import { Appointment } from "@/types/Appointment";
+import { PageableResponse } from "@/types/GlobalTypes";
 import { Car, CarBrand, CarDataProps, CarModel } from "@/types/Car";
 
 export const getUserCars = async ({
@@ -20,6 +21,18 @@ export const getLoggedInUserCars = async (): Promise<Car[]> => {
 
 export const getCarBrands = async (): Promise<CarBrand[]> => {
   const response = await apiClient.get("brands");
+  return response.data;
+};
+
+export const getAdminCarBrands = async ({
+  queryKey,
+}: {
+  queryKey: [string, number, number];
+}): Promise<PageableResponse<CarBrand[]>> => {
+  const [, size, page] = queryKey;
+  const response = await apiClient.get(
+    `/admin/brands?size=${size}&page=${page}`
+  );
   return response.data;
 };
 

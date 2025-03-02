@@ -30,6 +30,7 @@ const MyCarPage = lazy(() => import("@/pages/MyCarPage/MyCarPage"));
 const MyAppointments = lazy(
   () => import("@/pages/Appointments/MyAppointments")
 );
+const CarBrands = lazy(() => import("@/pages/CarBrands"));
 
 const router = createBrowserRouter([
   {
@@ -145,6 +146,16 @@ const router = createBrowserRouter([
               <ProtectedRoute role="ADMIN">
                 <Suspense fallback={<Spinner lg />}>
                   <Appointments />
+                </Suspense>
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "car-brands",
+            element: (
+              <ProtectedRoute role="ADMIN">
+                <Suspense fallback={<Spinner lg />}>
+                  <CarBrands />
                 </Suspense>
               </ProtectedRoute>
             ),
