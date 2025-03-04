@@ -3,18 +3,21 @@ import { useQuery } from "@tanstack/react-query";
 
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
+import AddCarBrandModal from "./AddCarBrandModal";
 import { Pagination } from "@/components/Pagination";
 import { getAdminCarBrands } from "@/services/carService";
 
 type Props = {};
 
 function CarBrands({}: Props) {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [addCarBrandModalState, setAddCarBrandModalState] = useState(false);
   const [totalItemsToShow, setTotalItemsToShow] = useState<number>(5);
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["carBrands", totalItemsToShow, currentPage - 1],
     queryFn: getAdminCarBrands,
+    staleTime: 1000 * 60 * 5,
   });
 
   const handleCurrentPage = useCallback(
@@ -24,21 +27,30 @@ function CarBrands({}: Props) {
     [currentPage]
   );
 
+  const closeAddCarBrandModal = () => {
+    setAddCarBrandModalState(false);
+  };
+
   return (
     <section>
-      {/* TODO: CREATE ADD CAR BRAND MODAL */}
-      {/* <AddCarBrandModal
-            modalState={}
-            onClose={}
-        /> */}
+      <AddCarBrandModal
+        onClose={closeAddCarBrandModal}
+        modalState={addCarBrandModalState}
+      />
 
-      <Button onClick={() => {}} className="py-2 px-4 sm-px-6 ml-2 rounded-3xl">
+      <Button
+        onClick={() => setAddCarBrandModalState(true)}
+        className="py-2 px-4 sm-px-6 ml-2 rounded-3xl"
+      >
         Add Car Brand
       </Button>
 
       <div className="w-fit mt-2 ml-2 p-2 flex flex-col items-center">
         <p className="font-semibold">Total items to show</p>
         <select
+          disabled={
+            isLoading || (data && data.page && data.page.totalElements < 3)
+          }
           defaultValue={totalItemsToShow}
           className="outline-none border w-full p-1"
           onChange={(e) => setTotalItemsToShow(Number(e.target.value))}

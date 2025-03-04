@@ -3,6 +3,7 @@ import { User } from "@/types/User";
 import { Appointment } from "@/types/Appointment";
 import { PageableResponse } from "@/types/GlobalTypes";
 import { Car, CarBrand, CarDataProps, CarModel } from "@/types/Car";
+import { AddCarBrandType } from "@/validations/carValidationSchemas";
 
 export const getUserCars = async ({
   queryKey,
@@ -74,5 +75,10 @@ export const editCar = async ({
   carData: CarDataProps;
 }) => {
   const response = await apiClient.put(`/cars/${carId}`, carData);
+  return response.data;
+};
+
+export const addCarBrand = async (brandForm: AddCarBrandType) => {
+  const response = await apiClient.post("/admin/brands", brandForm);
   return response.data;
 };

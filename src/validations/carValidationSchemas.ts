@@ -20,3 +20,9 @@ export const AddCarSchema = z.object({
       message: "Please select a valid year",
     }),
 });
+
+export const AddCarBrandSchema = z.object({
+  brandName: z.string().nonempty({ message: "Brand name is required" }),
+});
+
+export type AddCarBrandType = z.infer<typeof AddCarBrandSchema>;
