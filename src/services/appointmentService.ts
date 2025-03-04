@@ -10,10 +10,8 @@ import { AppointmentForm } from "@/pages/Appointments/components/CreateAppointme
 
 export const fetchAllAppointments = async ({
   queryKey,
-  signal,
 }: {
   queryKey: [string, AppointmentFilters, string];
-  signal: AbortSignal;
 }): Promise<PageableResponse<Appointment>> => {
   const [, appointmentFilters, size] = queryKey;
   const params = new URLSearchParams(
@@ -21,10 +19,7 @@ export const fetchAllAppointments = async ({
   );
 
   const response = await apiClient.get(
-    `admin/appointments?size=${size}&${params}`,
-    {
-      signal,
-    }
+    `admin/appointments?size=${size}&${params}`
   );
   return response.data;
 };
@@ -63,17 +58,12 @@ export const getUserAppointments = async ({
 
 export const getLoggedInUserAppointments = async ({
   queryKey,
-  signal,
 }: {
   queryKey: [string, string, number];
-  signal: AbortSignal;
 }) => {
   const [, size, page] = queryKey;
   const response = await apiClient.get(
-    `appointments/me?size=${size}&page=${page}`,
-    {
-      signal,
-    }
+    `appointments/me?size=${size}&page=${page}`
   );
   return response.data;
 };

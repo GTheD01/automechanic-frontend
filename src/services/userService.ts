@@ -9,16 +9,12 @@ export const fetchUser = async (): Promise<User> => {
 
 export const fetchAllUsers = async ({
   queryKey,
-  signal,
 }: {
   queryKey: [string, UserFilters, string];
-  signal: AbortSignal;
 }): Promise<PageableResponse<User[]>> => {
   const [, userFilters, size] = queryKey;
   const params = new URLSearchParams(userFilters as Record<string, string>);
-  const response = await apiClient.get(`/admin/users?size=${size}&${params}`, {
-    signal,
-  });
+  const response = await apiClient.get(`/admin/users?size=${size}&${params}`);
   return response.data;
 };
 
