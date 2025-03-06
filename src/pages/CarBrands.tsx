@@ -1,23 +1,54 @@
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 import { useCallback, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { CarBrand } from "@/types/Car";
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import AddCarBrandModal from "./AddCarBrandModal";
 import { Pagination } from "@/components/Pagination";
-import { getAdminCarBrands } from "@/services/carService";
+import { deleteCarBrand, getAdminCarBrands } from "@/services/carService";
+import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 
-type Props = {};
-
-function CarBrands({}: Props) {
+function CarBrands() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [addCarBrandModalState, setAddCarBrandModalState] = useState(false);
   const [totalItemsToShow, setTotalItemsToShow] = useState<number>(5);
+  const [deleteConfirmationModalState, setDeleteConfirmationModalState] =
+    useState<boolean>(false);
+  const [brandToDelete, setBrandToDelete] = useState<CarBrand["name"]>("");
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ["carBrands", totalItemsToShow, currentPage - 1],
     queryFn: getAdminCarBrands,
     staleTime: 1000 * 60 * 5,
+  });
+
+  const queryClient = useQueryClient();
+
+  const deleteCarBrandMutation = useMutation({
+    mutationKey: ["deleteCarBrand"],
+    mutationFn: deleteCarBrand,
+    onSuccess: () => {
+      toast.success("Brand deleted successfully");
+    },
+    onMutate: (brandName) => {
+      queryClient.setQueryData(
+        ["carBrands", totalItemsToShow, currentPage - 1],
+        (oldData: any) => {
+          const newData = oldData.content.filter(
+            (brand: CarBrand) => brand.name !== brandName
+          );
+          return { ...oldData, content: newData };
+        }
+      );
+      return brandName;
+    },
+    onError: (error: AxiosError) => {
+      console.log(error);
+      toast.error("An unknown error occured. Please try again later.");
+    },
   });
 
   const handleCurrentPage = useCallback(
@@ -27,8 +58,22 @@ function CarBrands({}: Props) {
     [currentPage]
   );
 
+  const openDeleteConfirmationModal = (brandName: CarBrand["name"]) => {
+    setDeleteConfirmationModalState(true);
+    setBrandToDelete(brandName);
+  };
+
   const closeAddCarBrandModal = () => {
     setAddCarBrandModalState(false);
+  };
+
+  const closeDeleteCarBrandModal = () => {
+    setDeleteConfirmationModalState(false);
+  };
+
+  const deleteCarBrandHandler = () => {
+    deleteCarBrandMutation.mutate(brandToDelete);
+    closeDeleteCarBrandModal();
   };
 
   return (
@@ -36,6 +81,13 @@ function CarBrands({}: Props) {
       <AddCarBrandModal
         onClose={closeAddCarBrandModal}
         modalState={addCarBrandModalState}
+      />
+      <DeleteConfirmationModal
+        headerText="Are you sure you want to delete this car brand?"
+        bodyText={`This action can't be undone.`}
+        onDelete={deleteCarBrandHandler}
+        modalState={deleteConfirmationModalState}
+        handleOnCloseModal={closeDeleteCarBrandModal}
       />
 
       <Button
@@ -91,9 +143,8 @@ function CarBrands({}: Props) {
                 </div>
               </div>
               <button
-                className="bg-red-500 hover:bg-red-600 p-2 text-white text-sm md:text-base"
-                // TODO: ADD DELETE CAR BRAND CONFIRMATION MODAL
-                //   onClick={() => setDeleteConfirmationModal()}
+                className="bg-red-500 hover:bg-red-600 p-2 text-white text-sm md:text-base outline-none"
+                onClick={() => openDeleteConfirmationModal(brand.name)}
               >
                 DELETE
               </button>

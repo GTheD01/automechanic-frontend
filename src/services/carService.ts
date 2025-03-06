@@ -25,6 +25,11 @@ export const getCarBrands = async (): Promise<CarBrand[]> => {
   return response.data;
 };
 
+export const deleteCarBrand = async (brandName: CarBrand["name"]) => {
+  const response = await apiClient.delete(`/admin/brands/${brandName}`);
+  return response.data;
+};
+
 export const getAdminCarBrands = async ({
   queryKey,
 }: {

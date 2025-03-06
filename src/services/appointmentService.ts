@@ -12,7 +12,7 @@ export const fetchAllAppointments = async ({
   queryKey,
 }: {
   queryKey: [string, AppointmentFilters, string];
-}): Promise<PageableResponse<Appointment>> => {
+}): Promise<PageableResponse<Appointment[]>> => {
   const [, appointmentFilters, size] = queryKey;
   const params = new URLSearchParams(
     appointmentFilters as Record<string, string>
