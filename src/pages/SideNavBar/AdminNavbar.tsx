@@ -65,6 +65,13 @@ function AdminNavbar() {
           <span className="hidden sm:block">Car Brands</span>
           <img src={CarIcon} alt="Reports Icon" className="w-6 h-6 sm:hidden" />
         </CustomNavLink>
+        <CustomNavLink
+          to="/car-models"
+          className="pl-4 py-2 sm:pl-6 sm:py-3 md:pl-8 md:py-4 text-sm md:text-base"
+        >
+          <span className="hidden sm:block">Car Models</span>
+          <img src={CarIcon} alt="Reports Icon" className="w-6 h-6 sm:hidden" />
+        </CustomNavLink>
       </ul>
     </>
   );
