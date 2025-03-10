@@ -6,10 +6,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CarBrand } from "@/types/Car";
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
-import AddCarBrandModal from "./AddCarBrandModal";
 import { Pagination } from "@/components/Pagination";
 import { deleteCarBrand, getAdminCarBrands } from "@/services/carService";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import AddCarBrandModal from "@/pages/CarBrands/components/AddCarBrandModal";
 
 function CarBrands() {
   const [currentPage, setCurrentPage] = useState<number>(1);
