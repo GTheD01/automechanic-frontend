@@ -1,11 +1,11 @@
-import Button from "@/components/Button";
-import Input from "@/components/Input";
+import { ChangeEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import Modal from "@/components/Modal";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
 import { getCarBrands } from "@/services/carService";
 import { AddCarModelType } from "@/validations/carValidationSchemas";
-import { useQuery } from "@tanstack/react-query";
-import { ChangeEvent, useState } from "react";
 
 function AddCarModelModal({
   onClose,
@@ -50,8 +50,10 @@ function AddCarModelModal({
           type="text"
           placeholder="Enter model name"
           value={modelName}
-          className="border border-black text-black"
+          className="border border-gray-200 text-black"
           onChange={(e) => setModelName(e.target.value)}
+          disabled={!brandName}
+          toolTipMessage="Brand must be selected"
         />
 
         {Object.values(errors).map((error, i) => (
