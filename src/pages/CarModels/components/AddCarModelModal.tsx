@@ -1,11 +1,18 @@
+import { z } from "zod";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import Modal from "@/components/Modal";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import { getCarBrands } from "@/services/carService";
-import { AddCarModelType } from "@/validations/carValidationSchemas";
+import {
+  AddCarModelSchema,
+  AddCarModelType,
+} from "@/validations/carValidationSchemas";
+import { ApiResponseError } from "@/types/Auth";
+import { addCarModel, getCarBrands } from "@/services/carService";
 
 function AddCarModelModal({
   onClose,
@@ -23,6 +30,28 @@ function AddCarModelModal({
     queryFn: getCarBrands,
   });
 
+  const queryClient = useQueryClient();
+
+  const addCarModelMutation = useMutation({
+    mutationFn: addCarModel,
+    onError: (error: AxiosError) => {
+      if (error.response && error.response.data) {
+        const data = error.response.data as ApiResponseError;
+        toast.error(data.message);
+      } else {
+        console.log(error);
+        toast.error("An unknown error occured. Please try again later.");
+      }
+    },
+    onSuccess: () => {
+      onCloseModalHandler();
+      toast.success("Model added successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["carModels"],
+      });
+    },
+  });
+
   const onCloseModalHandler = () => {
     setModelName("");
     setErrors({});
@@ -30,6 +59,23 @@ function AddCarModelModal({
   };
   const addCarModelHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setErrors({});
+
+    try {
+      AddCarModelSchema.parse({ brandName, modelName });
+      addCarModelMutation.mutate({ brandName, modelName });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const newErrors: Record<string, string> = {};
+
+        for (const issue of error.issues) {
+          newErrors[issue.path[0]] = issue.message;
+        }
+
+        setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
+      }
+    }
   };
 
   return (
@@ -38,7 +84,11 @@ function AddCarModelModal({
         <select
           className="w-full p-2 border outline-none rounded-md mb-2"
           value={brandName}
-          onChange={(e) => setBrandName(e.target.value)}
+          onChange={(e) => {
+            setBrandName(
+              e.target.value === "Select Brand" ? "" : e.target.value
+            );
+          }}
         >
           <option>Select Brand</option>
           {data &&
@@ -53,7 +103,7 @@ function AddCarModelModal({
           className="border border-gray-200 text-black"
           onChange={(e) => setModelName(e.target.value)}
           disabled={!brandName}
-          toolTipMessage="Brand must be selected"
+          toolTipMessage={!brandName ? "Brand must be selected" : ""}
         />
 
         {Object.values(errors).map((error, i) => (

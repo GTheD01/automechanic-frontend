@@ -1,9 +1,12 @@
 import apiClient from "@/services";
 import { User } from "@/types/User";
+import {
+  AddCarBrandType,
+  AddCarModelType,
+} from "@/validations/carValidationSchemas";
 import { Appointment } from "@/types/Appointment";
 import { PageableResponse } from "@/types/GlobalTypes";
 import { Car, CarBrand, CarDataProps, CarModel } from "@/types/Car";
-import { AddCarBrandType } from "@/validations/carValidationSchemas";
 
 export const getUserCars = async ({
   queryKey,
@@ -85,5 +88,25 @@ export const editCar = async ({
 
 export const addCarBrand = async (brandForm: AddCarBrandType) => {
   const response = await apiClient.post("/admin/brands", brandForm);
+  return response.data;
+};
+
+export const addCarModel = async (addCarModelData: AddCarModelType) => {
+  const { brandName, modelName } = addCarModelData;
+  const response = await apiClient.post(`/admin/${brandName}/create-model`, {
+    modelName,
+  });
+  return response.data;
+};
+
+export const getAllCarModels = async ({
+  queryKey,
+}: {
+  queryKey: [string, number, number];
+}): Promise<PageableResponse<CarModel[]>> => {
+  const [, size, page] = queryKey;
+  const response = await apiClient.get(
+    `admin/car-models?size=${size}&page=${page}`
+  );
   return response.data;
 };
