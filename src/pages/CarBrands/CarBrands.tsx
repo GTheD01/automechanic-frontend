@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useCallback, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -45,8 +44,7 @@ function CarBrands() {
       );
       return brandName;
     },
-    onError: (error: AxiosError) => {
-      console.log(error);
+    onError: () => {
       toast.error("An unknown error occured. Please try again later.");
     },
   });

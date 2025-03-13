@@ -110,3 +110,8 @@ export const getAllCarModels = async ({
   );
   return response.data;
 };
+
+export const deleteCarModel = async (modelName: CarModel["name"]) => {
+  const response = await apiClient.delete(`/admin/car-models/${modelName}`);
+  return response.data;
+};
