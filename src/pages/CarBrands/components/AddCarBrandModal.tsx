@@ -48,7 +48,6 @@ function AddCarBrandModal({
         const data = error.response.data as ApiResponseError;
         toast.error(data.message);
       } else {
-        console.log(error);
         toast.error("An unknown error occured. Please try again later.");
       }
     },

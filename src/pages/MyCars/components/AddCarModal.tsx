@@ -54,7 +54,11 @@ function AddCarModal({
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setCarData((prevData) => ({ ...prevData, [name]: value }));
+
+    const updatedValue =
+      name === "brandName" && value === "Select" ? "" : value;
+
+    setCarData((prevData) => ({ ...prevData, [name]: updatedValue }));
   };
 
   const queryClient = useQueryClient();

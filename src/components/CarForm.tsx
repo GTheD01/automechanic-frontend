@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 
+import Tooltip from "@/components/Tooltip";
 import Spinner from "@/components/Spinner";
 import { CarBrand, CarDataProps, CarModel } from "@/types/Car";
 
@@ -51,19 +52,25 @@ function CarForm({
           </p>
         )}
       </div>
+
       <div className="flex flex-col">
         <label htmlFor="carModel">Model</label>
-        <select
-          className="border outline-none p-2"
-          value={modelName}
-          onChange={handleOnChange}
-          name="modelName"
-        >
-          <option>Select</option>
-          {brandModels?.map((model) => (
-            <option key={model.id}>{model.name}</option>
-          ))}
-        </select>
+
+        <Tooltip tooltipMessage={!brandName ? "Brand must be selected" : ""}>
+          <select
+            className="border outline-none p-2 w-full"
+            value={modelName}
+            onChange={handleOnChange}
+            name="modelName"
+            disabled={!brandName}
+          >
+            <option>Select</option>
+            {brandModels?.map((model) => (
+              <option key={model.id}>{model.name}</option>
+            ))}
+          </select>
+        </Tooltip>
+
         {errors.modelName && (
           <p className="text-red-500 text-sm sm:text-base">
             {errors.modelName}

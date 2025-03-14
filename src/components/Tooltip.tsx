@@ -1,13 +1,13 @@
 import { PropsWithChildren } from "react";
 
-interface TooltipWrapperProps {
+interface TooltipProps {
   tooltipMessage?: string;
 }
 
-function TooltipWrapper({
+function Tooltip({
   children,
   tooltipMessage,
-}: PropsWithChildren<TooltipWrapperProps>) {
+}: PropsWithChildren<TooltipProps>) {
   return (
     <div className="w-full relative group">
       {tooltipMessage && (
@@ -23,4 +23,4 @@ function TooltipWrapper({
   );
 }
 
-export default TooltipWrapper;
+export default Tooltip;

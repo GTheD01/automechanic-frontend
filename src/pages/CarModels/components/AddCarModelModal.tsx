@@ -39,7 +39,6 @@ function AddCarModelModal({
         const data = error.response.data as ApiResponseError;
         toast.error(data.message);
       } else {
-        console.log(error);
         toast.error("An unknown error occured. Please try again later.");
       }
     },
@@ -81,6 +80,7 @@ function AddCarModelModal({
   return (
     <Modal onClose={onCloseModalHandler} open={modalState} className="w-fit">
       <form onSubmit={addCarModelHandler}>
+        <label className="text-lg">Brand name</label>
         <select
           className="w-full p-2 border outline-none rounded-md mb-2"
           value={brandName}
