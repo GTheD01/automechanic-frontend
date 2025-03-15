@@ -3,9 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
+import CarList from "@/components/CarList";
+import MyCarCard from "@/pages/MyCars/components/MyCarCard";
 import { getLoggedInUserCars } from "@/services/carService";
 import AddCarModal from "@/pages/MyCars/components/AddCarModal";
-import UserCarList from "@/pages/MyCars/components/UserCarList";
 
 function MyCars() {
   const [addCarModal, setAddCarModal] = useState<boolean>(false);
@@ -45,7 +46,9 @@ function MyCars() {
       {loggedInUserCars && loggedInUserCars.length < 1 && (
         <p className="pl-2 pt-2">User has no added cars.</p>
       )}
-      {loggedInUserCars && <UserCarList userCars={loggedInUserCars} />}
+      {loggedInUserCars && (
+        <CarList userCars={loggedInUserCars} CarCardComponent={MyCarCard} />
+      )}
     </div>
   );
 }

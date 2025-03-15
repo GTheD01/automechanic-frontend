@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import Spinner from "@/components/Spinner";
+import CarList from "@/components/CarList";
 import { getUserCars } from "@/services/carService";
-import UserCarList from "@/pages/MyCars/components/UserCarList";
+import UserCarCard from "@/pages/User/components/UserCarCard";
 
 function UserCars() {
   const { userId } = useParams();
@@ -30,7 +31,7 @@ function UserCars() {
     return <p className="ml-2 mt-2">The user has no cars added.</p>;
   }
 
-  return <UserCarList userCars={userCars} />;
+  return <CarList userCars={userCars} CarCardComponent={UserCarCard} />;
 }
 
 export default UserCars;
