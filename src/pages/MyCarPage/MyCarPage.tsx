@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { Car } from "@/types/Car";
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import { deleteCar, getCar } from "@/services/carService";
@@ -35,12 +36,24 @@ function UserCarPage() {
     setEditCarModal(false);
   };
 
+  const queryClient = useQueryClient();
+
   const deleteCarMutation = useMutation({
     mutationKey: ["userCar"],
     mutationFn: deleteCar,
     onSuccess: () => {
       toast.success("Car successfully deleted.");
       navigate("/my-cars");
+    },
+    onMutate: (carToDelete) => {
+      queryClient.setQueryData(["userCars"], (cars: Car[]) => {
+        const carsToReturn = cars.filter(
+          (car) => car.id.toString() !== carToDelete
+        );
+
+        return carsToReturn;
+      });
+      return carToDelete;
     },
     onError: () => {
       toast.error("Couldn't delete the car. Try again later!");
