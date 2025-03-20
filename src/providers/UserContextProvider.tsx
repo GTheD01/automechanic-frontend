@@ -9,7 +9,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 
 import { User } from "@/types/User";
-import { fetchUser } from "@/services/userService";
+import { getLoggedInUser } from "@/services/userService";
 
 interface UserContextType {
   user: User | undefined;
@@ -29,7 +29,7 @@ export default function UserContextProvider({
 
   const { data } = useQuery({
     queryKey: ["user"],
-    queryFn: fetchUser,
+    queryFn: getLoggedInUser,
     retry: 0,
     staleTime: 1000 * 60 * 15,
     enabled: !user,

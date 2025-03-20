@@ -4,7 +4,7 @@ import { ChangeEvent, useCallback, useRef, useState } from "react";
 import { UserFilters } from "@/types/User";
 import SearchFilter from "@/components/SearchFilter";
 import { Pagination } from "@/components/Pagination";
-import { fetchAllUsers } from "@/services/userService";
+import { getAllUsers } from "@/services/userService";
 import UsersList from "@/pages/Users/components/UsersList";
 
 function Users() {
@@ -14,7 +14,7 @@ function Users() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["users", filters, "4"],
-    queryFn: fetchAllUsers,
+    queryFn: getAllUsers,
     staleTime: 1000 * 60 * 5,
     retry: 0,
   });
@@ -81,6 +81,9 @@ function Users() {
           </div>
         </div>
       </div>
+      {data && data.content.length < 1 && (
+        <p className="ml-2 mt-2">No users found.</p>
+      )}
       {data && data.content.length > 0 && (
         <UsersList
           isError={isError}

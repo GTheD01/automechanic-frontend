@@ -21,7 +21,7 @@ const UsersList = React.memo(
     }
     return (
       <ul>
-        {users?.map((user) => (
+        {users.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}
       </ul>

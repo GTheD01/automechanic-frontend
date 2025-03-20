@@ -2,12 +2,17 @@ import apiClient from "@/services";
 import { User, UserFilters } from "@/types/User";
 import { PageableResponse } from "@/types/GlobalTypes";
 
-export const fetchUser = async (): Promise<User> => {
+export const getLoggedInUser = async (): Promise<User> => {
   const response = await apiClient.get("/users/me");
   return response.data;
 };
 
-export const fetchAllUsers = async ({
+export const deleteLoggedInUser = async () => {
+  const response = await apiClient.delete("/users/me");
+  return response.data;
+};
+
+export const getAllUsers = async ({
   queryKey,
 }: {
   queryKey: [string, UserFilters, string];

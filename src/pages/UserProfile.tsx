@@ -10,10 +10,10 @@ function UserProfile() {
   return (
     <section>
       <div>
-        <h3 className="my-8 text-3xl font-bold text-center border-b-2">
+        <h3 className="mt-8 m-4 text-3xl font-bold text-center">
           {user.firstName} {user.lastName}
         </h3>
-        <div className="grid lg:grid-cols-3 grid-cols-2 gap-y-3 border-b-2 pb-8">
+        <div className="grid lg:grid-cols-3 grid-cols-2 gap-y-3 border-y-2 py-8">
           <UserField
             content={user.id}
             field="User ID"
