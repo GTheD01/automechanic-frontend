@@ -5,22 +5,22 @@ import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import { ApiResponseError } from "@/types/Auth";
-import { updateUserProfile } from "@/services/userService";
 import { useUserContext } from "@/providers/UserContextProvider";
+import { updateLoggedInUserProfile } from "@/services/userService";
 import { UpdateUserProfileSchema } from "@/validations/userValidationSchemas";
 
-type UpdateUserProfileForm = z.infer<typeof UpdateUserProfileSchema>;
+type UpdateLoggedInUserProfileForm = z.infer<typeof UpdateUserProfileSchema>;
 
-function useUpdateUserProfile() {
+function useUpdateLoggedInUserProfile() {
   const { user, setUser } = useUserContext();
 
-  const initialFormData: UpdateUserProfileForm = {
+  const initialFormData: UpdateLoggedInUserProfileForm = {
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
     phoneNumber: user?.phoneNumber || "",
   };
   const [formData, setFormData] =
-    useState<UpdateUserProfileForm>(initialFormData);
+    useState<UpdateLoggedInUserProfileForm>(initialFormData);
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -29,7 +29,7 @@ function useUpdateUserProfile() {
   });
 
   const updateUserProfileMutation = useMutation({
-    mutationFn: updateUserProfile,
+    mutationFn: updateLoggedInUserProfile,
     onSuccess: (data) => {
       setUser((prev) => ({ ...prev, ...data }));
       toast.success("Profile settings updated.!");
@@ -63,7 +63,6 @@ function useUpdateUserProfile() {
 
       const parsedFormData = UpdateUserProfileSchema.parse(formData);
       updateUserProfileMutation.mutate({
-        userId: user?.id!,
         updateProfileUserData: parsedFormData,
       });
     } catch (error) {
@@ -90,4 +89,4 @@ function useUpdateUserProfile() {
   };
 }
 
-export default useUpdateUserProfile;
+export default useUpdateLoggedInUserProfile;

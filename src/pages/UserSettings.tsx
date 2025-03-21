@@ -6,10 +6,10 @@ import { useMutation } from "@tanstack/react-query";
 import Form from "@/components/Form";
 import { InputProps } from "@/components/Input";
 import { deleteLoggedInUser } from "@/services/userService";
-import useUpdateUserProfile from "@/hooks/useUpdateUserProfile";
 import { useAuthContext } from "@/providers/AuthContextProvider";
 import { useUserContext } from "@/providers/UserContextProvider";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import useUpdateLoggedInUserProfile from "@/hooks/useUpdateLoggedInUserProfile";
 
 function UserSettings() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function UserSettings() {
 
   const [deleteAccountModalState, setDeleteAccountModalState] = useState(false);
   const { errors, formData, isLoading, onChange, onSubmit } =
-    useUpdateUserProfile();
+    useUpdateLoggedInUserProfile();
 
   const inputConfig: InputProps[] = [
     {

@@ -37,6 +37,15 @@ export const updateUserProfile = async ({
   return response.data;
 };
 
+export const updateLoggedInUserProfile = async ({
+  updateProfileUserData,
+}: {
+  updateProfileUserData: Partial<User>;
+}) => {
+  const response = await apiClient.put("/users/me", updateProfileUserData);
+  return response.data;
+};
+
 export const getUserProfile = async ({
   queryKey,
 }: {
