@@ -54,6 +54,15 @@ function useUpdateLoggedInUserProfile() {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (
+      formData.firstName === initialFormData.firstName &&
+      formData.lastName === initialFormData.lastName &&
+      formData.phoneNumber === initialFormData.phoneNumber
+    ) {
+      toast.info("No changes detected.");
+      return;
+    }
+
     try {
       setErrors({
         firstName: "",
