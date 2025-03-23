@@ -12,12 +12,18 @@ export const deleteLoggedInUser = async () => {
   return response.data;
 };
 
+export const deleteUserAccountById = async (userId: User["id"]) => {
+  const response = await apiClient.delete(`/admin/users/${userId}`);
+  return response.data;
+};
+
 export const getAllUsers = async ({
-  queryKey,
+  userFilters,
+  size,
 }: {
-  queryKey: [string, UserFilters, string];
+  userFilters: UserFilters;
+  size: string;
 }): Promise<PageableResponse<User[]>> => {
-  const [, userFilters, size] = queryKey;
   const params = new URLSearchParams(userFilters as Record<string, string>);
   const response = await apiClient.get(`/admin/users?size=${size}&${params}`);
   return response.data;

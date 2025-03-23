@@ -20,11 +20,11 @@ const ResetPasswordConfirm = lazy(
 const VerifyEmail = lazy(() => import("@/pages/AuthPages/VerifyEmail"));
 const Dashboard = lazy(() => import("@/pages/Dashboard/Dashboard"));
 const Users = lazy(() => import("@/pages/Users/Users"));
-const User = lazy(() => import("@/pages/User/User"));
+const UserProfile = lazy(() => import("@/pages/UserProfile/UserProfile"));
 const Appointments = lazy(() => import("@/pages/Appointments/Appointments"));
 const Reports = lazy(() => import("@/pages/Reports/Reports"));
 const UserSettings = lazy(() => import("@/pages/UserSettings"));
-const UserProfile = lazy(() => import("@/pages/UserProfile"));
+const UserLoggedProfile = lazy(() => import("@/pages/UserLoggedProfile"));
 const MyCars = lazy(() => import("@/pages/MyCars/MyCars"));
 const MyCarPage = lazy(() => import("@/pages/MyCarPage/MyCarPage"));
 const MyAppointments = lazy(
@@ -136,7 +136,7 @@ const router = createBrowserRouter([
             element: (
               <ProtectedRoute role="ADMIN">
                 <Suspense fallback={<Spinner lg />}>
-                  <User />
+                  <UserProfile />
                 </Suspense>
               </ProtectedRoute>
             ),
@@ -184,7 +184,7 @@ const router = createBrowserRouter([
             path: "profile",
             element: (
               <Suspense fallback={<Spinner lg />}>
-                <UserProfile />
+                <UserLoggedProfile />
               </Suspense>
             ),
           },

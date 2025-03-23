@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import { MenuItem } from "@/pages/User/User";
+import { MenuItem } from "@/pages/User/UserProfile";
 
 interface SubMenuItemProps extends React.HTMLProps<HTMLLIElement> {
   menuItem: MenuItem;

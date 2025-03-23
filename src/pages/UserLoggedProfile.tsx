@@ -1,7 +1,7 @@
 import UserField from "@/components/UserField";
 import { useUserContext } from "@/providers/UserContextProvider";
 
-function UserProfile() {
+function UserLoggedProfile() {
   const { user } = useUserContext();
 
   if (!user) {
@@ -50,4 +50,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default UserLoggedProfile;

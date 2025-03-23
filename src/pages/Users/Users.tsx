@@ -13,8 +13,8 @@ function Users() {
   const [filters, setFilters] = useState<UserFilters>({});
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["users", filters, "4"],
-    queryFn: getAllUsers,
+    queryKey: ["users"],
+    queryFn: () => getAllUsers({ userFilters: filters, size: "4" }),
     staleTime: 1000 * 60 * 5,
     retry: 0,
   });
@@ -81,10 +81,10 @@ function Users() {
           </div>
         </div>
       </div>
-      {data && data.content.length < 1 && (
+      {data && data.content && data.content.length < 1 && (
         <p className="ml-2 mt-2">No users found.</p>
       )}
-      {data && data.content.length > 0 && (
+      {data && data.content && data.content.length > 0 && (
         <UsersList
           isError={isError}
           isLoading={isLoading}

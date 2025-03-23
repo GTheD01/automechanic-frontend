@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 
-import { MenuItem } from "@/pages/User/User";
+import { MenuItem } from "@/pages/User/UserProfile";
 import SubMenuItem from "@/pages/User/components/SubMenuItem";
 
 interface SubMenuProps {
