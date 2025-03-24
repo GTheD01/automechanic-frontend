@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 
-import { MenuItem } from "@/pages/User/UserProfile";
-import SubMenuItem from "@/pages/User/components/SubMenuItem";
+import { MenuItem } from "@/pages/UserProfile/UserProfile";
+import SubMenuItem from "@/pages/UserProfile/components/SubMenuItem";
 
 interface SubMenuProps {
   subMenuItems: MenuItem[];
