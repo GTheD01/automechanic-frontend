@@ -24,14 +24,18 @@ const AdminReportCard = ({
               {report?.user?.firstName} {report?.user?.lastName}
             </span>
           </div>
-        </div>
-        <div>
-          <p className="font-semibold">Description:</p>
-          <span>{report?.description}</span>
+          <div>
+            <p className="font-semibold">Report type:</p>
+            <span>{report?.reportType}</span>
+          </div>
         </div>
         <div>
           <p className="font-semibold">Answer:</p>
           <span>{report?.answer ?? "Not answered yet."}</span>
+        </div>
+        <div>
+          <p className="font-semibold">Description:</p>
+          <span>{report?.description}</span>
         </div>
       </div>
       <div className="flex flex-col gap-2">

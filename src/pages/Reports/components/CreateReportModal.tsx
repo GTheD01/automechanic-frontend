@@ -6,16 +6,17 @@ import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Modal from "@/components/Modal";
-import { Report } from "@/types/Report";
 import Spinner from "@/components/Spinner";
 import {
   CreateReportSchema,
   CreateReportForm,
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
+import { Report, ReportType } from "@/types/Report";
 import { createReport } from "@/services/reportService";
 
 const initialReportFormData = {
+  reportType: "",
   description: "",
 };
 
@@ -29,7 +30,10 @@ function CreateReportModal({
   const [reportFormData, setReportFormData] = useState<CreateReportForm>(
     initialReportFormData
   );
-  const [errors, setErrors] = useState<CreateReportForm>({ description: "" });
+  const [errors, setErrors] = useState<CreateReportForm>({
+    reportType: "",
+    description: "",
+  });
 
   const queryClient = useQueryClient();
 
@@ -65,6 +69,7 @@ function CreateReportModal({
           id: uuidv4(),
           description: reportFormData.description,
           answer: null,
+          reportType: reportFormData.reportType,
           createdAt: currTime + " / " + currDate,
         },
       ]);
@@ -103,24 +108,54 @@ function CreateReportModal({
   const onCloseHandler = () => {
     onClose();
     setReportFormData(initialReportFormData);
-    setErrors({ description: "" });
+    setErrors({ description: "", reportType: "" });
   };
+
+  const reportTypeOptions: ReportType[] = ["APPOINTMENT", "WEBSITE", "OTHER"];
 
   return (
     <Modal open={modalState} onClose={onCloseHandler}>
       <h2 className="text-center font-semibold text-2xl mb-4">Create Report</h2>
       <form onSubmit={createReportHandler}>
-        <textarea
-          placeholder="Enter your message"
-          className="w-full h-48 max-h-96 min-h-16 border p-2 outline-none"
-          value={reportFormData.description}
-          onChange={(e) =>
-            setReportFormData((prevData) => ({
-              ...prevData,
-              description: e.target.value,
-            }))
-          }
-        />
+        <div>
+          <label htmlFor="reportType" className="block font-semibold">
+            Report type
+          </label>
+          <select
+            className="border p-2 w-full mb-2 outline-none"
+            name="reportType"
+            value={reportFormData.reportType}
+            onChange={(e) =>
+              setReportFormData((prevData) => ({
+                ...prevData,
+                reportType: e.target.value,
+              }))
+            }
+          >
+            <option>Select</option>
+            {reportTypeOptions.map((reportType) => (
+              <option key={reportType} value={reportType}>
+                {reportType}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="description" className="block font-semibold">
+            Description
+          </label>
+          <textarea
+            placeholder="Enter your message"
+            className="w-full h-48 max-h-96 min-h-16 border p-2 outline-none"
+            value={reportFormData.description}
+            onChange={(e) =>
+              setReportFormData((prevData) => ({
+                ...prevData,
+                description: e.target.value,
+              }))
+            }
+          />
+        </div>
         {Object.values(errors).map((error, i) => (
           <p key={i} className="text-red-500 text-sm sm:text-base">
             {error}

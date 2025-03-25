@@ -51,6 +51,10 @@ function UserReports() {
                   <p className="font-semibold">Answer:</p>
                   <span>{report.answer ?? "Not answered yet."}</span>
                 </div>
+                <div>
+                  <p className="font-semibold">Report Type:</p>
+                  <span>{report.reportType}</span>
+                </div>
               </div>
             </li>
           ))}

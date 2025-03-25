@@ -14,7 +14,7 @@ export interface Appointment {
   appointmentTime: string;
   appointmentStatus: AppointmentStatus;
   user: User;
-  createdDate: string;
+  createdAt: string;
   lastModifiedDate: string;
   car: Car;
 }

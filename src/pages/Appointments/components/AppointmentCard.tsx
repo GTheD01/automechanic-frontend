@@ -3,11 +3,11 @@ import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { cn } from "@/lib/cn";
+import { useUserContext } from "@/providers/UserContextProvider";
 import { updateAppointment } from "@/services/appointmentService";
 import { Appointment, AppointmentStatus } from "@/types/Appointment";
 import AppointmentField from "@/pages/Appointments/components/AppointmentField";
 import EditAppointmentModal from "@/pages/Appointments/components/EditAppointmentModal";
-import { useUserContext } from "@/providers/UserContextProvider";
 
 function AppointmentCard({
   appointment,
@@ -102,7 +102,7 @@ function AppointmentCard({
           />
           <AppointmentField
             field="Created at"
-            content={appointment?.createdDate}
+            content={appointment?.createdAt}
           />
           <AppointmentField
             field="Last modified at"
