@@ -1,6 +1,6 @@
-import UserReports from "@/pages/Reports/UserReports";
 import AdminReports from "@/pages/Reports/AdminReports";
 import { useUserContext } from "@/providers/UserContextProvider";
+import UserLoggedReports from "@/pages/Reports/UserLoggedReports";
 
 function Reports() {
   const { user } = useUserContext();
@@ -13,7 +13,7 @@ function Reports() {
     return <AdminReports />;
   }
 
-  return <UserReports />;
+  return <UserLoggedReports />;
 }
 
 export default Reports;

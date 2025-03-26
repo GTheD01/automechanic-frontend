@@ -8,8 +8,9 @@ import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import UserCars from "@/pages/UserProfile/UserCars";
 import UserField from "@/components/UserField";
-import SubMenu from "@/pages/UserProfile/components/SubMenu";
 import { PageableResponse } from "@/types/GlobalTypes";
+import UserReports from "@/pages/UserProfile/UserReports";
+import SubMenu from "@/pages/UserProfile/components/SubMenu";
 import UserAppointments from "@/pages/UserProfile/UserAppointments";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 import { deleteUserAccountById, getUserProfile } from "@/services/userService";
@@ -137,7 +138,7 @@ function UserProfile() {
         />
         {selectedMenuItem === "Cars" && <UserCars />}
         {selectedMenuItem === "Appointments" && <UserAppointments />}
-        {selectedMenuItem === "Reports" && <div>reports</div>}
+        {selectedMenuItem === "Reports" && <UserReports />}
       </section>
     </>
   );
