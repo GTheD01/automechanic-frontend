@@ -6,9 +6,15 @@ function UserReportsList({ reports }: { reports: Report[] }) {
       {reports.map((report) => (
         <li key={report.id} className="px-4 pt-4 border-b">
           <div>
-            <div>
-              <p className="font-semibold">Created at:</p>
-              <span>{report.createdAt}</span>
+            <div className="flex gap-8">
+              <div>
+                <p className="font-semibold">Created at:</p>
+                <span>{report.createdAt}</span>
+              </div>
+              <div>
+                <p className="font-semibold">Report Type:</p>
+                <span>{report.reportType}</span>
+              </div>
             </div>
             <div>
               <p className="font-semibold">Description:</p>
@@ -17,10 +23,6 @@ function UserReportsList({ reports }: { reports: Report[] }) {
             <div>
               <p className="font-semibold">Answer:</p>
               <span>{report.answer ?? "Not answered yet."}</span>
-            </div>
-            <div>
-              <p className="font-semibold">Report Type:</p>
-              <span>{report.reportType}</span>
             </div>
           </div>
         </li>

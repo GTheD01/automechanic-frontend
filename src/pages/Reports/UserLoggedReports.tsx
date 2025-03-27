@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
-import UserReportsList from "./components/UserReportsList";
+import { Pagination } from "@/components/Pagination";
 import { getLoggedInUserReports } from "@/services/reportService";
+import UserReportsList from "@/pages/Reports/components/UserReportsList";
 import CreateReportModal from "@/pages/Reports/components/CreateReportModal";
 
-function UserReports() {
+function UserLoggedReports() {
   const [createReportModal, setCreateReportModal] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: userReports, isLoading } = useQuery({
-    queryKey: ["reports"],
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["reports", "5", currentPage - 1],
     queryFn: getLoggedInUserReports,
+    retry: 0,
   });
 
   const onCloseCreateReportModal = () => {
     setCreateReportModal(false);
   };
+
+  const handleCurrentPage = useCallback(
+    (el: number) => {
+      setCurrentPage(el);
+    },
+    [currentPage]
+  );
 
   return (
     <section>
@@ -32,12 +42,25 @@ function UserReports() {
         Create report
       </Button>
       {isLoading && <Spinner md />}
-      {userReports && userReports.length < 1 && (
+      {isError && (
+        <p className="ml-2 mt-2">
+          There was an error fetching your reports. Please try again later.
+        </p>
+      )}
+      {data && data.content && data.content.length < 1 && (
         <p className="ml-2 mt-2">No reports found.</p>
       )}
-      {userReports && <UserReportsList reports={userReports} />}
+      {data && <UserReportsList reports={data.content} />}
+
+      {data && data.page && (
+        <Pagination
+          currentPage={currentPage}
+          handleCurrentPage={handleCurrentPage}
+          totalPages={data.page.totalPages}
+        />
+      )}
     </section>
   );
 }
 
-export default UserReports;
+export default UserLoggedReports;

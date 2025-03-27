@@ -13,6 +13,7 @@ import {
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
 import { Report, ReportType } from "@/types/Report";
+import { PageableResponse } from "@/types/GlobalTypes";
 import { createReport } from "@/services/reportService";
 
 const initialReportFormData = {
@@ -63,16 +64,22 @@ function CreateReportModal({
         })
         .replace(/\//g, ".");
 
-      queryClient.setQueryData(["reports"], (oldReports: Report[]) => [
-        ...(oldReports || []),
-        {
-          id: uuidv4(),
-          description: reportFormData.description,
-          answer: null,
-          reportType: reportFormData.reportType,
-          createdAt: currTime + " / " + currDate,
-        },
-      ]);
+      queryClient.setQueryData(
+        ["reports"],
+        (reports: PageableResponse<Report[]>) => ({
+          content: [
+            ...(reports?.content || []),
+            {
+              id: uuidv4(),
+              description: reportFormData.description,
+              answer: null,
+              reportType: reportFormData.reportType,
+              createdAt: currTime + " / " + currDate,
+            },
+          ],
+          page: reports?.page,
+        })
+      );
 
       return { previousReports };
     },
@@ -81,6 +88,7 @@ function CreateReportModal({
         const data = error.response.data as ApiResponseError;
         toast.error(data.message);
       } else {
+        console.log(error);
         toast.error("An unknown error occured. Please try again later.");
       }
     },
