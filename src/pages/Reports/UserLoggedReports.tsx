@@ -8,12 +8,14 @@ import { getLoggedInUserReports } from "@/services/reportService";
 import UserReportsList from "@/pages/Reports/components/UserReportsList";
 import CreateReportModal from "@/pages/Reports/components/CreateReportModal";
 
+const TOTAL_REPORTS_PER_PAGE = 5;
+
 function UserLoggedReports() {
   const [createReportModal, setCreateReportModal] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["reports", "5", currentPage - 1],
+    queryKey: ["loggedUserReports", TOTAL_REPORTS_PER_PAGE, currentPage - 1],
     queryFn: getLoggedInUserReports,
     retry: 0,
   });
@@ -32,6 +34,8 @@ function UserLoggedReports() {
   return (
     <section>
       <CreateReportModal
+        paginationSize={TOTAL_REPORTS_PER_PAGE}
+        currentPage={currentPage - 1}
         modalState={createReportModal}
         onClose={onCloseCreateReportModal}
       />

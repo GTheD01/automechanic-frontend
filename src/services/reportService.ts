@@ -12,7 +12,7 @@ export const createReport = async (createReportData: CreateReportForm) => {
 export const getLoggedInUserReports = async ({
   queryKey,
 }: {
-  queryKey: [string, string, number];
+  queryKey: [string, number, number];
 }): Promise<PageableResponse<Report[]>> => {
   const [_, size, page] = queryKey;
   const response = await apiClient.get(`/reports/me?size=${size}&page=${page}`);
@@ -22,7 +22,7 @@ export const getLoggedInUserReports = async ({
 export const getUserReports = async ({
   queryKey,
 }: {
-  queryKey: [string, string, number, User["id"] | undefined];
+  queryKey: [string, number, number, User["id"] | undefined];
 }): Promise<PageableResponse<Report[]>> => {
   const [_, size, page, userId] = queryKey;
   const response = await apiClient.get(

@@ -8,12 +8,14 @@ import { Pagination } from "@/components/Pagination";
 import { getUserReports } from "@/services/reportService";
 import UserReportsList from "../Reports/components/UserReportsList";
 
+const TOTAL_REPORTS_PER_PAGE = 5;
+
 function UserReports() {
   const { userId } = useParams<User["id"]>();
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["userReports", "4", currentPage - 1, userId],
+    queryKey: ["userReports", TOTAL_REPORTS_PER_PAGE, currentPage - 1, userId],
     queryFn: getUserReports,
     enabled: !!userId,
     retry: 0,

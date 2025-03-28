@@ -1,19 +1,17 @@
 import { z } from "zod";
 import { AxiosError } from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Modal from "@/components/Modal";
 import Spinner from "@/components/Spinner";
+import { ReportType } from "@/types/Report";
 import {
   CreateReportSchema,
   CreateReportForm,
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
-import { Report, ReportType } from "@/types/Report";
-import { PageableResponse } from "@/types/GlobalTypes";
 import { createReport } from "@/services/reportService";
 
 const initialReportFormData = {
@@ -22,9 +20,13 @@ const initialReportFormData = {
 };
 
 function CreateReportModal({
+  paginationSize,
+  currentPage,
   modalState,
   onClose,
 }: {
+  paginationSize: number;
+  currentPage: number;
   modalState: boolean;
   onClose: () => void;
 }) {
@@ -39,7 +41,7 @@ function CreateReportModal({
   const queryClient = useQueryClient();
 
   const createReportMutation = useMutation({
-    mutationKey: ["reports"],
+    mutationKey: ["loggedUserReports", paginationSize, currentPage],
     mutationFn: createReport,
     onSuccess: () => {
       toast.success("Report created!");
@@ -47,41 +49,9 @@ function CreateReportModal({
       setReportFormData(initialReportFormData);
     },
     onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: ["reports"] });
-
-      const previousReports = queryClient.getQueryData(["reports"]);
-
-      const now = new Date();
-      const currTime = now.toLocaleTimeString("en-GB", {
-        hour: "2-digit",
-        minute: "2-digit",
+      queryClient.invalidateQueries({
+        queryKey: ["loggedUserReports", paginationSize, currentPage],
       });
-      const currDate = now
-        .toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })
-        .replace(/\//g, ".");
-
-      queryClient.setQueryData(
-        ["reports"],
-        (reports: PageableResponse<Report[]>) => ({
-          content: [
-            ...(reports?.content || []),
-            {
-              id: uuidv4(),
-              description: reportFormData.description,
-              answer: null,
-              reportType: reportFormData.reportType,
-              createdAt: currTime + " / " + currDate,
-            },
-          ],
-          page: reports?.page,
-        })
-      );
-
-      return { previousReports };
     },
     onError: (error: AxiosError) => {
       if (error.response && error.response.data) {
