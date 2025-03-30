@@ -31,8 +31,15 @@ export const getUserReports = async ({
   return response.data;
 };
 
-export const getAllReports = async (): Promise<Report[]> => {
-  const response = await apiClient.get("/admin/reports");
+export const getAllReports = async ({
+  queryKey,
+}: {
+  queryKey: [string, number, number];
+}): Promise<PageableResponse<Report[]>> => {
+  const [_, size, page] = queryKey;
+  const response = await apiClient.get(
+    `/admin/reports?size=${size}&page=${page}`
+  );
   return response.data;
 };
 

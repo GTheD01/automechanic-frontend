@@ -35,7 +35,7 @@ function UserLoggedReports() {
     <section>
       <CreateReportModal
         paginationSize={TOTAL_REPORTS_PER_PAGE}
-        currentPage={currentPage - 1}
+        currentPage={currentPage}
         modalState={createReportModal}
         onClose={onCloseCreateReportModal}
       />

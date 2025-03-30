@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { v4 as uuidv4 } from "uuid";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
@@ -12,6 +13,7 @@ import {
   CreateReportForm,
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
+import { PageableResponse } from "@/types/GlobalTypes";
 import { createReport } from "@/services/reportService";
 
 const initialReportFormData = {
@@ -41,7 +43,7 @@ function CreateReportModal({
   const queryClient = useQueryClient();
 
   const createReportMutation = useMutation({
-    mutationKey: ["loggedUserReports", paginationSize, currentPage],
+    mutationKey: ["loggedUserReports", paginationSize, currentPage - 1],
     mutationFn: createReport,
     onSuccess: () => {
       toast.success("Report created!");
@@ -49,9 +51,47 @@ function CreateReportModal({
       setReportFormData(initialReportFormData);
     },
     onMutate: async () => {
-      queryClient.invalidateQueries({
-        queryKey: ["loggedUserReports", paginationSize, currentPage],
+      await queryClient.cancelQueries({
+        queryKey: ["loggedUserReports", paginationSize, currentPage - 1],
       });
+
+      const previousReports = queryClient.getQueryData([
+        "loggedUserReports",
+        paginationSize,
+        currentPage - 1,
+      ]);
+
+      const now = new Date();
+      const currTime = now.toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      const currDate = now
+        .toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+        .replace(/\//g, ".");
+
+      queryClient.setQueryData(
+        ["loggedUserReports", paginationSize, currentPage - 1],
+        (reports: PageableResponse<Report[]>) => ({
+          content: [
+            ...(reports?.content || []),
+            {
+              id: uuidv4(),
+              description: reportFormData.description,
+              answer: null,
+              reportType: reportFormData.reportType,
+              createdAt: currTime + " / " + currDate,
+            },
+          ],
+          page: reports?.page,
+        })
+      );
+
+      return { previousReports };
     },
     onError: (error: AxiosError) => {
       if (error.response && error.response.data) {

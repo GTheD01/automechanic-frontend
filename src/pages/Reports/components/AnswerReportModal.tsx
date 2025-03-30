@@ -12,6 +12,7 @@ import {
   AnswerReportSchema,
 } from "@/validations/reportValidationSchemas";
 import { ApiResponseError } from "@/types/Auth";
+import { PageableResponse } from "@/types/GlobalTypes";
 import { answerReport } from "@/services/reportService";
 
 const initialAnswerReportFormData = {
@@ -20,9 +21,13 @@ const initialAnswerReportFormData = {
 
 function AnswerReportModal({
   modalState,
+  currentPage,
+  pageSize,
   onClose,
   reportId,
 }: {
+  currentPage: number;
+  pageSize: number;
   modalState: boolean;
   onClose: () => void;
   reportId: string;
@@ -34,7 +39,7 @@ function AnswerReportModal({
   const queryClient = useQueryClient();
 
   const answerReportMutation = useMutation({
-    mutationKey: ["reports"],
+    mutationKey: ["reports", pageSize, currentPage - 1],
     mutationFn: answerReport,
     onSuccess: () => {
       toast.success("Report answered!");
@@ -42,24 +47,38 @@ function AnswerReportModal({
       setAnswerReportFormData(initialAnswerReportFormData);
     },
     onMutate: async (reportAnswer) => {
-      await queryClient.cancelQueries({ queryKey: ["reports"] });
-
-      const previousReports = queryClient.getQueryData(["reports"]);
-
-      queryClient.setQueryData(["reports"], (oldReports: Report[]) => {
-        const reportIdx = oldReports.findIndex(
-          (report) => report.id === reportAnswer.reportId
-        );
-        if (reportIdx > -1) {
-          const report = oldReports[reportIdx];
-          const updatedReport = {
-            ...report,
-            answer: reportAnswer.answerReportFormData.answer,
-          };
-          oldReports[reportIdx] = updatedReport;
-        }
-        return oldReports;
+      await queryClient.cancelQueries({
+        queryKey: ["reports", pageSize, currentPage - 1],
       });
+
+      const previousReports = queryClient.getQueryData([
+        "reports",
+        pageSize,
+        currentPage - 1,
+      ]);
+
+      queryClient.setQueryData(
+        ["reports", pageSize, currentPage - 1],
+        (oldReports: PageableResponse<Report[]>) => {
+          const reportIdx = oldReports.content.findIndex(
+            (report) => report.id === reportAnswer.reportId
+          );
+          const editedReports = oldReports.content;
+          if (reportIdx > -1) {
+            const report = oldReports.content[reportIdx];
+            const updatedReport = {
+              ...report,
+              answer: reportAnswer.answerReportFormData.answer,
+            };
+            editedReports[reportIdx] = updatedReport;
+          }
+
+          return {
+            content: editedReports,
+            page: oldReports.content,
+          };
+        }
+      );
 
       return { previousReports };
     },

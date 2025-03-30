@@ -4,18 +4,19 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Report } from "@/types/Report";
 import Spinner from "@/components/Spinner";
+import { Pagination } from "@/components/Pagination";
+import { PageableResponse } from "@/types/GlobalTypes";
 import { deleteReport, getAllReports } from "@/services/reportService";
 import AdminReportsList from "@/pages/Reports/components/AdminReportsList";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
 import AnswerReportModal from "@/pages/Reports/components/AnswerReportModal";
 
+const TOTAL_REPORTS_PER_PAGE = 5;
+
 function AdminReports() {
-  const {
-    data: reports,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["reports"],
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["reports", TOTAL_REPORTS_PER_PAGE, currentPage - 1],
     queryFn: getAllReports,
   });
   const [selectedReportId, setSelectedReportId] = useState<string>("");
@@ -45,20 +46,43 @@ function AdminReports() {
     setDeleteReportModal(true);
   }, []);
 
+  const handleCurrentPage = useCallback(
+    (el: number) => {
+      setCurrentPage(el);
+    },
+    [currentPage]
+  );
+
   const queryClient = useQueryClient();
 
   const deleteReportMutation = useMutation({
-    mutationKey: ["reports"],
+    mutationKey: ["reports", TOTAL_REPORTS_PER_PAGE, currentPage - 1],
     mutationFn: deleteReport,
     onSuccess: () => {
       toast.success("Report successfully deleted.");
     },
     onMutate: async (selectedReport) => {
-      await queryClient.cancelQueries({ queryKey: ["reports"] });
-      const previousCars = queryClient.getQueryData(["reports"]);
+      await queryClient.cancelQueries({
+        queryKey: ["reports", TOTAL_REPORTS_PER_PAGE, currentPage - 1],
+      });
+      const previousCars = queryClient.getQueryData([
+        "reports",
+        TOTAL_REPORTS_PER_PAGE,
+        currentPage - 1,
+      ]);
 
-      queryClient.setQueryData(["reports"], (oldReports: Report[]) =>
-        oldReports.filter((report) => report.id !== selectedReport.reportId)
+      queryClient.setQueryData(
+        ["reports", TOTAL_REPORTS_PER_PAGE, currentPage - 1],
+        (reportsData: PageableResponse<Report[]>) => {
+          const filterReports = reportsData.content.filter(
+            (report) => report.id !== selectedReport.reportId
+          );
+
+          return {
+            content: filterReports || [],
+            page: reportsData.page || {},
+          };
+        }
       );
 
       return { previousCars };
@@ -76,6 +100,8 @@ function AdminReports() {
   return (
     <>
       <AnswerReportModal
+        currentPage={currentPage}
+        pageSize={TOTAL_REPORTS_PER_PAGE}
         modalState={answerReportModal}
         onClose={onCloseAnswerReportModal}
         reportId={selectedReportId}
@@ -94,15 +120,23 @@ function AdminReports() {
             <Spinner md />
           </div>
         )}
-        {reports && reports.length < 1 && (
+        {data && data.content && data.content.length < 1 && (
           <p className="ml-2 mt-2">No reports added yet.</p>
         )}
         {isError && <p>Couldn't fetch reports.</p>}
-        {reports && reports.length > 0 && (
+        {data && data.content && data.content.length > 0 && (
           <AdminReportsList
-            reports={reports}
+            reports={data.content}
             onOpenAnswerReportModal={onOpenAnswerReportModal}
             onOpenDeleteReportModal={onOpenDeleteReportModal}
+          />
+        )}
+
+        {data && data.page && (
+          <Pagination
+            currentPage={currentPage}
+            handleCurrentPage={handleCurrentPage}
+            totalPages={data.page.totalPages}
           />
         )}
       </section>
