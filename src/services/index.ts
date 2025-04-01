@@ -19,7 +19,6 @@ apiClient.interceptors.response.use(
 
         return apiClient(error.config);
       } catch (err) {
-        console.error("Unable to refresh token", err);
         return Promise.reject(error);
       }
     }

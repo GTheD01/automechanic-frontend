@@ -46,7 +46,6 @@ function UserProfile() {
       queryClient.setQueryData(
         ["users"],
         (oldData: PageableResponse<User[]>) => {
-          console.log(oldData.content);
           return oldData.content.filter((user) => user.id !== userToDeleteId);
         }
       );
