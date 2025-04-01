@@ -1,6 +1,7 @@
-import closeMenuCrossSvg from "@/assets/svgs/cross.svg";
-import { Dispatch, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Dispatch, useEffect, useState } from "react";
+
+import closeMenuCrossSvg from "@/assets/svgs/cross.svg";
 
 function MobileNav({
   openMobileNav,

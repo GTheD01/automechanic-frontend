@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import useIsLessThan from "@/hooks/useIsLessThan";
-import Nav from "@/pages/HomeLayout/components/Nav";
-import MobileNav from "@/pages/HomeLayout/components/MobileNav";
+import Nav from "@/layouts/HomeLayout/components/Nav";
+import MobileNav from "@/layouts/HomeLayout/components/MobileNav";
 
 import menuBurgerSvg from "@/assets/svgs/menu-burger.svg";
 

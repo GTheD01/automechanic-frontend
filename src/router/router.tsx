@@ -3,9 +3,9 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import Spinner from "@/components/Spinner";
 
-import AuthPagesLayout from "@/pages/AuthPages/AuthPagesLayout";
-import NavFooterLayout from "@/pages/HomeLayout/HomeLayout";
-import ProtectedPagesLayout from "@/pages/ProtectedPagesLayout/ProtectedPagesLayout";
+import AuthPagesLayout from "@/layouts/AuthPagesLayout";
+import NavFooterLayout from "@/layouts/HomeLayout/HomeLayout";
+import ProtectedPagesLayout from "@/layouts/ProtectedPagesLayout/ProtectedPagesLayout";
 import UserContextProvider from "@/providers/UserContextProvider";
 import AuthContextProvider from "@/providers/AuthContextProvider";
 import ProtectedRoute from "@/components/ProtectedRoute";

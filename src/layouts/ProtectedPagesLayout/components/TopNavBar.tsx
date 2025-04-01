@@ -3,11 +3,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { logout } from "@/services/authService";
 import { useAuthContext } from "@/providers/AuthContextProvider";
-
-import SettingsIcon from "@/assets/svgs/settings.svg";
-import LogoutIcon from "@/assets/svgs/logout.svg";
-import UserProfileIcon from "@/assets/svgs/userprofile.svg";
 import { useUserContext } from "@/providers/UserContextProvider";
+
+import LogoutIcon from "@/assets/svgs/logout.svg";
+import SettingsIcon from "@/assets/svgs/settings.svg";
+import UserProfileIcon from "@/assets/svgs/userprofile.svg";
 
 const TopNavBar = () => {
   const navigate = useNavigate();

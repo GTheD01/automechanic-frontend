@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import Spinner from "@/components/Spinner";
 import SideNavBar from "@/pages/SideNavBar/SideNavBar";
 import { useAuthContext } from "@/providers/AuthContextProvider";
-import TopNavBar from "@/pages/ProtectedPagesLayout/components/TopNavBar";
+import TopNavBar from "@/layouts/ProtectedPagesLayout/components/TopNavBar";
 
 function ProtectedPagesLayout() {
   const { isAuthenticated, isLoading } = useAuthContext();

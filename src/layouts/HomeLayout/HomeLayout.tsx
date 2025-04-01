@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 
-import Footer from "@/pages/HomeLayout/components/Footer";
-import HeaderNav from "@/pages/HomeLayout/components/Header";
-import ScrollToTopButton from "@/pages/HomeLayout/components/ScrollToTopButton";
+import Footer from "@/layouts/HomeLayout/components/Footer";
+import HeaderNav from "@/layouts/HomeLayout/components/Header";
+import ScrollToTopButton from "@/layouts/HomeLayout/components/ScrollToTopButton";
 
 function NavFooterLayout() {
   return (
