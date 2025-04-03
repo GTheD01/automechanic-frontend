@@ -6,9 +6,9 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 import { signup } from "@/services/authService";
 import { ApiResponseError } from "@/types/Auth";
-import { RegisterUserSchema } from "@/validations/authValidationSchemas";
+import { SignUpUserSchema } from "@/validations/authValidationSchemas";
 
-type RegistrationForm = z.infer<typeof RegisterUserSchema>;
+type RegistrationForm = z.infer<typeof SignUpUserSchema>;
 
 function useSignUp() {
   const initialFormData: RegistrationForm = {
@@ -35,7 +35,7 @@ function useSignUp() {
     onSuccess: () => {
       setFormData(initialFormData);
       toast.success(
-        "Successfully registered! Check your email to verify your account."
+        "Successfully signed up! Check your email to verify your account."
       );
     },
     onError: (error: AxiosError) => {
@@ -61,7 +61,7 @@ function useSignUp() {
       // Clear errors
       setErrors(initialErrors);
 
-      const parsedFormData = RegisterUserSchema.parse(formData);
+      const parsedFormData = SignUpUserSchema.parse(formData);
 
       signUpMutation.mutate(parsedFormData);
     } catch (error) {

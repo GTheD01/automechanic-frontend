@@ -1,20 +1,20 @@
 import apiClient from "@/services";
 import {
-  LoginUser,
-  RegisterUser,
+  SignInUser,
+  SignUpUser,
   ResetPassword,
   ResetPasswordConfirm,
 } from "@/types/Auth";
 
-export const signin = async (loginFormData: LoginUser) => {
-  const response = await apiClient.post("/auth/authenticate", loginFormData);
+export const signin = async (signinFormData: SignInUser) => {
+  const response = await apiClient.post("/auth/authenticate", signinFormData);
   return response.data;
 };
 
 export const signup = async (
-  registerFormData: RegisterUser
-): Promise<RegisterUser> => {
-  const response = await apiClient.post("/auth/register", registerFormData);
+  signupFormData: SignUpUser
+): Promise<SignUpUser> => {
+  const response = await apiClient.post("/auth/signup", signupFormData);
   return response.data;
 };
 
@@ -49,6 +49,6 @@ export const confirmResetPassword = async (
 };
 
 export const verifyToken = async () => {
-  const response = await apiClient.post("/verify-token");
+  const response = await apiClient.post("/auth/jwt/verify-token");
   return response.data;
 };

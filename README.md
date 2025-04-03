@@ -5,7 +5,7 @@ The website allows users to:
 
 - Explore Services: View a full list of services offered by the auto repair shop, from routine maintenance to complex repairs.
 
-- Register as a Customer: Easily create an account to access personalized features and track service history.
+- Sign up as a Customer: Easily create an account to access personalized features and track service history.
 
 - Book Appointments: Schedule and manage service appointments directly through the platform, with real-time availability and reminders.
 

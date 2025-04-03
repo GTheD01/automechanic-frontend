@@ -3,7 +3,7 @@ import { z } from "zod";
 const PASSWORD_REGEX =
   /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\\[\]{};':"\\|,.<>\\/?]).{8,}$/;
 
-export const RegisterUserSchema = z
+export const SignUpUserSchema = z
   .object({
     firstName: z.string().min(1, "First name must be at least 1 character"),
     lastName: z.string().min(1, "Last name must be at least 1 character"),
@@ -31,7 +31,7 @@ export const RegisterUserSchema = z
     }
   );
 
-export const LoginUserSchema = z.object({
+export const SignInUserSchema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(1, "Password must be at least 1 character"),
 });

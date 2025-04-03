@@ -8,19 +8,19 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { signin } from "@/services/authService";
 import { ApiResponseError } from "@/types/Auth";
 import { useAuthContext } from "@/providers/AuthContextProvider";
-import { LoginUserSchema } from "@/validations/authValidationSchemas";
+import { SignInUserSchema } from "@/validations/authValidationSchemas";
 
-type LoginForm = z.infer<typeof LoginUserSchema>;
+type SignInForm = z.infer<typeof SignInUserSchema>;
 
 function useSignIn() {
   const navigate = useNavigate();
   const { setIsAuthenticated } = useAuthContext();
 
-  const initialFormData: LoginForm = {
+  const initialFormData: SignInForm = {
     email: "",
     password: "",
   };
-  const [formData, setFormData] = useState<LoginForm>(initialFormData);
+  const [formData, setFormData] = useState<SignInForm>(initialFormData);
 
   const [errors, setErrors] = useState({
     email: "",
@@ -60,7 +60,7 @@ function useSignIn() {
         password: "",
       });
 
-      const parsedFormData = LoginUserSchema.parse(formData);
+      const parsedFormData = SignInUserSchema.parse(formData);
       signInMutation.mutate(parsedFormData);
     } catch (error) {
       if (error instanceof z.ZodError) {

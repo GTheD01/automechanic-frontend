@@ -10,16 +10,21 @@ const refreshAccessToken = async () => {
   return response.data;
 };
 
+let isRefreshing = false;
+
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.status === 401) {
+    if (error.response && error.response.status === 401 && !isRefreshing) {
+      isRefreshing = true;
       try {
         await refreshAccessToken();
 
         return apiClient(error.config);
       } catch (err) {
         return Promise.reject(error);
+      } finally {
+        isRefreshing = false;
       }
     }
   }
