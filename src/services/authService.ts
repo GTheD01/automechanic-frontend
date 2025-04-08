@@ -7,9 +7,7 @@ import {
 } from "@/types/Auth";
 
 export const signin = async (signinFormData: SignInUser) => {
-  const response = await apiClient.post("/auth/authenticate", signinFormData, {
-    withCredentials: false,
-  });
+  const response = await apiClient.post("/auth/authenticate", signinFormData);
   return response.data;
 };
 
