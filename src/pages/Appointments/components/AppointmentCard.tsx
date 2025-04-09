@@ -41,7 +41,7 @@ function AppointmentCard({
     },
     onError: () => {
       toast.error("Something went wrong... Try again later!");
-      setOriginalStatus(appointment?.appointmentStatus);
+      setOriginalStatus(originalStatus);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["appointments"] });
