@@ -2,7 +2,12 @@ import { Appointment } from "@/types/Appointment";
 
 export interface AppointmentsPerYear {
   year: string;
-  appointments: number;
+  appointmentsCount: number;
+}
+
+export interface ReportsPerYear {
+  year: string;
+  reportsCount: number;
 }
 
 export interface AdminDashboardResponse {
@@ -10,7 +15,8 @@ export interface AdminDashboardResponse {
   totalCars: number;
   totalReports: number;
   upcomingAppointment: Appointment;
-  appointmentsStatsByYear: AppointmentsPerYear[];
+  appointmentsPerYearCount: AppointmentsPerYear[];
+  reportsPerYearCount: ReportsPerYear[];
 }
 
 export interface UserDashboardResponse {

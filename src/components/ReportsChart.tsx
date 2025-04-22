@@ -1,4 +1,4 @@
-import { AppointmentsPerYear } from "@/types/Dashboard";
+import { ReportsPerYear } from "@/types/Dashboard";
 import {
   BarChart,
   Bar,
@@ -11,19 +11,19 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const CustomLegend = ({ totalAppointments }: { totalAppointments: number }) => (
+const CustomLegend = ({ totalReports }: { totalReports: number }) => (
   <div className="flex items-center justify-center gap-2">
-    <p className="font-semibold">Total appointments:</p>
-    <span>{totalAppointments}</span>
+    <p className="font-semibold">Total reports:</p>
+    <span>{totalReports}</span>
   </div>
 );
 
-function AppointmentsChart({
-  appointmentsPerYear,
-  totalAppointments,
+function ReportsChart({
+  reportsPerYear,
+  totalReports,
 }: {
-  appointmentsPerYear: AppointmentsPerYear[] | undefined;
-  totalAppointments: number;
+  reportsPerYear: ReportsPerYear[] | undefined;
+  totalReports: number;
 }) {
   return (
     <div className="mt-8 lg:w-1/2">
@@ -35,7 +35,7 @@ function AppointmentsChart({
         <BarChart
           width={500}
           height={300}
-          data={appointmentsPerYear}
+          data={reportsPerYear}
           margin={{
             right: 20,
             left: 20,
@@ -45,12 +45,10 @@ function AppointmentsChart({
           <XAxis dataKey="year" />
           <YAxis />
           <Tooltip />
-          <Legend
-            content={<CustomLegend totalAppointments={totalAppointments} />}
-          />
+          <Legend content={<CustomLegend totalReports={totalReports} />} />
           <Bar
             maxBarSize={100}
-            dataKey="appointmentsCount"
+            dataKey="reportsCount"
             fill="#132bd0"
             activeBar={<Rectangle fill="#364f67" stroke="blue" />}
           />
@@ -60,4 +58,4 @@ function AppointmentsChart({
   );
 }
 
-export default AppointmentsChart;
+export default ReportsChart;
