@@ -1,4 +1,4 @@
-import CustomNavLink from "@/components/CustomNavLink";
+import CustomNavLink from "@/components/common/CustomNavLink";
 
 import CarIcon from "@/assets/svgs/car.svg";
 import UsersIcon from "@/assets/svgs/users.svg";

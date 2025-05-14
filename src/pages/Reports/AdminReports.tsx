@@ -3,12 +3,12 @@ import { useCallback, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Report } from "@/types/Report";
-import Spinner from "@/components/Spinner";
-import { Pagination } from "@/components/Pagination";
+import Spinner from "@/components/common/Spinner";
+import { Pagination } from "@/components/common/Pagination";
 import { PageableResponse } from "@/types/GlobalTypes";
 import { deleteReport, getAllReports } from "@/services/reportService";
 import AdminReportsList from "@/pages/Reports/components/AdminReportsList";
-import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 import AnswerReportModal from "@/pages/Reports/components/AnswerReportModal";
 
 const TOTAL_REPORTS_PER_PAGE = 5;

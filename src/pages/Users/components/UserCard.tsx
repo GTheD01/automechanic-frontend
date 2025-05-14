@@ -1,5 +1,5 @@
 import { User } from "@/types/User";
-import Button from "@/components/Button";
+import Button from "@/components/common/Button";
 import UserField from "@/components/UserField";
 
 function UserCard({ user }: { user: User }) {

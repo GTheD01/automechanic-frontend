@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/common/Spinner";
 import { AppointmentStatus } from "@/types/Appointment";
 
 type EditAppointmentModalProps = {

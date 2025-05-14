@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import Button from "@/components/Button";
-import Spinner from "@/components/Spinner";
+import Button from "@/components/common/Button";
+import Spinner from "@/components/common/Spinner";
 import CarList from "@/components/CarList";
 import MyCarCard from "@/pages/MyCars/components/MyCarCard";
 import { getLoggedInUserCars } from "@/services/carService";

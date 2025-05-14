@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import Modal from "@/components/Modal";
-import Spinner from "@/components/Spinner";
+import Modal from "@/components/common/Modal";
+import Spinner from "@/components/common/Spinner";
 import { ApiResponseError } from "@/types/Auth";
 import { Appointment } from "@/types/Appointment";
 import { getLoggedInUserCars } from "@/services/carService";

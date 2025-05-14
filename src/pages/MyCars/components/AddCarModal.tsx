@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { ChangeEvent, Dispatch, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import Modal from "@/components/Modal";
+import Modal from "@/components/common/Modal";
 import CarForm from "@/components/CarForm";
 import { ApiResponseError } from "@/types/Auth";
 import { Car, CarDataProps } from "@/types/Car";

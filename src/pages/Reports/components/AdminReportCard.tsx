@@ -1,5 +1,5 @@
 import { Report } from "@/types/Report";
-import Button from "@/components/Button";
+import Button from "@/components/common/Button";
 
 const AdminReportCard = ({
   report,

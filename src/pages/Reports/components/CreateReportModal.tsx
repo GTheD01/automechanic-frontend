@@ -1,5 +1,5 @@
-import Modal from "@/components/Modal";
-import Spinner from "@/components/Spinner";
+import Modal from "@/components/common/Modal";
+import Spinner from "@/components/common/Spinner";
 import { ReportType } from "@/types/Report";
 import useCreateReport from "@/hooks/useCreateReport";
 

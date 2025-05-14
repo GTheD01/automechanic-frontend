@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import Modal from "@/components/Modal";
+import Modal from "@/components/common/Modal";
 import { Report } from "@/types/Report";
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/common/Spinner";
 import {
   AnswerReportForm,
   AnswerReportSchema,

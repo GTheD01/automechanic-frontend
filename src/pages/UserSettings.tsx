@@ -3,12 +3,12 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
-import Form from "@/components/Form";
-import { InputProps } from "@/components/Input";
+import Form from "@/components/common/Form";
+import { InputProps } from "@/components/common/Input";
 import { deleteLoggedInUser } from "@/services/userService";
 import { useAuthContext } from "@/providers/AuthContextProvider";
 import { useUserContext } from "@/providers/UserContextProvider";
-import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 import useUpdateLoggedInUserProfile from "@/hooks/useUpdateLoggedInUserProfile";
 
 function UserSettings() {

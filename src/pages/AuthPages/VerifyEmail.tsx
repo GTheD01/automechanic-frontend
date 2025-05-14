@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/common/Spinner";
 import { ApiResponseError } from "@/types/Auth";
 import { verifyEmail } from "@/services/authService";
 

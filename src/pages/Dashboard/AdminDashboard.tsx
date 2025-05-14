@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/common/Spinner";
 import { getAdminDashboard } from "@/services/dashboardService";
 import AppointmentCard from "@/pages/Appointments/components/AppointmentCard";
 import AppointmentsChart from "@/components/AppointmentsChart";

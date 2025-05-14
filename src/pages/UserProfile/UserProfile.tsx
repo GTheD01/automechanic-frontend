@@ -4,15 +4,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { User } from "@/types/User";
-import Button from "@/components/Button";
-import Spinner from "@/components/Spinner";
+import Button from "@/components/common/Button";
+import Spinner from "@/components/common/Spinner";
 import UserCars from "@/pages/UserProfile/UserCars";
 import UserField from "@/components/UserField";
 import { PageableResponse } from "@/types/GlobalTypes";
 import UserReports from "@/pages/UserProfile/UserReports";
 import SubMenu from "@/pages/UserProfile/components/SubMenu";
 import UserAppointments from "@/pages/UserProfile/UserAppointments";
-import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 import { deleteUserAccountById, getUserProfile } from "@/services/userService";
 
 export type MenuItem = "Cars" | "Appointments" | "Reports";

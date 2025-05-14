@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
-import Tooltip from "@/components/Tooltip";
-import Spinner from "@/components/Spinner";
+import Tooltip from "@/components/common/Tooltip";
+import Spinner from "@/components/common/Spinner";
 import { CarBrand, CarDataProps, CarModel } from "@/types/Car";
 
 interface CarFormProps {

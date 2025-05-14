@@ -1,4 +1,4 @@
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/common/Spinner";
 
 import { useQuery } from "@tanstack/react-query";
 import AppointmentCard from "@/pages/Appointments/components/AppointmentCard";

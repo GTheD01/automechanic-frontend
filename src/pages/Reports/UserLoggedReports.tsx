@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import Button from "@/components/Button";
-import Spinner from "@/components/Spinner";
-import { Pagination } from "@/components/Pagination";
+import Button from "@/components/common/Button";
+import Spinner from "@/components/common/Spinner";
+import { Pagination } from "@/components/common/Pagination";
 import { getLoggedInUserReports } from "@/services/reportService";
 import UserReportsList from "@/pages/Reports/components/UserReportsList";
 import CreateReportModal from "@/pages/Reports/components/CreateReportModal";

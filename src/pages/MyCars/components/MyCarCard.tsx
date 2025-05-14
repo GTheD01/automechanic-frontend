@@ -1,5 +1,5 @@
 import { Car } from "@/types/Car";
-import Button from "@/components/Button";
+import Button from "@/components/common/Button";
 
 function MyCarCard({ car }: { car: Car }) {
   return (

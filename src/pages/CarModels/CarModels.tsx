@@ -1,13 +1,13 @@
 import { useCallback, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import Button from "@/components/Button";
-import Spinner from "@/components/Spinner";
-import { Pagination } from "@/components/Pagination";
+import Button from "@/components/common/Button";
+import Spinner from "@/components/common/Spinner";
+import { Pagination } from "@/components/common/Pagination";
 import { deleteCarModel, getAllCarModels } from "@/services/carService";
 import AddCarModelModal from "@/pages/CarModels/components/AddCarModelModal";
 import { CarModel } from "@/types/Car";
-import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 import { toast } from "react-toastify";
 
 function CarModels() {

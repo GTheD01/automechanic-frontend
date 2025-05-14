@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import Button from "@/components/common/Button";
 import RepairServiceCard from "@/components/RepairServiceCard";
 
 import brakeRepairImg from "@/assets/images/brake-repair.webp";

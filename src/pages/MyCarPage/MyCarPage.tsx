@@ -4,11 +4,11 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Car } from "@/types/Car";
-import Button from "@/components/Button";
-import Spinner from "@/components/Spinner";
+import Button from "@/components/common/Button";
+import Spinner from "@/components/common/Spinner";
 import { deleteCar, getCar } from "@/services/carService";
 import EditCarModal from "@/pages/MyCarPage/components/EditCarModal";
-import CarDeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import CarDeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 
 function UserCarPage() {

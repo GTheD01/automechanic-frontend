@@ -1,7 +1,7 @@
 import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 
 import { cn } from "@/lib/cn";
-import Tooltip from "@/components/Tooltip";
+import Tooltip from "@/components/common/Tooltip";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

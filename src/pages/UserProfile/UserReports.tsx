@@ -3,8 +3,8 @@ import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { User } from "@/types/User";
-import Spinner from "@/components/Spinner";
-import { Pagination } from "@/components/Pagination";
+import Spinner from "@/components/common/Spinner";
+import { Pagination } from "@/components/common/Pagination";
 import { getUserReports } from "@/services/reportService";
 import UserReportsList from "../Reports/components/UserReportsList";
 

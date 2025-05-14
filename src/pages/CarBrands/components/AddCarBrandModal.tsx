@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import Modal from "@/components/Modal";
-import Input from "@/components/Input";
-import Button from "@/components/Button";
+import Modal from "@/components/common/Modal";
+import Input from "@/components/common/Input";
+import Button from "@/components/common/Button";
 import {
   AddCarBrandSchema,
   AddCarBrandType,

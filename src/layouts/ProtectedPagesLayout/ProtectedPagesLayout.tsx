@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/common/Spinner";
 import SideNavBar from "@/pages/SideNavBar/SideNavBar";
 import { useAuthContext } from "@/providers/AuthContextProvider";
 import TopNavBar from "@/layouts/ProtectedPagesLayout/components/TopNavBar";

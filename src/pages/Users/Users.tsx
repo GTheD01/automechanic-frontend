@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 
 import { UserFilters } from "@/types/User";
-import SearchFilter from "@/components/SearchFilter";
-import { Pagination } from "@/components/Pagination";
+import SearchFilter from "@/components/common/SearchFilter";
+import { Pagination } from "@/components/common/Pagination";
 import { getAllUsers } from "@/services/userService";
 import UsersList from "@/pages/Users/components/UsersList";
 

@@ -1,14 +1,14 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/common/Spinner";
 
 import AuthPagesLayout from "@/layouts/AuthPagesLayout";
 import NavFooterLayout from "@/layouts/HomeLayout/HomeLayout";
 import ProtectedPagesLayout from "@/layouts/ProtectedPagesLayout/ProtectedPagesLayout";
 import UserContextProvider from "@/providers/UserContextProvider";
 import AuthContextProvider from "@/providers/AuthContextProvider";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedRoute from "@/components/common/ProtectedRoute";
 
 const Home = lazy(() => import("@/pages/Home/Home"));
 const SignIn = lazy(() => import("@/pages/AuthPages/SignIn"));

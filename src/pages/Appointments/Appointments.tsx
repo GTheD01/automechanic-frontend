@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useCallback, useRef, useState } from "react";
 
-import Spinner from "@/components/Spinner";
-import SearchFilter from "@/components/SearchFilter";
-import { Pagination } from "@/components/Pagination";
+import Spinner from "@/components/common/Spinner";
+import SearchFilter from "@/components/common/SearchFilter";
+import { Pagination } from "@/components/common/Pagination";
 import { AppointmentFilters } from "@/types/Appointment";
 import { fetchAllAppointments } from "@/services/appointmentService";
 import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";

@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import Spinner from "@/components/Spinner";
-import { Pagination } from "@/components/Pagination";
+import Spinner from "@/components/common/Spinner";
+import { Pagination } from "@/components/common/Pagination";
 import { getUserAppointments } from "@/services/appointmentService";
 import AppointmentsList from "@/pages/Appointments/components/AppointmentsList";
 
