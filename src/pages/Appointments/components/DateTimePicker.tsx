@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { Appointment } from "@/types/Appointment";
-import { AppointmentForm } from "@/pages/Appointments/components/CreateAppointmentModal";
+import { AppointmentForm } from "@/hooks/useCreateAppointment";
 
 import "react-datepicker/dist/react-datepicker.css";
 

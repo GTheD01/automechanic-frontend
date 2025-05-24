@@ -6,7 +6,7 @@ import {
 import apiClient from "@/services";
 import { User } from "@/types/User";
 import { PageableResponse } from "@/types/GlobalTypes";
-import { AppointmentForm } from "@/pages/Appointments/components/CreateAppointmentModal";
+import { AppointmentForm } from "@/hooks/useCreateAppointment";
 
 export const fetchAllAppointments = async ({
   queryKey,

@@ -35,7 +35,7 @@ function MyAppointments() {
       <CreateAppointmentModal
         appointments={data?.content}
         modalState={createAppointmentModal}
-        onClose={onCloseCreateAppointmentHandler}
+        onCloseModal={onCloseCreateAppointmentHandler}
       />
 
       <Button
