@@ -7,8 +7,8 @@ import Button from "@/components/common/Button";
 import Spinner from "@/components/common/Spinner";
 import { Pagination } from "@/components/common/Pagination";
 import { deleteCarBrand, getAdminCarBrands } from "@/services/carService";
-import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 import AddCarBrandModal from "@/pages/CarBrands/components/AddCarBrandModal";
+import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 
 function CarBrands() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -77,7 +77,7 @@ function CarBrands() {
   return (
     <section>
       <AddCarBrandModal
-        onClose={closeAddCarBrandModal}
+        onCloseModal={closeAddCarBrandModal}
         modalState={addCarBrandModalState}
       />
       <DeleteConfirmationModal

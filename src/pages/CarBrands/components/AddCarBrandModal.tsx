@@ -1,75 +1,22 @@
-import { z } from "zod";
-import { AxiosError } from "axios";
-import { toast } from "react-toastify";
-import { ChangeEvent, useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import Modal from "@/components/common/Modal";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
-import {
-  AddCarBrandSchema,
-  AddCarBrandType,
-} from "@/validations/carValidationSchemas";
-import { ApiResponseError } from "@/types/Auth";
-import { addCarBrand } from "@/services/carService";
+import useCreateCarBrand from "@/hooks/useCreateCarBrand";
 
 function AddCarBrandModal({
-  onClose,
+  onCloseModal,
   modalState,
 }: {
   modalState: boolean;
-  onClose: () => void;
+  onCloseModal: () => void;
 }) {
-  const [brandName, setBrandName] = useState<AddCarBrandType["brandName"]>("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const onCloseModalHandler = () => {
-    setBrandName("");
-    setErrors({});
-    onClose();
-  };
-
-  const queryClient = useQueryClient();
-
-  const addCarBrandMutation = useMutation({
-    mutationKey: ["addCarBrand"],
-    mutationFn: addCarBrand,
-    onSuccess: () => {
-      onCloseModalHandler();
-      toast.success("Brand added successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["carBrands"],
-      });
-    },
-
-    onError: (error: AxiosError) => {
-      if (error.response && error.response.data) {
-        const data = error.response.data as ApiResponseError;
-        toast.error(data.message);
-      } else {
-        toast.error("An unknown error occured. Please try again later.");
-      }
-    },
-  });
-
-  const addCarBrandHandler = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      AddCarBrandSchema.parse({ brandName });
-      addCarBrandMutation.mutate({ brandName });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const newErrors: Record<string, string> = {};
-
-        for (const issue of error.issues) {
-          newErrors[issue.path[0]] = issue.message;
-        }
-
-        setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
-      }
-    }
-  };
+  const {
+    addCarBrandHandler,
+    brandName,
+    errors,
+    onCloseModalHandler,
+    setBrandName,
+  } = useCreateCarBrand({ onCloseModal });
 
   return (
     <Modal onClose={onCloseModalHandler} open={modalState} className="w-fit">
@@ -92,7 +39,7 @@ function AddCarBrandModal({
             Submit
           </Button>
           <button
-            onClick={onClose}
+            onClick={onCloseModalHandler}
             type="button"
             className="text-secondary rounded-3xl py-2 px-4 self-center sm:px-6 mb-2 text-sm lg:text-base mt-2 border hover:bg-black/10"
           >
