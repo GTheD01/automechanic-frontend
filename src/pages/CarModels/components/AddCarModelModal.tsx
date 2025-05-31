@@ -1,18 +1,10 @@
-import { z } from "zod";
-import { AxiosError } from "axios";
-import { toast } from "react-toastify";
-import { ChangeEvent, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import Modal from "@/components/common/Modal";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
-import {
-  AddCarModelSchema,
-  AddCarModelType,
-} from "@/validations/carValidationSchemas";
-import { ApiResponseError } from "@/types/Auth";
-import { addCarModel, getCarBrands } from "@/services/carService";
+import { getCarBrands } from "@/services/carService";
+import useCreateCarModel from "@/hooks/useCreateCarModel";
 
 function AddCarModelModal({
   onClose,
@@ -21,61 +13,20 @@ function AddCarModelModal({
   modalState: boolean;
   onClose: () => void;
 }) {
-  const [modelName, setModelName] = useState<AddCarModelType["modelName"]>("");
-  const [brandName, setBrandName] = useState<AddCarModelType["brandName"]>("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const {
+    modelName,
+    setModelName,
+    brandName,
+    setBrandName,
+    errors,
+    addCarModelHandler,
+    onCloseModalHandler,
+  } = useCreateCarModel({ onCloseModal: onClose });
 
   const { data } = useQuery({
     queryKey: ["carBrands"],
     queryFn: getCarBrands,
   });
-
-  const queryClient = useQueryClient();
-
-  const addCarModelMutation = useMutation({
-    mutationFn: addCarModel,
-    onError: (error: AxiosError) => {
-      if (error.response && error.response.data) {
-        const data = error.response.data as ApiResponseError;
-        toast.error(data.message);
-      } else {
-        toast.error("An unknown error occured. Please try again later.");
-      }
-    },
-    onSuccess: () => {
-      onCloseModalHandler();
-      toast.success("Model added successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["carModels"],
-      });
-    },
-  });
-
-  const onCloseModalHandler = () => {
-    setModelName("");
-    setErrors({});
-    onClose();
-  };
-  const addCarModelHandler = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setErrors({});
-
-    try {
-      AddCarModelSchema.parse({ brandName, modelName });
-      addCarModelMutation.mutate({ brandName, modelName });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const newErrors: Record<string, string> = {};
-
-        for (const issue of error.issues) {
-          newErrors[issue.path[0]] = issue.message;
-        }
-
-        setErrors((prevErrors) => ({ ...prevErrors, ...newErrors }));
-      }
-    }
-  };
 
   return (
     <Modal onClose={onCloseModalHandler} open={modalState} className="w-fit">
