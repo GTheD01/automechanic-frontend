@@ -1,24 +1,17 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
 
 import Form from "@/components/common/Form";
 import { InputProps } from "@/components/common/Input";
-import { deleteLoggedInUser } from "@/services/userService";
-import { useAuthContext } from "@/providers/AuthContextProvider";
-import { useUserContext } from "@/providers/UserContextProvider";
-import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
+import useDeleteLoggedInAccount from "@/hooks/useDeleteLoggedInAccount";
 import useUpdateLoggedInUserProfile from "@/hooks/useUpdateLoggedInUserProfile";
+import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
 
 function UserSettings() {
-  const navigate = useNavigate();
-  const { setUser } = useUserContext();
-  const { setIsAuthenticated } = useAuthContext();
-
   const [deleteAccountModalState, setDeleteAccountModalState] = useState(false);
+
   const { errors, formData, isLoading, onChange, onSubmit } =
     useUpdateLoggedInUserProfile();
+  const { onDeleteLoggedInAccount } = useDeleteLoggedInAccount();
 
   const inputConfig: InputProps[] = [
     {
@@ -46,23 +39,6 @@ function UserSettings() {
       error: errors.phoneNumber,
     },
   ];
-
-  const deleteLoggedInAccountMutation = useMutation({
-    mutationFn: deleteLoggedInUser,
-    onSuccess() {
-      setIsAuthenticated(false);
-      setUser(undefined);
-      navigate("/sign-in");
-      toast.success("Account deleted successfully.");
-    },
-    onError() {
-      toast.error("Couldn't delete the account.");
-    },
-  });
-
-  const onDeleteLoggedInAccount = () => {
-    deleteLoggedInAccountMutation.mutate();
-  };
 
   return (
     <>
