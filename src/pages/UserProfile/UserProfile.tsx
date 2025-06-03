@@ -1,24 +1,23 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
-import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { User } from "@/types/User";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
+import UserField from "@/components/UserField";
 import Button from "@/components/common/Button";
 import Spinner from "@/components/common/Spinner";
 import UserCars from "@/pages/UserProfile/UserCars";
-import UserField from "@/components/UserField";
-import { PageableResponse } from "@/types/GlobalTypes";
+
+import { getUserProfile } from "@/services/userService";
 import UserReports from "@/pages/UserProfile/UserReports";
 import SubMenu from "@/pages/UserProfile/components/SubMenu";
+import useDeleteUserAccount from "@/hooks/useDeleteUserAccount";
 import UserAppointments from "@/pages/UserProfile/UserAppointments";
 import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
-import { deleteUserAccountById, getUserProfile } from "@/services/userService";
 
 export type MenuItem = "Cars" | "Appointments" | "Reports";
 
 function UserProfile() {
-  const navigate = useNavigate();
   const { userId } = useParams();
 
   const [selectedMenuItem, setSelectedMenuItem] = useState<MenuItem>("Cars");
@@ -34,34 +33,7 @@ function UserProfile() {
     staleTime: 1000 * 60 * 15,
   });
 
-  const queryClient = useQueryClient();
-
-  const deleteUserAccountMutation = useMutation({
-    mutationFn: deleteUserAccountById,
-    onSuccess() {
-      navigate("/users");
-      toast.success("Account deleted successfully.");
-    },
-    onMutate(userToDeleteId: User["id"]) {
-      queryClient.setQueryData(
-        ["users"],
-        (oldData: PageableResponse<User[]>) => {
-          return oldData.content.filter((user) => user.id !== userToDeleteId);
-        }
-      );
-
-      return userToDeleteId;
-    },
-    onError() {
-      toast.error("Couldn't delete the account.");
-    },
-  });
-
-  const onDeleteLoggedInAccount = () => {
-    if (user && user.id) {
-      deleteUserAccountMutation.mutate(user.id);
-    }
-  };
+  const { onDeleteAccount } = useDeleteUserAccount({ userId: user?.id });
 
   if (isLoading) {
     return <Spinner lg />;
@@ -80,7 +52,7 @@ function UserProfile() {
         headerText="Delete Account"
         handleOnCloseModal={() => setDeleteAccountModalState(false)}
         modalState={deleteAccountModalState}
-        onDelete={onDeleteLoggedInAccount}
+        onDelete={onDeleteAccount}
       />
       <section>
         <Button to="/users" link className="py-2 px-4">
