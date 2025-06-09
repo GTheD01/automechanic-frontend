@@ -1,6 +1,6 @@
 import Modal from "@/components/common/Modal";
+import { reportTypeList } from "@/types/Report";
 import Spinner from "@/components/common/Spinner";
-import { ReportType } from "@/types/Report";
 import useCreateReport from "@/hooks/useCreateReport";
 
 const initialReportFormData = {
@@ -38,8 +38,6 @@ function CreateReportModal({
     setErrors({ description: "", reportType: "" });
   };
 
-  const reportTypeOptions: ReportType[] = ["APPOINTMENT", "WEBSITE", "OTHER"];
-
   return (
     <Modal open={modalState} onClose={onCloseHandler}>
       <h2 className="text-center font-semibold text-2xl mb-4">Create Report</h2>
@@ -60,7 +58,7 @@ function CreateReportModal({
             }
           >
             <option>Select</option>
-            {reportTypeOptions.map((reportType) => (
+            {reportTypeList.map((reportType) => (
               <option key={reportType} value={reportType}>
                 {reportType}
               </option>

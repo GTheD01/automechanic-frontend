@@ -1,6 +1,8 @@
 import { User } from "@/types/User";
 
-export type ReportType = "APPOINTMENT" | "WEBSITE" | "OTHER";
+export const reportTypeList = ["APPOINTMENT", "WEBSITE", "OTHER"] as const;
+
+export type ReportType = (typeof reportTypeList)[number];
 
 export interface Report {
   id: string;
