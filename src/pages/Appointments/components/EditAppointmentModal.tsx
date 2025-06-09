@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Spinner from "@/components/common/Spinner";
-import { AppointmentStatus } from "@/types/Appointment";
+import { AppointmentStatus, appointmentStatusList } from "@/types/Appointment";
 
 type EditAppointmentModalProps = {
   isOpen: boolean;
@@ -49,20 +49,18 @@ function EditAppointmentModal({
                 role="menu"
                 className="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg z-10"
               >
-                {["UPCOMING", "FINISHED", "CANCELLED", "RESCHEDULED"].map(
-                  (status) => (
-                    <li
-                      key={status}
-                      role="menuitem"
-                      onClick={() =>
-                        handleStatusChange(status as AppointmentStatus)
-                      }
-                      className="px-4 py-2 cursor-pointer hover:bg-gray-100 transition duration-200"
-                    >
-                      {status}
-                    </li>
-                  )
-                )}
+                {appointmentStatusList.map((status) => (
+                  <li
+                    key={status}
+                    role="menuitem"
+                    onClick={() =>
+                      handleStatusChange(status as AppointmentStatus)
+                    }
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100 transition duration-200"
+                  >
+                    {status}
+                  </li>
+                ))}
               </ul>
             )}
           </div>

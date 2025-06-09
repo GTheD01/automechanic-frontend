@@ -1,11 +1,14 @@
 import { Car } from "@/types/Car";
 import { User } from "@/types/User";
 
-export type AppointmentStatus =
-  | "UPCOMING"
-  | "FINISHED"
-  | "CANCELLED"
-  | "RESCHEDULED";
+export const appointmentStatusList = [
+  "UPCOMING",
+  "FINISHED",
+  "CANCELLED",
+  "RESCHEDULED",
+] as const;
+
+export type AppointmentStatus = (typeof appointmentStatusList)[number];
 
 export interface Appointment {
   id: string;
